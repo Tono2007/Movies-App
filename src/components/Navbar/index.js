@@ -24,6 +24,7 @@ import Stack from '@mui/material/Stack';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import SearchIcon from '@mui/icons-material/Search';
 
 function NavButton(NavButtonProps) {
   const { path, children, to, addSX, ...rest } = NavButtonProps;
@@ -73,9 +74,9 @@ function navbar() {
         sx={{
           /*  background: (theme) => theme.palette.background.paper, */
           background:
-            'linear-gradient(90deg, rgba(18,20,19,0.9) 15%, rgba(20,20,20,0.20) 100%)',
+            'linear-gradient(90deg, #12141D90 10%, rgba(20,20,20,0.20) 35%)',
           backdropFilter: 'blur(0.625em)',
-          boxShadow: '0px 1px 8px 0px rgba(20,20,20,.5)',
+          boxShadow: '0px 1px 10px 0px rgba(20,20,20,0.8)',
           px: 3,
         }}
       >
@@ -95,20 +96,28 @@ function navbar() {
             component={NavLink}
             to="/"
             sx={{ textDecoration: 'none' }}
+            bgcolor="#fafafa10"
+            p={1}
+            borderRadius="20px"
           >
             <Avatar sx={{ bgcolor: 'primary.dark', width: 30, height: 30 }}>
               <LocalMoviesIcon fontSize="small" />
             </Avatar>{' '}
-            <Typography color="primary.dark" fontWeight="500" fontSize="20px">
+            <Typography
+              color="#fff"
+              fontWeight="400"
+              fontSize="15px"
+              sx={{
+                textShadow: (theme) =>
+                  `1px 1px 0px ${theme.palette.primary.light}`,
+              }}
+            >
               Movies
               <Typography
                 component="span"
-                color="primary.dark"
-                fontWeight="500"
-                fontSize="20px"
-                sx={{
-                  textShadow: (theme) => `2px 2px 0px rgba(0,0,0,0.5)`,
-                }}
+                color="#fff"
+                fontWeight="400"
+                fontSize="15px"
               >
                 APP
               </Typography>
@@ -129,21 +138,19 @@ function navbar() {
               Blog
             </NavButton>
             <NavButton path="/dashboard" to="/dashboard">
-              Buscar
+              Generos
             </NavButton>
           </Stack>
 
-          <Avatar sx={{ bgcolor: 'primary.main' }}>
-            <PersonOutlineIcon fontSize="medium" sx={{ color: '#fff' }} />
-          </Avatar>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <SearchIcon />
+            <Avatar sx={{ bgcolor: 'primary.main' }}>
+              <PersonOutlineIcon fontSize="medium" sx={{ color: '#fff' }} />
+            </Avatar>
+          </Stack>
         </Toolbar>
       </AppBar>
       <Outlet />
-      <div>
-        <Avatar src="/broken-image.jpg" />
-        navbar
-      </div>
-      <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
     </>
   );
 }

@@ -13,6 +13,7 @@
     "react/react-in-jsx-scope": "off",
     "spaced-comment": 0,
     "react/jsx-props-no-spreading": 0,
+    "import/order": 0,
     /* "no-shadow": "warn",
     "no-use-before-define": "warn",
     "react/destructuring-assignment": "warn",
@@ -24,7 +25,7 @@
     "react/prop-types": 0,
     "react/no-array-index-key": 0,
     "radix": 0,
-    "import/order": 0,
+    
     "allowTernary": 0,
     "react/jsx-uses-react": "off",
     "default-param-last": "off",
