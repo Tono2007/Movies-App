@@ -12,6 +12,7 @@
     "no-unused-expressions": "warn",
     "react/react-in-jsx-scope": "off",
     "spaced-comment": 0,
+    "react/jsx-props-no-spreading": 0,
     /* "no-shadow": "warn",
     "no-use-before-define": "warn",
     "react/destructuring-assignment": "warn",
