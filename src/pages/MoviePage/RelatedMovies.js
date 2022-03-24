@@ -12,11 +12,11 @@ import Divider from '@mui/material/Divider';
 import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import MovieCard from '../../components/MovieCardMin';
+import MovieCard from '../../components/MovieCard';
 
-function LatestMovies() {
+function RelatedMovies() {
   return (
-    <Box>
+    <Box my={8}>
       <Stack
         direction="row"
         alignItems="center"
@@ -25,7 +25,7 @@ function LatestMovies() {
         mb={2}
       >
         <Typography variant="h5" mb={0}>
-          Ultimas Peliculas
+          Peliculas Relacionadas
           <Divider
             variant="middle"
             sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
@@ -36,22 +36,16 @@ function LatestMovies() {
         </Button>
       </Stack>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>
       </Grid>
@@ -59,4 +53,4 @@ function LatestMovies() {
   );
 }
 
-export default LatestMovies;
+export default RelatedMovies;

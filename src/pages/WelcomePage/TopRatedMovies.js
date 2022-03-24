@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Rating from '@mui/material/Rating';
+import Divider from '@mui/material/Divider';
 
 //Icons
 import StarIcon from '@mui/icons-material/Star';
@@ -25,6 +26,10 @@ function TopRatedMovies() {
       >
         <Typography variant="h5" mb={0}>
           Peliculas Mejor Calificadas
+          <Divider
+            variant="middle"
+            sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
+          />
         </Typography>
         <Button size="medium" variant="contained">
           Ver Mas

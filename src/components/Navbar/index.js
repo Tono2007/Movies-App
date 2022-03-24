@@ -141,6 +141,9 @@ function navbar() {
             <NavButton path="/dashboard" to="/dashboard">
               Generos
             </NavButton>
+            <NavButton path="/dashboard" to="/dashboard">
+              Actores
+            </NavButton>
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>

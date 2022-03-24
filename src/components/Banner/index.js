@@ -4,9 +4,29 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+
+//icon
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
-function Banner() {
+function GenreChip() {
+  return (
+    <Typography
+      mr={1}
+      borderRadius="15px"
+      variant="caption"
+      fontSize="15px"
+      mb={0}
+      display="inline"
+      width="auto"
+      p="2px 16px"
+      bgcolor="#eee4"
+    >
+      Aventura
+    </Typography>
+  );
+}
+function Banner(props) {
+  const { showCover, caption, movieBtn } = props;
   return (
     <Box position="relative">
       <Box
@@ -44,15 +64,30 @@ function Banner() {
         position="relative"
         left="0"
         top="0"
-        width="50%"
+        width="100%"
         height="105vh"
         display="flex"
         alignItems="center"
         p="3%"
       >
-        <Stack bgcolor="#21212100" p={5}>
-          <Typography variant="caption" fontSize="10px" mb={1} width="auto">
-            MoviesAPP-[Pelicula]
+        <Stack
+          bgcolor="#21212100"
+          p={5}
+          width="60%"
+          direction="column"
+          justifyContent="flex-end"
+          alignItems="flex-start"
+        >
+          <Typography
+            variant="caption"
+            fontSize="9px"
+            mb={0}
+            display="inline"
+            width="auto"
+            p={0.6}
+            bgcolor="#eee2"
+          >
+            {caption}
           </Typography>
           <Typography
             fontSize="6vw"
@@ -114,7 +149,9 @@ function Banner() {
             >
               Etiquetas
             </Typography>
-            Acción, Aventura, Horror
+            <GenreChip />
+            <GenreChip />
+            <GenreChip />
           </Typography>
           <Typography
             fontSize="19px"
@@ -133,15 +170,52 @@ function Banner() {
             </Typography>
             Acción, Aventura, Horror
           </Typography>
-          <Button
-            size="large"
-            variant="contained"
-            sx={{ width: '200px' }}
-            endIcon={<PlayCircleOutlineIcon />}
-          >
-            Ver Pelicula
-          </Button>
+          {movieBtn && (
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ width: '200px' }}
+              endIcon={<PlayCircleOutlineIcon />}
+            >
+              Ver Pelicula
+            </Button>
+          )}
         </Stack>
+        {showCover && (
+          <Box
+            width="50%"
+            height="100%"
+            p={2}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <Box
+              border={3}
+              borderColor="#eee4"
+              boxShadow={15}
+              alt="banner"
+              width="50%"
+              height="auto"
+              maxHeight="70%"
+              component="img"
+              src="https://picsum.photos/300/900"
+              sx={{
+                filter: 'brightness(0.99)',
+                objectFit: 'cover',
+              }}
+            />
+            <Button
+              size="small"
+              variant="contained"
+              sx={{ width: '200px', mt: '-18px' }}
+              endIcon={<PlayCircleOutlineIcon />}
+            >
+              Ver Trailer
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   );
