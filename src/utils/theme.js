@@ -25,14 +25,14 @@ const theme = createTheme({
       contrastText: '#ffffff',
     },
     gray: {
-      main: '#858A8F',
+      main: '#2A2C34',
       light: '#AAB0B7',
-      dark: '#2A2C34',
+      dark: '#1E2029',
       contrastText: '#ffffff',
     },
     paper: {
       main: '#1E2029',
-      light: '#AAB0B7',
+      light: '#858A8F',
       dark: '#2A2C34',
       contrastText: '#ffffff',
     },

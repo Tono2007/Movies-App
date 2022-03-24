@@ -25,6 +25,7 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
+import Footer from '../Footer';
 
 function NavButton(NavButtonProps) {
   const { path, children, to, addSX, ...rest } = NavButtonProps;
@@ -151,6 +152,7 @@ function navbar() {
         </Toolbar>
       </AppBar>
       <Outlet />
+      <Footer />
     </>
   );
 }

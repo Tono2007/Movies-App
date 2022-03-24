@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Banner from './Banner';
 import TopRatedMovies from './TopRatedMovies';
 import GenreList from './GenreList';
+import LatestMovies from './LatestMovies';
 
 function WelcomePage() {
   return (
@@ -13,11 +14,11 @@ function WelcomePage() {
       <PopularMovies />
       <TopRatedMovies />
 
-      <Grid container spacing={0}>
-        <Grid item xs={8}>
-          <PopularMovies />
+      <Grid container spacing={0} m="auto" px="4%" my={9}>
+        <Grid item xs={9}>
+          <LatestMovies />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <GenreList />
         </Grid>
       </Grid>
