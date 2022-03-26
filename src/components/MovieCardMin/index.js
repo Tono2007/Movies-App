@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -67,6 +69,8 @@ function MovieCard() {
   );
 }
 function CardContent() {
+  const navigate = useNavigate();
+
   return (
     <Stack
       className="cardContent"
@@ -107,6 +111,7 @@ function CardContent() {
         sx={{ m: 'auto', mt: 'auto' }}
         color="primary"
         endIcon={<PlayCircleOutlineIcon />}
+        onClick={() => navigate(`/movies/22`)}
       >
         Ver Pelicula
       </Button>

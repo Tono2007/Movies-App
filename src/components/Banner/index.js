@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { constants } from '../../utils/constants';
+import { useNavigate } from 'react-router-dom';
+
+import moment from 'moment';
+import 'moment/locale/es';
 //mi
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -65,9 +69,10 @@ function Cover() {
   );
 }
 function Banner(props) {
+  const navigate = useNavigate();
   const { showCover, caption, movieBtn, movie, genres } = props;
   const [movies, setMovies] = useState([]);
-  console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
+  //console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
   return (
     <Box position="relative">
       <Box
@@ -112,9 +117,10 @@ function Banner(props) {
         p="3%"
       >
         <Stack
+          mt="-5%"
           bgcolor="#21212100"
           p={5}
-          width="60%"
+          width="50%"
           direction="column"
           justifyContent="flex-end"
           alignItems="flex-start"
@@ -133,6 +139,7 @@ function Banner(props) {
           <Typography
             fontSize="6vw"
             fontWeight="800"
+            lineHeight="6vw"
             sx={{
               textTransform: 'uppercase',
               textShadow: (theme) =>
@@ -142,28 +149,34 @@ function Banner(props) {
             {movie?.original_title}
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Rating
-              name="size-medium"
-              defaultValue={2.5}
-              precision={0.5}
-              sx={{ mr: '5px' }}
-              size="large"
-            />
-            <Typography variant="caption" fontSize="15px" mb={0}>
-              {movie?.popularity} (Imdb)
+            {movie?.vote_average !== undefined && (
+              <Rating
+                name="size-medium"
+                value={movie.vote_average}
+                precision={0.5}
+                sx={{ mr: '5px' }}
+                max={10}
+                size="medium"
+              />
+            )}
+            <Typography variant="caption" fontSize="17px" mb={0} mr={1}>
+              {movie?.vote_average}
+            </Typography>
+            <Typography variant="caption" fontSize="12px" mb={0}>
+              ({movie?.popularity})
             </Typography>
           </Stack>
-
           <Typography
             fontSize="15px"
             fontWeight="300"
             mb={1}
             color="textSecondary"
           >
-            {movie?.release_date} • 2hrs:43mins • GP-13
+            {moment(movie?.release_date).format('LL')} • 2hrs 43mins • GP-13 •
+            {movie?.original_language}
           </Typography>
-          <Typography fontSize="15px" fontWeight="300" mb={3}>
-            {movie?.overview}
+          <Typography fontSize="15px" fontWeight="300" mb={2}>
+            {movie?.overview.substring(0, 270)}...
           </Typography>
           <Typography fontSize="19px" color="textSecondary" fontWeight="300">
             <Typography
@@ -214,6 +227,7 @@ function Banner(props) {
               variant="contained"
               sx={{ width: '200px' }}
               endIcon={<PlayCircleOutlineIcon />}
+              onClick={() => navigate(`/movies/${movie?.id}`)}
             >
               Ver Pelicula
             </Button>

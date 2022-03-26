@@ -15,8 +15,9 @@
     "react/jsx-props-no-spreading": 0,
     "import/order": 0,
     "react/prop-types": 0,
-    /* "no-shadow": "warn",
     "no-use-before-define": "warn",
+
+    /* "no-shadow": "warn",
     "react/destructuring-assignment": "warn",
     "no-param-reassign": "warn",
     "no-restricted-syntax": "warn",

@@ -10,6 +10,9 @@ export const instance = axios.create({
     Accept: 'application/json',
     Authorization: `Bearer ${constants.api?.keyV4}`,
   },
+  params: {
+    language: 'es',
+  },
 });
 
 //Interceptor agregar token

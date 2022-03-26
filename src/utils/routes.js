@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 //Components
 import Navbar from '../components/Navbar';
-import MoviesPage from '../pages/MoviePage';
+import MoviePage from '../pages/MoviePage';
+import MoviesPage from '../pages/MoviesPage';
+
 //Pages
 import WelcomePage from '../pages/WelcomePage';
 import ScrollToTop from './helpers/ScrollToTop';
@@ -15,11 +17,12 @@ function Router() {
             <Route index element={<WelcomePage />} />
             <Route path="/welcome" element={<WelcomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movies/:idMovie" element={<MoviePage />} />
           </Route>
           <Route path="/welcomeff" element={<h1>welvcomne</h1>} />
           <Route path="/signup" element={<h1>welvcomne</h1>} />
 
-          <Route path="*" element={<h1>welvcomne</h1>} />
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </ScrollToTop>
     </BrowserRouter>
