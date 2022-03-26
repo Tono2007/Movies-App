@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { constants } from '../../utils/constants';
+//mi
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -25,8 +27,47 @@ function GenreChip() {
     </Typography>
   );
 }
+function Cover() {
+  return (
+    <Box
+      width="50%"
+      height="100%"
+      p={2}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
+      <Box
+        border={3}
+        borderColor="#eee4"
+        boxShadow={15}
+        alt="banner"
+        width="50%"
+        height="auto"
+        maxHeight="70%"
+        component="img"
+        src="https://picsum.photos/300/900"
+        sx={{
+          filter: 'brightness(0.99)',
+          objectFit: 'cover',
+        }}
+      />
+      <Button
+        size="small"
+        variant="contained"
+        sx={{ width: '200px', mt: '-18px' }}
+        endIcon={<PlayCircleOutlineIcon />}
+      >
+        Ver Trailer
+      </Button>
+    </Box>
+  );
+}
 function Banner(props) {
-  const { showCover, caption, movieBtn } = props;
+  const { showCover, caption, movieBtn, movie, genres } = props;
+  const [movies, setMovies] = useState([]);
+  console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
   return (
     <Box position="relative">
       <Box
@@ -53,7 +94,7 @@ function Banner(props) {
           width="100%"
           height="100%"
           component="img"
-          src="https://picsum.photos/900/900"
+          src={`${constants.api.site}/original${movie?.backdrop_path}`}
           sx={{
             filter: 'brightness(0.99)',
             objectFit: 'cover',
@@ -98,7 +139,7 @@ function Banner(props) {
                 `2px 2px 0px ${theme.palette.primary.light}`,
             }}
           >
-            Movie Title
+            {movie?.original_title}
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
             <Rating
@@ -109,7 +150,7 @@ function Banner(props) {
               size="large"
             />
             <Typography variant="caption" fontSize="15px" mb={0}>
-              4.7 (Imdb)
+              {movie?.popularity} (Imdb)
             </Typography>
           </Stack>
 
@@ -119,13 +160,10 @@ function Banner(props) {
             mb={1}
             color="textSecondary"
           >
-            2017 • 2hrs:43mins • GP-13
+            {movie?.release_date} • 2hrs:43mins • GP-13
           </Typography>
           <Typography fontSize="15px" fontWeight="300" mb={3}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Reprehenderit quam rerum reiciendis est pariatur excepturi nihil
-            obcaecati porro consequuntur, temporibus beatae totam perspiciatis
-            distinctio corrupti itaque dolor provident libero quas.
+            {movie?.overview}
           </Typography>
           <Typography fontSize="19px" color="textSecondary" fontWeight="300">
             <Typography
@@ -181,41 +219,7 @@ function Banner(props) {
             </Button>
           )}
         </Stack>
-        {showCover && (
-          <Box
-            width="50%"
-            height="100%"
-            p={2}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-          >
-            <Box
-              border={3}
-              borderColor="#eee4"
-              boxShadow={15}
-              alt="banner"
-              width="50%"
-              height="auto"
-              maxHeight="70%"
-              component="img"
-              src="https://picsum.photos/300/900"
-              sx={{
-                filter: 'brightness(0.99)',
-                objectFit: 'cover',
-              }}
-            />
-            <Button
-              size="small"
-              variant="contained"
-              sx={{ width: '200px', mt: '-18px' }}
-              endIcon={<PlayCircleOutlineIcon />}
-            >
-              Ver Trailer
-            </Button>
-          </Box>
-        )}
+        {showCover && <Cover />}
       </Box>
     </Box>
   );

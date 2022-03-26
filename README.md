@@ -79,3 +79,11 @@ NEXT_PUBLIC_EXTERNAL_SERVER_API_URL=http://api.com
 
 Api reference
 themoviedb api documentation
+
+How to run locally
+$ npm install
+$ npm run dev
+
+
+Set enviroment variables env.local
+API_KEY_V4=Key

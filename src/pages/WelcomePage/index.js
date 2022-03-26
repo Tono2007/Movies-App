@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 //MUI
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -9,12 +9,35 @@ import TopRatedMovies from './TopRatedMovies';
 import GenreList from './GenreList';
 import LatestMovies from './LatestMovies';
 import TvShows from './TvShows';
+//API
+import { getPopularMovies } from '../../api/services/movies';
+import { getAllMovieGenres } from '../../api/services/catalog';
 
 function WelcomePage() {
+  const [movies, setMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const response = await getPopularMovies();
+        console.log(response);
+        setMovies(response.data.results);
+        const responseGenres = await getAllMovieGenres();
+        console.log(responseGenres);
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getMovies();
+  }, []);
+
   return (
     <>
       {/* <Stack m="auto" px="4%" spacing={3}></Stack> */}
-      <Banner caption="MoviesAPP" movieBtn />
+      <Banner caption="MoviesAPP" movieBtn movie={movies[1]} genres={genres} />
       <PopularMovies />
       <TopRatedMovies />
 

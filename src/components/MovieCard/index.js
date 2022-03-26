@@ -107,7 +107,7 @@ function CardContent() {
       <Typography fontSize="15px" color="textSecondary" fontWeight="300">
         <Typography
           fontSize="15px"
-          color="primary.light"
+          color="primary.dark"
           fontWeight="600"
           component="span"
           mr={2}
