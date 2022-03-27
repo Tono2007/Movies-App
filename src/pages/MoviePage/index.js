@@ -1,4 +1,10 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
+
+import moment from 'moment';
+import 'moment/locale/es';
+//
 import Box from '@mui/material/Box';
 import Banner from '../../components/Banner';
 import Typography from '@mui/material/Typography';
@@ -27,20 +33,29 @@ import MovieIcon from '@mui/icons-material/Movie';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import RelatedMovies from './RelatedMovies';
+//
+import {
+  getMovie,
+  getMovieKeywords,
+  getMovieCredits,
+} from '../../api/services/movies';
 
-function GenreChip() {
+function GenreChip({ text }) {
   return (
     <Typography
-      borderRadius="10px"
-      variant="caption"
-      fontSize="12px"
+      component="span"
+      display="inline-block"
+      mr={0}
+      borderRadius="15px"
+      fontSize="13px"
       mb={0}
-      display="inline"
+      lineHeight="13px"
+      my={3}
       width="auto"
-      p="2px 16px"
-      bgcolor="#eee2"
+      p="3px 16px"
+      bgcolor="#eee4"
     >
-      Aventura
+      {text}
     </Typography>
   );
 }
@@ -104,32 +119,71 @@ function MovieImg() {
   );
 }
 
-function MoviesPage() {
+function MoviePage() {
+  const { idMovie } = useParams();
+  const [movie, setMovie] = useState({});
+  const [keywords, setKeywords] = useState([]);
+  const [credits, setCredits] = useState([]);
+
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const responses = await Promise.all([
+          getMovie(idMovie),
+          getMovieKeywords(idMovie),
+          getMovieCredits(idMovie),
+        ]);
+        console.log(responses);
+        setMovie(responses[0].data);
+        setKeywords(responses[1].data.keywords);
+        setCredits(responses[2].data);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getDetails();
+  }, []);
+
   return (
     <>
-      <Banner showCover caption="PELICULA" />
-      <Stack m="auto" px="4%" my={9}>
-        <Stack direction="row" justifyContent="space-between">
-          <Chip color="primary" label="2016" size="medium" />
+      <Banner showCover caption="PELICULA" id={idMovie} />
+      <Stack m="auto" px="4%" mb={9}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Chip
+            color="primary"
+            label={moment(movie?.release_date).format('L')}
+            size="medium"
+          />
           <Stack direction="row" alignItems="center" spacing={1}>
             <div>
-              <Rating
-                name="size-large"
-                defaultValue={2.5}
-                precision={0.5}
-                sx={{ mr: '5px' }}
-                size="large"
-              />{' '}
-              <Typography variant="subtitle1">78978 Calificaciones </Typography>
+              {movie?.vote_average !== undefined && (
+                <Rating
+                  name="size-large"
+                  value={movie?.vote_average}
+                  precision={0.5}
+                  sx={{ mr: '5px' }}
+                  max={10}
+                  size="large"
+                />
+              )}
+
+              <Typography variant="subtitle1">
+                Votos totales: ({movie?.popularity})
+              </Typography>
             </div>
 
             <Typography variant="subtitle2" fontSize="90px" fontWeight="300">
-              9,7
+              {movie?.vote_average}
             </Typography>
           </Stack>
         </Stack>
         <Typography variant="h3" fontWeight="400" mb={3} mt={-3}>
-          Movie Title
+          {movie?.original_title}
           <Divider
             sx={{
               bgcolor: (theme) => theme.palette.primary.dark,
@@ -140,12 +194,11 @@ function MoviesPage() {
         <Stack direction="row" alignItems="center" spacing={2}>
           <AccessTimeIcon color="primary" />
           <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
-            2hr 13mn
+            {convertMinsToHrsMins(movie?.runtime)}{' '}
           </Typography>
-          <GenreChip />
-          <GenreChip />
-          <GenreChip />
-          <GenreChip />
+          {movie?.genres?.slice(0, 9).map((genre) => (
+            <GenreChip text={genre.name} key={genre.id} />
+          ))}
           <FavoriteBorderIcon color="primary" />
           <Button
             size="large"
@@ -156,19 +209,51 @@ function MoviesPage() {
             Ver Trailer
           </Button>
         </Stack>
-
         <Typography variant="h6" mb={0} fontWeight="400" mt={5}>
           Descripción
         </Typography>
-        <Typography variant="body1" mb={0} fontWeight="300" my={0}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
-          consectetur incidunt error, doloremque impedit totam, vero deserunt
-          cum laborum, fuga dolores. Nostrum repudiandae voluptas labore
-          ratione! Enim quaerat quisquam nisi! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Officia, cupiditate eveniet? Adipisci
-          deleniti dolore nesciunt voluptatum quod possimus commodi officia
-          tempore! Obcaecati, fuga vel repellendus maxime velit veritatis!
-          Rerum, inventore!
+        <Typography variant="body1" mb={0} fontWeight="300" my={0} gutterBottom>
+          {movie?.overview}
+        </Typography>
+        <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+          Pais:
+          <Typography
+            component="span"
+            variant="body2"
+            fontWeight="400"
+            color="primary.main"
+            ml={1}
+          >
+            {movie?.production_countries?.[0].name}
+          </Typography>
+        </Typography>{' '}
+        <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+          Actores:
+          <Typography
+            component="span"
+            variant="body2"
+            fontWeight="400"
+            color="primary.main"
+            ml={1}
+          >
+            {credits?.cast
+              ?.slice(0, 10)
+              .map((genrer, index) =>
+                index !== 0 ? `, ${genrer.name}` : `${genrer.name}`,
+              )}
+          </Typography>
+        </Typography>
+        <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+          Director:
+          <Typography
+            component="span"
+            variant="body2"
+            fontWeight="400"
+            color="primary.main"
+            ml={1}
+          >
+            {credits?.crew?.find((worker) => worker.job === 'Director').name}
+          </Typography>
         </Typography>
         <Divider textAlign="center" sx={{ my: 5 }}>
           <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
@@ -218,11 +303,10 @@ function MoviesPage() {
             </Grid>
           </Grid>
         </Box>
-
         <RelatedMovies />
       </Stack>
     </>
   );
 }
 
-export default MoviesPage;
+export default MoviePage;

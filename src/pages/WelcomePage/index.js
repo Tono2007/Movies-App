@@ -64,7 +64,7 @@ function BannerSection({ genres }) {
     const getMovies = async () => {
       try {
         const response = await getPopularMovies();
-        console.log(response);
+        //console.log(response);
         setMovies(response.data.results);
       } catch (error) {
         console.log(error);
@@ -78,7 +78,7 @@ function BannerSection({ genres }) {
       component={Swiper}
       loop
       autoplay={{
-        delay: 6000,
+        delay: 8000,
         disableOnInteraction: false,
       }}
       modules={[Navigation, Pagination]}
@@ -99,7 +99,13 @@ function BannerSection({ genres }) {
     >
       {movies.map((movie) => (
         <SwiperSlide component={SwiperSlide} key={movie.id}>
-          <Banner caption="MoviesAPP" movieBtn movie={movie} genres={genres} />
+          <Banner
+            caption="MoviesAPP"
+            movieBtn
+            movie={movie}
+            id={movie.id}
+            genres={genres}
+          />
         </SwiperSlide>
       ))}
       <SwiperNavigation />

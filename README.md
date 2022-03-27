@@ -86,4 +86,5 @@ $ npm run dev
 
 
 Set enviroment variables env.local
-API_KEY_V4=Key
+REACT_APP_API_KEY_V3 = Key...
+REACT_APP_API_KEY_V4 = Key...

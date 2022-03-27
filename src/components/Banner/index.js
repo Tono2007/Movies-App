@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { constants } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
+import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -13,25 +14,33 @@ import Button from '@mui/material/Button';
 
 //icon
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+//API
+import {
+  getMovie,
+  getMovieKeywords,
+  getMovieCredits,
+} from '../../api/services/movies';
 
-function GenreChip() {
+function GenreChip({ text }) {
   return (
     <Typography
-      mr={1}
+      component="span"
+      display="inline-block"
+      mr={0}
       borderRadius="15px"
-      variant="caption"
-      fontSize="15px"
+      fontSize="13px"
       mb={0}
-      display="inline"
+      lineHeight="13px"
+      my={3}
       width="auto"
-      p="2px 16px"
+      p="3px 16px"
       bgcolor="#eee4"
     >
-      Aventura
+      {text}
     </Typography>
   );
 }
-function Cover() {
+function Cover({ id, imgPath }) {
   return (
     <Box
       width="50%"
@@ -51,7 +60,7 @@ function Cover() {
         height="auto"
         maxHeight="70%"
         component="img"
-        src="https://picsum.photos/300/900"
+        src={`${constants.api.site}/original${imgPath}`}
         sx={{
           filter: 'brightness(0.99)',
           objectFit: 'cover',
@@ -60,7 +69,7 @@ function Cover() {
       <Button
         size="small"
         variant="contained"
-        sx={{ width: '200px', mt: '-18px' }}
+        sx={{ width: '200px' /* mt: '-18px'  */, mt: 1 }}
         endIcon={<PlayCircleOutlineIcon />}
       >
         Ver Trailer
@@ -70,9 +79,33 @@ function Cover() {
 }
 function Banner(props) {
   const navigate = useNavigate();
-  const { showCover, caption, movieBtn, movie, genres } = props;
-  const [movies, setMovies] = useState([]);
+  const { showCover, caption, movieBtn, id, genres } = props;
+  const [movie, setMovie] = useState({});
+  const [keywords, setKeywords] = useState([]);
+  const [credits, setCredits] = useState([]);
+
   //console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
+
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const responses = await Promise.all([
+          getMovie(id),
+          getMovieKeywords(id),
+          getMovieCredits(id),
+        ]);
+        //console.log(responses);
+        setMovie(responses[0].data);
+        setKeywords(responses[1].data.keywords);
+        setCredits(responses[2].data.cast);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getDetails();
+  }, []);
+
   return (
     <Box position="relative">
       <Box
@@ -117,7 +150,7 @@ function Banner(props) {
         p="3%"
       >
         <Stack
-          mt="-5%"
+          mt="-1%"
           bgcolor="#21212100"
           p={5}
           width="50%"
@@ -163,7 +196,7 @@ function Banner(props) {
               {movie?.vote_average}
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              ({movie?.popularity})
+              Votos totales: ({movie?.popularity})
             </Typography>
           </Stack>
           <Typography
@@ -172,11 +205,12 @@ function Banner(props) {
             mb={1}
             color="textSecondary"
           >
-            {moment(movie?.release_date).format('LL')} • 2hrs 43mins • GP-13 •
+            {moment(movie?.release_date).format('LL')} •{' '}
+            {convertMinsToHrsMins(movie?.runtime)} {/* • GP-13  */}•{' '}
             {movie?.original_language}
           </Typography>
           <Typography fontSize="15px" fontWeight="300" mb={2}>
-            {movie?.overview.substring(0, 270)}...
+            {movie?.overview?.substring(0, 270)}...
           </Typography>
           <Typography fontSize="19px" color="textSecondary" fontWeight="300">
             <Typography
@@ -186,26 +220,35 @@ function Banner(props) {
               component="span"
               mr={2}
             >
-              Genero
+              Generos
             </Typography>
-            Acción
+            {movie?.genres?.map((genrer, index) =>
+              index !== 0 ? `, ${genrer.name}` : `${genrer.name}`,
+            )}
           </Typography>
-          <Typography fontSize="19px" color="textSecondary" fontWeight="300">
+
+          <Stack
+            direction="row"
+            flexWrap="wrap"
+            spacing={1}
+            alignItems="center"
+            alignContent="center"
+          >
             <Typography
               fontSize="20px"
               color="primary.main"
               fontWeight="600"
               component="span"
-              mr={2}
+              mr={0}
             >
               Etiquetas
             </Typography>
-            <GenreChip />
-            <GenreChip />
-            <GenreChip />
-          </Typography>
+            {keywords.slice(0, 8).map((keyword) => (
+              <GenreChip text={keyword.name} key={keyword.id} />
+            ))}
+          </Stack>
           <Typography
-            fontSize="19px"
+            fontSize="15px"
             color="textSecondary"
             fontWeight="300"
             mb={3}
@@ -219,7 +262,11 @@ function Banner(props) {
             >
               Actores
             </Typography>
-            Acción, Aventura, Horror
+            {credits
+              .slice(0, 5)
+              .map((genrer, index) =>
+                index !== 0 ? `, ${genrer.name}` : `${genrer.name}`,
+              )}
           </Typography>
           {movieBtn && (
             <Button
@@ -233,7 +280,7 @@ function Banner(props) {
             </Button>
           )}
         </Stack>
-        {showCover && <Cover />}
+        {showCover && <Cover imgPath={movie?.poster_path} />}
       </Box>
     </Box>
   );
