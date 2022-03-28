@@ -179,7 +179,10 @@ function Banner(props) {
                 `2px 2px 0px ${theme.palette.primary.light}`,
             }}
           >
-            {movie?.original_title}
+            {
+              //movie?.original_title
+            }
+            {movie?.title}
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
             {movie?.vote_average !== undefined && (

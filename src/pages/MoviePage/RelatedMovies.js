@@ -16,7 +16,7 @@ import MovieCard from '../../components/MovieCard';
 
 function RelatedMovies() {
   return (
-    <Box my={8}>
+    <Box my={2}>
       <Stack
         direction="row"
         alignItems="center"

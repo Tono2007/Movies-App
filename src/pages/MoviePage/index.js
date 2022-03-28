@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
+import { constants } from '../../utils/constants';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -118,6 +119,21 @@ function MovieImg() {
     </div>
   );
 }
+function ProductionCompany({ company }) {
+  return (
+    <Box
+      alt="banner"
+      width="100%"
+      maxWidth="10%"
+      height="auto"
+      component="img"
+      src={`${constants.api.site}/original${company?.logo_path}`}
+      sx={{
+        objectFit: 'cover',
+      }}
+    />
+  );
+}
 
 function MoviePage() {
   const { idMovie } = useParams();
@@ -183,7 +199,13 @@ function MoviePage() {
           </Stack>
         </Stack>
         <Typography variant="h3" fontWeight="400" mb={3} mt={-3}>
-          {movie?.original_title}
+          {
+            //movie?.original_title
+          }
+          {movie?.title}{' '}
+          <Typography variant="caption" fontWeight="300">
+            {movie?.tagline}
+          </Typography>
           <Divider
             sx={{
               bgcolor: (theme) => theme.palette.primary.dark,
@@ -233,7 +255,7 @@ function MoviePage() {
             component="span"
             variant="body2"
             fontWeight="400"
-            color="primary.main"
+            color="primary.light"
             ml={1}
           >
             {credits?.cast
@@ -303,6 +325,23 @@ function MoviePage() {
             </Grid>
           </Grid>
         </Box>
+        <Divider sx={{ my: 5 }} />
+        <Stack
+          my={5}
+          direction="row"
+          spacing={4}
+          justifyContent="center"
+          alignContent="center"
+          alignItems="center"
+          bgcolor="gray.main"
+          p={5}
+        >
+          {movie?.production_companies
+            ?.filter((company) => company.logo_path !== null)
+            .map((company) => (
+              <ProductionCompany company={company} key={company.id} />
+            ))}
+        </Stack>
         <RelatedMovies />
       </Stack>
     </>
