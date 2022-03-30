@@ -14,7 +14,7 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieCard from '../../components/MovieCard';
 
-function RelatedMovies() {
+function RelatedMovies({ similarMovies }) {
   return (
     <Box my={2}>
       <Stack
@@ -36,15 +36,12 @@ function RelatedMovies() {
         </Button>
       </Stack>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
+        {similarMovies.map((movie) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+            <MovieCard movie={movie} />
+          </Grid>
+        ))}
+
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>

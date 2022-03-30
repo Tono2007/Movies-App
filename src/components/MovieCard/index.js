@@ -1,6 +1,9 @@
-import React from 'react';
+import { constants } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
-
+import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
+import moment from 'moment';
+import 'moment/locale/es';
+//mui
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,7 +17,7 @@ import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
-function MovieCard() {
+function MovieCard({ movie }) {
   return (
     <Box
       position="relative"
@@ -59,18 +62,18 @@ function MovieCard() {
           width="100%"
           height="100%"
           component="img"
-          src={`https://picsum.photos/300/300?random=${Math.random()}`}
+          src={`${constants.api.site}/original${movie?.backdrop_path}`}
           sx={{
             filter: 'brightness(0.99)',
             objectFit: 'cover',
           }}
         />
       </Box>
-      <CardContent />
+      <CardContent movie={movie} />
     </Box>
   );
 }
-function CardContent() {
+function CardContent({ movie }) {
   const navigate = useNavigate();
 
   return (
@@ -86,27 +89,30 @@ function CardContent() {
       sx={{ visibility: 'hidden' }}
       height="100%"
     >
-      <Typography variant="h6" textAlign="center" my={3}>
-        Nombre Pelicula
+      <Typography variant="h6" textAlign="center" my={1} mt="auto">
+        {movie?.title}
       </Typography>
-      <Typography fontSize="15px" fontWeight="300" mb={3}>
-        Lorem ipsum dolor sit amet consec tetur adipisicing elit. Reprehenderit
-        quam rerum reiciendis est pariatur excepturi nihil obcaecati porro
+      <Typography fontSize="15px" fontWeight="300" mb={1}>
+        {movie?.overview?.substring(0, 100)}...
       </Typography>
-      <Stack direction="row" alignItems="center" spacing={1}>
+      {movie?.vote_average !== undefined && (
         <Rating
           name="size-medium"
-          defaultValue={2.5}
+          value={movie.vote_average}
           precision={0.5}
           sx={{ mr: '5px' }}
+          max={10}
           size="small"
         />
-        <Typography variant="caption" fontSize="15px" mb={0}>
-          4.7 (Imdb)
+      )}
+      <Typography variant="caption" fontSize="17px" mb={0}>
+        {movie?.vote_average}
+        <Typography variant="caption" fontSize="12px" ml={1}>
+          Votos totales: ({movie?.popularity})
         </Typography>
-      </Stack>
-      <Typography fontSize="15px" fontWeight="300" mb={1} color="textSecondary">
-        2017 • 2hrs:43mins
+      </Typography>
+      <Typography fontSize="15px" fontWeight="300" mb={0} color="textSecondary">
+        {moment(movie?.release_date).format('LL')} •{' '}
       </Typography>
       <Typography fontSize="15px" color="textSecondary" fontWeight="300">
         <Typography
@@ -128,7 +134,7 @@ function CardContent() {
         sx={{ m: 'auto', mt: 'auto' }}
         color="primary"
         endIcon={<PlayCircleOutlineIcon />}
-        onClick={() => navigate(`/movies/22`)}
+        onClick={() => navigate(`/movies/${movie?.id}`)}
       >
         Ver Pelicula
       </Button>

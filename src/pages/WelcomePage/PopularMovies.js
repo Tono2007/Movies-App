@@ -1,4 +1,5 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+//mui
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -12,9 +13,27 @@ import Divider from '@mui/material/Divider';
 import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+//com
 import MovieCard from '../../components/MovieCard';
+//api
+import { getPopularMovies } from '../../api/services/movies';
 
 function PopularMovies() {
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const response = await getPopularMovies();
+        console.log(response);
+        setPopularMovies(response.data.results);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getDetails();
+  }, []);
   return (
     <Box m="auto" mx="4%" my={5}>
       <Stack
@@ -38,6 +57,11 @@ function PopularMovies() {
       </Stack>
 
       <Grid container spacing={4}>
+        {popularMovies.map((movie) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+            <MovieCard movie={movie} />
+          </Grid>
+        ))}
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>

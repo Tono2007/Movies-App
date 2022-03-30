@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function index() {
+function index({ ...rest }) {
   return (
     <Stack
       direction="row"
@@ -20,6 +20,7 @@ function index() {
       zIndex={1}
       width="100%"
       p={1}
+      {...rest}
     >
       <IconButton
         className="swiper-button-prev-custom"

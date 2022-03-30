@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 //Components
-import SwiperNavigation from '../../components/SwiperNavigation';
 import PopularMovies from './PopularMovies';
 import Banner from '../../components/Banner';
 import TopRatedMovies from './TopRatedMovies';
@@ -15,6 +14,7 @@ import TvShows from './TvShows';
 import { getPopularMovies } from '../../api/services/movies';
 import { getAllMovieGenres } from '../../api/services/catalog';
 // Swiper
+import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

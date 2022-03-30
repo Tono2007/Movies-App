@@ -16,7 +16,7 @@
     "import/order": 0,
     "react/prop-types": 0,
     "no-use-before-define": "warn",
-
+    "react/no-array-index-key": 0,
     /* "no-shadow": "warn",
     "react/destructuring-assignment": "warn",
     "no-param-reassign": "warn",
@@ -25,7 +25,7 @@
     "no-console": 0,
     "spaced-comment": 0,
   
-    "react/no-array-index-key": 0,
+
     "radix": 0,
     
     "allowTernary": 0,

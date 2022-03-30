@@ -33,13 +33,17 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import MovieIcon from '@mui/icons-material/Movie';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import RelatedMovies from './RelatedMovies';
 //
 import {
   getMovie,
   getMovieKeywords,
   getMovieCredits,
+  getMovieImages,
+  getSimilarMovies,
 } from '../../api/services/movies';
+//compo
+import RelatedMovies from './RelatedMovies';
+import Cast from './Cast';
 
 function GenreChip({ text }) {
   return (
@@ -60,40 +64,7 @@ function GenreChip({ text }) {
     </Typography>
   );
 }
-function ActressCard() {
-  return (
-    <div>
-      <Box
-        border={3}
-        borderColor="#eee4"
-        boxShadow={15}
-        alt="banner"
-        width="100%"
-        height="300px"
-        maxHeight="70%"
-        component="img"
-        src={`https://picsum.photos/300/300?random=${Math.random()}`}
-        sx={{
-          filter: 'brightness(0.99)',
-          objectFit: 'cover',
-        }}
-      />
-      <Typography
-        borderRadius="10px"
-        variant="caption"
-        fontSize="14px"
-        mb={0}
-        display="inline"
-        width="auto"
-        p="2px 16px"
-        bgcolor="#eee1"
-      >
-        Antonio Ayola
-      </Typography>
-    </div>
-  );
-}
-function MovieImg() {
+function MovieImg({ img }) {
   return (
     <div>
       <Box
@@ -105,7 +76,7 @@ function MovieImg() {
         height="200px"
         maxHeight="70%"
         component="img"
-        src={`https://picsum.photos/300/300?random=${Math.random()}`}
+        src={`${constants.api.site}/original${img?.file_path}`}
         sx={{
           cursor: 'pointer',
           filter: 'brightness(0.99)',
@@ -140,6 +111,8 @@ function MoviePage() {
   const [movie, setMovie] = useState({});
   const [keywords, setKeywords] = useState([]);
   const [credits, setCredits] = useState([]);
+  const [imgs, setImgs] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -148,18 +121,23 @@ function MoviePage() {
           getMovie(idMovie),
           getMovieKeywords(idMovie),
           getMovieCredits(idMovie),
+          getMovieImages(idMovie),
         ]);
+        const response = await getSimilarMovies(idMovie);
+        console.log(response);
+        setSimilarMovies(response.data.results);
         console.log(responses);
         setMovie(responses[0].data);
         setKeywords(responses[1].data.keywords);
         setCredits(responses[2].data);
+        setImgs(responses[3].data);
       } catch (error) {
         console.log(error);
         console.log(error.response);
       }
     };
     getDetails();
-  }, []);
+  }, [idMovie]);
 
   return (
     <>
@@ -234,7 +212,7 @@ function MoviePage() {
         <Typography variant="h6" mb={0} fontWeight="400" mt={5}>
           Descripción
         </Typography>
-        <Typography variant="body1" mb={0} fontWeight="300" my={0} gutterBottom>
+        <Typography variant="body1" fontWeight="300" mb={2} gutterBottom>
           {movie?.overview}
         </Typography>
         <Typography variant="body2" mb={0} fontWeight="400" my={1}>
@@ -277,27 +255,19 @@ function MoviePage() {
             {credits?.crew?.find((worker) => worker.job === 'Director').name}
           </Typography>
         </Typography>
-        <Divider textAlign="center" sx={{ my: 5 }}>
-          <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
-            Actores
+        <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+          Titulos alternativos:
+          <Typography
+            component="span"
+            variant="body2"
+            fontWeight="400"
+            color="primary.main"
+            ml={1}
+          >
+            {credits?.crew?.find((worker) => worker.job === 'Director').name}
           </Typography>
-        </Divider>
-        <Box p={8} bgcolor="gray.dark">
-          <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={3} lg={3} xl={2}>
-              <ActressCard />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={3} xl={2}>
-              <ActressCard />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={3} xl={2}>
-              <ActressCard />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={3} xl={2}>
-              <ActressCard />
-            </Grid>
-          </Grid>
-        </Box>
+        </Typography>
+        <Cast credits={credits} />
         <Divider textAlign="center" sx={{ my: 5 }}>
           <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
             Imagenes
@@ -305,24 +275,11 @@ function MoviePage() {
         </Divider>
         <Box p={0} bgcolor="transparent">
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
-              <MovieImg />
-            </Grid>
+            {imgs?.posters?.map((img, index) => (
+              <Grid item xs={12} sm={6} md={3} lg={2} xl={2} key={index}>
+                <MovieImg img={img} />
+              </Grid>
+            ))}
           </Grid>
         </Box>
         <Divider sx={{ my: 5 }} />
@@ -342,7 +299,7 @@ function MoviePage() {
               <ProductionCompany company={company} key={company.id} />
             ))}
         </Stack>
-        <RelatedMovies />
+        <RelatedMovies similarMovies={similarMovies} />
       </Stack>
     </>
   );

@@ -14,6 +14,12 @@ import Button from '@mui/material/Button';
 
 //icon
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import EventIcon from '@mui/icons-material/Event';
+import GTranslateIcon from '@mui/icons-material/GTranslate';
+import MovieIcon from '@mui/icons-material/Movie';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 //API
 import {
   getMovie,
@@ -104,7 +110,7 @@ function Banner(props) {
       }
     };
     getDetails();
-  }, []);
+  }, [id]);
 
   return (
     <Box position="relative">
@@ -170,9 +176,9 @@ function Banner(props) {
             {caption}
           </Typography>
           <Typography
-            fontSize="6vw"
+            fontSize="4vw"
             fontWeight="800"
-            lineHeight="6vw"
+            lineHeight="4vw"
             sx={{
               textTransform: 'uppercase',
               textShadow: (theme) =>
@@ -208,14 +214,22 @@ function Banner(props) {
             mb={1}
             color="textSecondary"
           >
+            <EventIcon fontSize="5px" sx={{ mb: '-3px' }} />{' '}
             {moment(movie?.release_date).format('LL')} •{' '}
+            <AccessTimeIcon fontSize="5px" sx={{ mb: '-3px', mr: 0.5 }} />
             {convertMinsToHrsMins(movie?.runtime)} {/* • GP-13  */}•{' '}
+            <GTranslateIcon fontSize="5px" sx={{ mb: '-3px', mr: 0.5 }} />
             {movie?.original_language}
           </Typography>
           <Typography fontSize="15px" fontWeight="300" mb={2}>
             {movie?.overview?.substring(0, 270)}...
           </Typography>
           <Typography fontSize="19px" color="textSecondary" fontWeight="300">
+            <MovieIcon
+              color="primary"
+              fontSize="15px"
+              sx={{ mb: '-3px', mr: 0.5 }}
+            />
             <Typography
               fontSize="20px"
               color="primary.main"
@@ -237,6 +251,7 @@ function Banner(props) {
             alignItems="center"
             alignContent="center"
           >
+            <LocalOfferIcon color="primary" fontSize="15px" />
             <Typography
               fontSize="20px"
               color="primary.main"
@@ -256,6 +271,11 @@ function Banner(props) {
             fontWeight="300"
             mb={3}
           >
+            <PeopleAltIcon
+              color="primary"
+              fontSize="15px"
+              sx={{ mb: '-3px', mr: 1 }}
+            />
             <Typography
               fontSize="20px"
               color="primary.main"
