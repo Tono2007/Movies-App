@@ -127,7 +127,7 @@ function Banner(props) {
             height: '100%',
             position: 'absolute',
             background:
-              'linear-gradient(90deg, rgba(18,20,19,1) 0%, transparent 60%)',
+              'linear-gradient(90deg, rgba(18,20,19,1) 0%, transparent 65%)',
             boxShadow: 'inset 0px -90px 30px -35px #12141D',
           },
         }}
@@ -205,7 +205,7 @@ function Banner(props) {
               {movie?.vote_average}
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              Votos totales: ({movie?.popularity})
+              ({movie?.popularity} Votos totales:)
             </Typography>
           </Stack>
           <Typography

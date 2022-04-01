@@ -54,7 +54,7 @@ function NavButton(NavButtonProps) {
         '&:hover': {
           fontWeight: '400',
           color: 'textPrimary',
-          bgcolor: (theme) => '#eee3',
+          bgcolor: (theme) => '#eee4',
         },
         ...addSX,
       }}

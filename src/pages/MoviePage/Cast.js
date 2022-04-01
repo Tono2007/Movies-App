@@ -64,8 +64,8 @@ function Cast({ credits }) {
           }}
           slidesPerView={5}
           navigation={{
-            nextEl: '.swiper-button-next-custom',
-            prevEl: '.swiper-button-prev-custom',
+            nextEl: '.swiper-button-next__moviePage--cast',
+            prevEl: '.swiper-button-prev__moviePage--cast',
           }}
           sx={{
             '& .swiper-scrollbar': {
@@ -86,7 +86,13 @@ function Cast({ credits }) {
                 <ActressCard cast={cast} />
               </SwiperSlide>
             ))}
-          <SwiperNavigation />
+          <SwiperNavigation
+            classBtns={[
+              'swiper-button-prev__moviePage--cast',
+              'swiper-button-next__moviePage--cast',
+            ]}
+            top="40%"
+          />
         </Box>
       </Box>
     </>

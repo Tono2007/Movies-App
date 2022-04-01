@@ -280,6 +280,11 @@ function MoviePage() {
                 <MovieImg img={img} />
               </Grid>
             ))}
+            {imgs?.backdrops?.map((img, index) => (
+              <Grid item xs={12} sm={6} md={3} lg={2} xl={2} key={index}>
+                <MovieImg img={img} />
+              </Grid>
+            ))}
           </Grid>
         </Box>
         <Divider sx={{ my: 5 }} />
@@ -292,6 +297,7 @@ function MoviePage() {
           alignItems="center"
           bgcolor="gray.main"
           p={5}
+          flexWrap="wrap"
         >
           {movie?.production_companies
             ?.filter((company) => company.logo_path !== null)

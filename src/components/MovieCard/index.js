@@ -53,7 +53,7 @@ function MovieCard({ movie }) {
             height: '100%',
             position: 'absolute',
             boxShadow:
-              'inset 0px 50px 20px -15px #12141D,inset 0px -30px 10px -15px #12141D',
+              'inset 0px 50px 30px -15px #12141D,inset 0px -30px 10px -15px #12141D',
           },
         }}
       >
@@ -62,7 +62,7 @@ function MovieCard({ movie }) {
           width="100%"
           height="100%"
           component="img"
-          src={`${constants.api.site}/original${movie?.backdrop_path}`}
+          src={`${constants.api.site}/original${movie?.poster_path}`}
           sx={{
             filter: 'brightness(0.99)',
             objectFit: 'cover',
@@ -79,65 +79,71 @@ function CardContent({ movie }) {
   return (
     <Stack
       className="cardContent"
-      p={2}
       position="absolute"
       top="0"
       width="100%"
-      direction="column"
-      justifyContent="center"
-      alignItems="space-between"
       sx={{ visibility: 'hidden' }}
       height="100%"
     >
-      <Typography variant="h6" textAlign="center" my={1} mt="auto">
-        {movie?.title}
-      </Typography>
-      <Typography fontSize="15px" fontWeight="300" mb={1}>
-        {movie?.overview?.substring(0, 100)}...
-      </Typography>
-      {movie?.vote_average !== undefined && (
-        <Rating
-          name="size-medium"
-          value={movie.vote_average}
-          precision={0.5}
-          sx={{ mr: '5px' }}
-          max={10}
-          size="small"
-        />
-      )}
-      <Typography variant="caption" fontSize="17px" mb={0}>
-        {movie?.vote_average}
-        <Typography variant="caption" fontSize="12px" ml={1}>
+      <Stack p={1} height="100%" direction="column" justifyContent="center">
+        <Typography variant="h6" textAlign="center" my={1} mt="auto">
+          {movie?.title}
+        </Typography>
+        <Typography fontSize="15px" fontWeight="300" mb={1}>
+          {movie?.overview?.substring(0, 100)}...
+        </Typography>
+        <div>
+          {movie?.vote_average !== undefined && (
+            <Rating
+              name="size-medium"
+              value={movie.vote_average}
+              precision={0.5}
+              sx={{ mr: '1px' }}
+              max={10}
+              size="small"
+            />
+          )}
+          <Typography variant="caption" fontSize="15px" mb={0}>
+            {movie?.vote_average}
+          </Typography>
+        </div>
+        <Typography variant="caption" fontSize="12px" ml={0}>
           Votos totales: ({movie?.popularity})
         </Typography>
-      </Typography>
-      <Typography fontSize="15px" fontWeight="300" mb={0} color="textSecondary">
-        {moment(movie?.release_date).format('LL')} •{' '}
-      </Typography>
-      <Typography fontSize="15px" color="textSecondary" fontWeight="300">
         <Typography
           fontSize="15px"
-          color="primary.dark"
-          fontWeight="600"
-          component="span"
-          mr={2}
+          fontWeight="300"
+          mb={0}
+          color="textSecondary"
         >
-          Genero
+          Estreno:
+          <strong> {moment(movie?.release_date).format('LL')}</strong>
         </Typography>
-        Acción
-      </Typography>
+        <Typography fontSize="15px" color="textSecondary" fontWeight="300">
+          <Typography
+            fontSize="15px"
+            color="primary.light"
+            fontWeight="600"
+            component="span"
+            mr={2}
+          >
+            Genero
+          </Typography>
+          Acción
+        </Typography>
 
-      <Button
-        size="small"
-        variant="contained"
-        fullWidth
-        sx={{ m: 'auto', mt: 'auto' }}
-        color="primary"
-        endIcon={<PlayCircleOutlineIcon />}
-        onClick={() => navigate(`/movies/${movie?.id}`)}
-      >
-        Ver Pelicula
-      </Button>
+        <Button
+          size="small"
+          variant="contained"
+          fullWidth
+          sx={{ m: 'auto', mt: 'auto' }}
+          color="primary"
+          endIcon={<PlayCircleOutlineIcon />}
+          onClick={() => navigate(`/movies/${movie?.id}`)}
+        >
+          Ver Pelicula
+        </Button>
+      </Stack>
     </Stack>
   );
 }

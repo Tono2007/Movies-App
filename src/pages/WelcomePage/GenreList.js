@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, NavLink, useMatch, Outlet } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
@@ -16,8 +16,10 @@ import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieCard from '../../components/MovieCard';
+//API
+import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
 
-function ListItem() {
+function ListItem({ genre }) {
   return (
     <Link
       underline="hover"
@@ -43,12 +45,27 @@ function ListItem() {
       component={NavLink}
       to="/"
     >
-      Aventura
+      {genre.name}
     </Link>
   );
 }
 
 function GenreList() {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const getGenres = async () => {
+      try {
+        const response = await getAllMovieGenres();
+        console.log(response);
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getGenres();
+  }, []);
   return (
     <Box p={2} bgcolor="#1E2029" borderRadius="5px" ml={5}>
       <Typography variant="h6" textAlign="center" my={2}>
@@ -59,12 +76,9 @@ function GenreList() {
         sx={{ bgcolor: (theme) => theme.palette.primary.main }}
       />
       <Stack spacing={1} my={2}>
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
+        {genres.slice(0, 10).map((genre) => (
+          <ListItem key={genre.id} genre={genre} />
+        ))}
       </Stack>
 
       <Button

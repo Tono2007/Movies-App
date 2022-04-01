@@ -17,6 +17,11 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieCard from '../../components/MovieCard';
 //api
 import { getPopularMovies } from '../../api/services/movies';
+//
+import SwiperNavigation from '../../components/SwiperNavigation';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
+// eslint-disable-next-line import/no-unresolved
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 function PopularMovies() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -35,7 +40,7 @@ function PopularMovies() {
     getDetails();
   }, []);
   return (
-    <Box m="auto" mx="4%" my={5}>
+    <Box m="auto" mx="4%" my={5} position="relative">
       <Stack
         direction="row"
         alignItems="center"
@@ -55,26 +60,52 @@ function PopularMovies() {
           Ver todas
         </Button>
       </Stack>
-
-      <Grid container spacing={4}>
+      <Box
+        mx="auto"
+        pb={5}
+        width="90%"
+        component={Swiper}
+        grabCursor
+        spaceBetween={30}
+        autoplay={{
+          delay: 8000,
+          disableOnInteraction: false,
+        }}
+        modules={[Navigation, Scrollbar]}
+        scrollbar={{
+          draggable: true,
+          dragSize: 100,
+        }}
+        slidesPerView={4}
+        navigation={{
+          nextEl: '.swiper-button-next__welcomePage--popularMovies',
+          prevEl: '.swiper-button-prev__welcomePage--popularMovies',
+        }}
+        sx={{
+          '& .swiper-scrollbar': {
+            height: '10px',
+            mt: 1,
+            mb: '-0px',
+            bgcolor: 'rgb(23, 26, 43)',
+            '& .swiper-scrollbar-drag:hover': {
+              bgcolor: 'primary.dark',
+            },
+          },
+        }}
+      >
         {popularMovies.map((movie) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+          <SwiperSlide key={movie.id}>
             <MovieCard movie={movie} />
-          </Grid>
+          </SwiperSlide>
         ))}
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <MovieCard />
-        </Grid>
-      </Grid>
+      </Box>
+      <SwiperNavigation
+        classBtns={[
+          'swiper-button-prev__welcomePage--popularMovies',
+          'swiper-button-next__welcomePage--popularMovies',
+        ]}
+        zIndex={0}
+      />
     </Box>
   );
 }

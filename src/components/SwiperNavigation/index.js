@@ -10,20 +10,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function index({ ...rest }) {
+function SwiperNavigation({ classBtns, ...rest }) {
   return (
     <Stack
       direction="row"
       justifyContent="space-between"
       position="absolute"
-      top="40%"
-      zIndex={1}
+      top="50%"
+      left="0"
       width="100%"
       p={1}
+      zIndex={1}
       {...rest}
     >
       <IconButton
-        className="swiper-button-prev-custom"
+        className={classBtns[0]}
         aria-label="delete"
         size="large"
         color="secondary"
@@ -32,7 +33,7 @@ function index({ ...rest }) {
         <ArrowBackIosIcon sx={{ color: '#fafafa' }} />
       </IconButton>
       <IconButton
-        className="swiper-button-next-custom"
+        className={classBtns[1]}
         aria-label="delete"
         size="large"
         color="secondary"
@@ -44,4 +45,4 @@ function index({ ...rest }) {
   );
 }
 
-export default index;
+export default SwiperNavigation;

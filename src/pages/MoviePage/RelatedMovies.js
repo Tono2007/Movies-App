@@ -13,10 +13,15 @@ import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieCard from '../../components/MovieCard';
+//
+import SwiperNavigation from '../../components/SwiperNavigation';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
+// eslint-disable-next-line import/no-unresolved
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 function RelatedMovies({ similarMovies }) {
   return (
-    <Box my={2}>
+    <Box my={2} position="relative">
       <Stack
         direction="row"
         alignItems="center"
@@ -31,11 +36,54 @@ function RelatedMovies({ similarMovies }) {
             sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
           />
         </Typography>
-        <Button size="medium" variant="contained">
-          Ver Mas
-        </Button>
       </Stack>
-      <Grid container spacing={4}>
+      <Box
+        mx="auto"
+        pb={5}
+        width="90%"
+        component={Swiper}
+        grabCursor
+        spaceBetween={30}
+        autoplay={{
+          delay: 8000,
+          disableOnInteraction: false,
+        }}
+        modules={[Navigation, Scrollbar]}
+        scrollbar={{
+          draggable: true,
+          dragSize: 100,
+        }}
+        slidesPerView={4}
+        navigation={{
+          nextEl: '.swiper-button-next__moviePage--relatedMovies',
+          prevEl: '.swiper-button-prev__moviePage--relatedMovies',
+        }}
+        sx={{
+          '& .swiper-scrollbar': {
+            height: '10px',
+            mt: 1,
+            mb: '-0px',
+            bgcolor: 'rgb(23, 26, 43)',
+            '& .swiper-scrollbar-drag:hover': {
+              bgcolor: 'primary.dark',
+            },
+          },
+        }}
+      >
+        {similarMovies.map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <MovieCard movie={movie} />
+          </SwiperSlide>
+        ))}
+      </Box>
+      <SwiperNavigation
+        classBtns={[
+          'swiper-button-prev__moviePage--relatedMovies',
+          'swiper-button-next__moviePage--relatedMovies',
+        ]}
+        zIndex={0}
+      />
+      {/*   <Grid container spacing={4}>
         {similarMovies.map((movie) => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
             <MovieCard movie={movie} />
@@ -45,7 +93,7 @@ function RelatedMovies({ similarMovies }) {
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
           <MovieCard />
         </Grid>
-      </Grid>
+      </Grid> */}
     </Box>
   );
 }
