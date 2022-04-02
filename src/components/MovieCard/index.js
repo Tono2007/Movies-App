@@ -30,6 +30,7 @@ function MovieCard({ movie }) {
           borderColor: 'primary.light',
           '.carImg:after': {
             bgcolor: '#0009',
+            boxShadow: 'none',
           },
           '.cardContent': {
             visibility: 'visible',
@@ -52,8 +53,8 @@ function MovieCard({ movie }) {
             width: '100%',
             height: '100%',
             position: 'absolute',
-            boxShadow:
-              'inset 0px 50px 30px -15px #12141D,inset 0px -30px 10px -15px #12141D',
+            boxShadow: (theme) =>
+              `inset 0px 50px 30px -15px ${theme.palette.background.default},inset 0px -30px 10px -15px ${theme.palette.background.default}`,
           },
         }}
       >
@@ -117,7 +118,15 @@ function CardContent({ movie }) {
           color="textSecondary"
         >
           Estreno:
-          <strong> {moment(movie?.release_date).format('LL')}</strong>
+          <Typography
+            ml={1}
+            fontSize="13px"
+            fontWeight="400"
+            component="span"
+            color="textPrimary"
+          >
+            {moment(movie?.release_date).format('LL')}
+          </Typography>
         </Typography>
         <Typography fontSize="15px" color="textSecondary" fontWeight="300">
           <Typography

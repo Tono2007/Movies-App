@@ -138,7 +138,7 @@ function navbar() {
             <NavButton path="/dashboard" to="/dashboard">
               Blog
             </NavButton>
-            <NavButton path="/dashboard" to="/dashboard">
+            <NavButton path="/genres" to="/genres">
               Generos
             </NavButton>
             <NavButton path="/dashboard" to="/dashboard">
@@ -147,6 +147,7 @@ function navbar() {
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
+            <Typography>Es</Typography>
             <SearchIcon />
             <Avatar sx={{ bgcolor: 'primary.main' }}>
               <PersonOutlineIcon fontSize="medium" sx={{ color: '#fff' }} />

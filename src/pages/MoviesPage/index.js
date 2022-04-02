@@ -35,7 +35,8 @@ function peliculas() {
             width: '100%',
             height: '100%',
             position: 'absolute',
-            boxShadow: 'inset 0px -90px 30px -35px #12141D',
+            boxShadow: (theme) =>
+              `inset 0px -90px 30px -35px ${theme.palette.background.default}`,
           },
         }}
       >
@@ -47,7 +48,7 @@ function peliculas() {
           component="img"
           src={wallpaper}
           sx={{
-            filter: 'brightness(0.79)',
+            filter: 'brightness(0.9)',
             objectFit: 'cover',
           }}
         />

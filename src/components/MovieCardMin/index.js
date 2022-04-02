@@ -30,6 +30,7 @@ function MovieCard({ movie }) {
             borderColor: 'primary.light',
             '.carImg:after': {
               bgcolor: '#0009',
+              boxShadow: 'none',
             },
             '.cardContent': {
               visibility: 'visible',
@@ -51,8 +52,8 @@ function MovieCard({ movie }) {
               width: '100%',
               height: '100%',
               position: 'absolute',
-              boxShadow:
-                'inset 0px 20px 10px -15px #12141D,inset 0px -20px 10px -15px #12141D',
+              boxShadow: (theme) =>
+                `inset 0px 20px 10px -15px ${theme.palette.background.default},inset 0px -20px 10px -15px ${theme.palette.background.default}`,
             },
           }}
         >

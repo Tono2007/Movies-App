@@ -86,7 +86,7 @@ function PopularMovies() {
             height: '10px',
             mt: 1,
             mb: '-0px',
-            bgcolor: 'rgb(23, 26, 43)',
+            bgcolor: (theme) => theme.palette.gray.dark,
             '& .swiper-scrollbar-drag:hover': {
               bgcolor: 'primary.dark',
             },
@@ -99,6 +99,15 @@ function PopularMovies() {
           </SwiperSlide>
         ))}
       </Box>
+      <Box position="relative" bgcolor="red" width="100%" height="200px">
+        <SwiperNavigation
+          classBtns={[
+            'swiper-button-prev__welcomePage--popularMovies',
+            'swiper-button-next__welcomePage--popularMovies',
+          ]}
+          zIndex={0}
+        />
+      </Box>
       <SwiperNavigation
         classBtns={[
           'swiper-button-prev__welcomePage--popularMovies',
@@ -106,6 +115,7 @@ function PopularMovies() {
         ]}
         zIndex={0}
       />
+      df
     </Box>
   );
 }

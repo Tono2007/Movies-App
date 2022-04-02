@@ -18,9 +18,13 @@ export function getLatestMovie() {
 export function getSimilarMovies(id) {
   return axios.get(`/movie/${id}/similar`);
 }
+//-------------------------
 
 export function getMovie(id) {
   return axios.get(`/movie/${id}`);
+}
+export function getMovieTitles(id) {
+  return axios.get(`/movie/${id}/alternative_titles`);
 }
 export function getMovieKeywords(id) {
   return axios.get(`/movie/${id}/keywords`);

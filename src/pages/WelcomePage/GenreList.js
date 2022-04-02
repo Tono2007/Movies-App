@@ -51,6 +51,7 @@ function ListItem({ genre }) {
 }
 
 function GenreList() {
+  const navigate = useNavigate();
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -88,6 +89,7 @@ function GenreList() {
         sx={{ m: 'auto', mt: 'auto' }}
         color="primary"
         endIcon={<PlayCircleOutlineIcon />}
+        onClick={() => navigate(`/genres`)}
       >
         Ver Todos
       </Button>
