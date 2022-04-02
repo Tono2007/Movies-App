@@ -91,6 +91,8 @@ function Cast({ credits }) {
               'swiper-button-prev__moviePage--cast',
               'swiper-button-next__moviePage--cast',
             ]}
+            zIndex={1}
+            m={1}
             top="40%"
           />
         </Box>

@@ -59,18 +59,18 @@ function LatestMovies() {
           Ver Mas
         </Button>
       </Stack>
-      <Box position="relative" px={3} mt="5%">
-        <SwiperNavigation
+      <Box position="relative" px={0} mt="5%">
+        {/*  <SwiperNavigation
           classBtns={[
             'swiper-button-prev__welcomePage--latestMovies',
             'swiper-button-next__welcomePage--latestMovies',
           ]}
-          top="30%"
-        />
+          top="25%"
+        /> */}
         <Box
           mx="auto"
           pb={5}
-          width="90%"
+          width="calc(100% - 0px)"
           component={Swiper}
           grabCursor
           spaceBetween={30}
@@ -108,20 +108,22 @@ function LatestMovies() {
               <MovieCard movie={movie} />
             </SwiperSlide>
           ))}
+          <SwiperNavigation
+            classBtns={[
+              'swiper-button-prev__welcomePage--latestMovies',
+              'swiper-button-next__welcomePage--latestMovies',
+            ]}
+            zIndex={1}
+            mx={1}
+            top="25%"
+          />
         </Box>
       </Box>
-      <Box position="relative" px={3}>
-        <SwiperNavigation
-          classBtns={[
-            'swiper-button-prev__welcomePage--latestMovies2',
-            'swiper-button-next__welcomePage--latestMovies2',
-          ]}
-          top="30%"
-        />
+      <Box position="relative" px={0}>
         <Box
           mx="auto"
           pb={5}
-          width="90%"
+          width="calc(100% - 0px)"
           component={Swiper}
           grabCursor
           spaceBetween={30}
@@ -159,6 +161,15 @@ function LatestMovies() {
               <MovieCard movie={movie} />
             </SwiperSlide>
           ))}
+          <SwiperNavigation
+            classBtns={[
+              'swiper-button-prev__welcomePage--latestMovies2',
+              'swiper-button-next__welcomePage--latestMovies2',
+            ]}
+            zIndex={1}
+            mx={1}
+            top="30%"
+          />
         </Box>
       </Box>
       {/*  <Grid container spacing={2}>

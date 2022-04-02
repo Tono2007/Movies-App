@@ -74,6 +74,8 @@ function BannerSection({ genres }) {
           'swiper-button-prev__welcomePage--banner',
           'swiper-button-next__welcomePage--banner',
         ]}
+        zIndex={1}
+        mx={1}
         top="40%"
       />
     </Box>

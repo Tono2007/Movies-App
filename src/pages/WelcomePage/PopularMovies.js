@@ -63,7 +63,7 @@ function PopularMovies() {
       <Box
         mx="auto"
         pb={5}
-        width="90%"
+        width="calc(100% - 100px)"
         component={Swiper}
         grabCursor
         spaceBetween={30}
@@ -99,23 +99,12 @@ function PopularMovies() {
           </SwiperSlide>
         ))}
       </Box>
-      <Box position="relative" bgcolor="red" width="100%" height="200px">
-        <SwiperNavigation
-          classBtns={[
-            'swiper-button-prev__welcomePage--popularMovies',
-            'swiper-button-next__welcomePage--popularMovies',
-          ]}
-          zIndex={0}
-        />
-      </Box>
       <SwiperNavigation
         classBtns={[
           'swiper-button-prev__welcomePage--popularMovies',
           'swiper-button-next__welcomePage--popularMovies',
         ]}
-        zIndex={0}
       />
-      df
     </Box>
   );
 }
