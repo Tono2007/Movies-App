@@ -206,7 +206,7 @@ function Banner(props) {
               {movie?.vote_average}
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              ({movie?.popularity} Votos totales:)
+              ({movie?.popularity} Votos totales)
             </Typography>
           </Stack>
           <Typography

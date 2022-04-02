@@ -43,10 +43,9 @@ function SwiperNavigation({ classBtns, ...rest }) {
         <ArrowForwardIosIcon sx={{ color: '#fafafa' }} />
       </IconButton>
     </Stack> */}
-      <Box position="absolute" top="50%" left="0" {...rest}>
+      <Box position="absolute" top="50%" left="0" zIndex={1} {...rest}>
         <IconButton
           className={classBtns[0]}
-          zIndex={1}
           aria-label="delete"
           size="large"
           color="secondary"
@@ -58,10 +57,9 @@ function SwiperNavigation({ classBtns, ...rest }) {
           <ArrowBackIosIcon sx={{ color: '#fafafa' }} />
         </IconButton>
       </Box>
-      <Box position="absolute" top="50%" right="0" {...rest}>
+      <Box position="absolute" top="50%" right="0" zIndex={1} {...rest}>
         <IconButton
           className={classBtns[1]}
-          zIndex={1}
           aria-label="delete"
           size="large"
           color="secondary"

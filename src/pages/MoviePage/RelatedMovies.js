@@ -21,7 +21,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 function RelatedMovies({ similarMovies }) {
   return (
-    <Box my={2} position="relative">
+    <Box my={3} position="relative">
       <Stack
         direction="row"
         alignItems="center"

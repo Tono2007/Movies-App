@@ -49,6 +49,7 @@ import OverView from './OverView';
 import Companies from './Companies';
 import Keywords from './Keywords';
 import Collection from './Collection';
+import Multimedia from './Multimedia';
 
 function MovieImg({ img }) {
   return (
@@ -119,6 +120,7 @@ function MoviePage() {
       <Stack m="auto" px="4%" mb={9}>
         <OverView movie={movie} credits={credits} titles={titles} />
         <Cast credits={credits} />
+        <Multimedia movie={movie} />
         <Divider textAlign="center" sx={{ my: 5 }}>
           <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
             Multimedia
@@ -150,7 +152,7 @@ function MoviePage() {
         </Divider>
         <Companies movie={movie} />
         <Keywords keywords={keywords} />
-        <Collection />
+        <Collection movie={movie} />
         <RelatedMovies similarMovies={similarMovies} />
       </Stack>
     </>

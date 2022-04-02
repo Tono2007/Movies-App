@@ -87,7 +87,13 @@ function CardContent({ movie }) {
       height="100%"
     >
       <Stack p={1} height="100%" direction="column" justifyContent="center">
-        <Typography variant="h6" textAlign="center" my={1} mt="auto">
+        <Typography
+          variant="h6"
+          textAlign="center"
+          my={1}
+          mt="auto"
+          lineHeight="21px"
+        >
           {movie?.title}
         </Typography>
         <Typography fontSize="15px" fontWeight="300" mb={1}>
