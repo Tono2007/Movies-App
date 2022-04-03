@@ -24,6 +24,7 @@ function MovieCard({ movie }) {
       border={2}
       borderColor="transparent"
       borderRadius="3px"
+      height="100%"
       sx={{
         transition: '0.5s',
         '&:hover': {
@@ -43,7 +44,7 @@ function MovieCard({ movie }) {
         borderRadius="3px"
         overflow="hidden"
         position="relative"
-        height="340px"
+        height="100%"
         sx={{
           '&:after': {
             transition: '0.5s',
@@ -65,7 +66,6 @@ function MovieCard({ movie }) {
           component="img"
           src={`${constants.api.site}/original${movie?.poster_path}`}
           sx={{
-            filter: 'brightness(0.99)',
             objectFit: 'cover',
           }}
         />
@@ -86,14 +86,8 @@ function CardContent({ movie }) {
       sx={{ visibility: 'hidden' }}
       height="100%"
     >
-      <Stack p={1} height="100%" direction="column" justifyContent="center">
-        <Typography
-          variant="h6"
-          textAlign="center"
-          my={1}
-          mt="auto"
-          lineHeight="21px"
-        >
+      <Stack p={1} height="100%" direction="column" justifyContent="flex-start">
+        <Typography variant="h6" textAlign="center" my={1} lineHeight="21px">
           {movie?.title}
         </Typography>
         <Typography fontSize="15px" fontWeight="300" mb={1}>
@@ -134,7 +128,12 @@ function CardContent({ movie }) {
             {moment(movie?.release_date).format('LL')}
           </Typography>
         </Typography>
-        <Typography fontSize="15px" color="textSecondary" fontWeight="300">
+        <Typography
+          fontSize="15px"
+          color="textSecondary"
+          fontWeight="300"
+          flexGrow={1}
+        >
           <Typography
             fontSize="15px"
             color="primary.light"
@@ -151,7 +150,6 @@ function CardContent({ movie }) {
           size="small"
           variant="contained"
           fullWidth
-          sx={{ m: 'auto', mt: 'auto' }}
           color="primary"
           endIcon={<PlayCircleOutlineIcon />}
           onClick={() => navigate(`/movies/${movie?.id}`)}

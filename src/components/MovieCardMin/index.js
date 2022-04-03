@@ -19,10 +19,11 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 function MovieCard({ movie }) {
   return (
-    <>
+    <Box height="100%">
       <Box
         position="relative"
         border={2}
+        height="100%"
         borderColor="transparent"
         sx={{
           transition: '0.5s',
@@ -42,7 +43,7 @@ function MovieCard({ movie }) {
           className="carImg"
           overflow="hidden"
           position="relative"
-          height="140px"
+          height="100%"
           sx={{
             '&:after': {
               transition: '0.5s',
@@ -53,7 +54,7 @@ function MovieCard({ movie }) {
               height: '100%',
               position: 'absolute',
               boxShadow: (theme) =>
-                `inset 0px 20px 10px -15px ${theme.palette.background.default},inset 0px -20px 10px -15px ${theme.palette.background.default}`,
+                `inset 0px 25px 10px -15px ${theme.palette.background.default},inset 0px -25px 10px -15px ${theme.palette.background.default}`,
             },
           }}
         >
@@ -64,7 +65,6 @@ function MovieCard({ movie }) {
             component="img"
             src={`${constants.api.site}/original${movie?.backdrop_path}`}
             sx={{
-              filter: 'brightness(0.99)',
               objectFit: 'cover',
             }}
           />
@@ -74,7 +74,7 @@ function MovieCard({ movie }) {
       <Typography variant="caption" my={0} lineHeight="1px">
         {movie?.title}
       </Typography>
-    </>
+    </Box>
   );
 }
 function CardContent({ movie }) {
@@ -93,8 +93,8 @@ function CardContent({ movie }) {
         p={1}
         height="100%"
         direction="column"
-        justifyContent="center"
-        alignItems="space-between"
+        justifyContent="flex-start"
+        alignItems="center"
       >
         <Typography variant="h6" my={0.5} lineHeight="20px">
           {movie?.title}
@@ -105,6 +105,7 @@ function CardContent({ movie }) {
           fontWeight="300"
           mb={0}
           color="textSecondary"
+          flexGrow={1}
         >
           {moment(movie?.release_date).format('YYYY')} •
           <Typography
@@ -134,7 +135,6 @@ function CardContent({ movie }) {
           size="small"
           variant="contained"
           fullWidth
-          sx={{ m: 'auto', mt: 'auto' }}
           color="primary"
           endIcon={<PlayCircleOutlineIcon />}
           onClick={() => navigate(`/movies/${movie?.id}`)}

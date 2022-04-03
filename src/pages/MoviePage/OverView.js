@@ -148,11 +148,14 @@ function OverView({ movie, credits, titles }) {
           color="primary.light"
           ml={1}
         >
-          {credits?.cast
+          {/*  {credits?.cast
             ?.slice(0, 10)
             .map((genrer, index) =>
               index !== 0 ? `, ${genrer.name}` : `${genrer.name}`,
-            )}
+            )} */}
+          {new Intl.ListFormat('es').format(
+            credits?.cast?.slice(0, 10).map((title) => title.name),
+          )}
         </Typography>
       </Typography>
       <Typography variant="body2" mb={0} fontWeight="400" my={1}>

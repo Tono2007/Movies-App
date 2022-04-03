@@ -30,7 +30,7 @@ function ListItem({ genre }) {
       fontWeight="400"
       textAlign="center"
       px="25px"
-      pt="5px"
+      py="2px"
       letterSpacing="1.1px"
       sx={{
         transition: '.4s',

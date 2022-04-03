@@ -40,7 +40,8 @@ function RelatedMovies({ similarMovies }) {
       <Box
         mx="auto"
         pb={5}
-        width="90%"
+        width="calc(100% - 100px)"
+        height="400px"
         component={Swiper}
         grabCursor
         spaceBetween={30}
