@@ -1,4 +1,5 @@
-import React from 'react';
+import { constants } from '../../utils/constants';
+//
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,35 +15,28 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 //
 import MovieCard from '../../components/MovieCard';
+import ImageCard from '../../components/ImageCard';
+
 //
 import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-function RelatedMovies({ similarMovies }) {
+function BackDropsTab({ imgs }) {
   return (
-    <Box my={3} position="relative">
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={1}
-        justifyContent="space-between"
-        mb={2}
-      >
-        <Typography variant="h5" mb={0}>
-          Peliculas Relacionadas
-          <Divider
-            variant="middle"
-            sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
-          />
+    <Box position="relative">
+      <Divider textAlign="center" sx={{ my: 0 }}>
+        <Typography variant="caption" mb={0} fontWeight="400" my={0}>
+          Fondos
         </Typography>
-      </Stack>
+      </Divider>
       <Box
         mx="auto"
         pb={5}
+        my={1}
         width="calc(100% - 100px)"
-        height="400px"
+        height="330px"
         component={Swiper}
         grabCursor
         spaceBetween={30}
@@ -55,16 +49,15 @@ function RelatedMovies({ similarMovies }) {
           draggable: true,
           dragSize: 100,
         }}
-        slidesPerView={4}
+        slidesPerView={2}
         navigation={{
-          nextEl: '.swiper-button-next__moviePage--relatedMovies',
-          prevEl: '.swiper-button-prev__moviePage--relatedMovies',
+          nextEl: '.swiper-button-next__moviePage--backdrops',
+          prevEl: '.swiper-button-prev__moviePage--backdrops',
         }}
         sx={{
           '& .swiper-scrollbar': {
             height: '10px',
-            mt: 1,
-            mb: '-0px',
+            mb: '0',
             bgcolor: 'rgb(23, 26, 43)',
             '& .swiper-scrollbar-drag:hover': {
               bgcolor: 'primary.dark',
@@ -72,18 +65,20 @@ function RelatedMovies({ similarMovies }) {
           },
         }}
       >
-        {similarMovies.map((movie) => (
-          <SwiperSlide key={movie.id}>
-            <MovieCard movie={movie} />
+        {imgs?.backdrops?.map((img, index) => (
+          <SwiperSlide key={index}>
+            <ImageCard
+              img={`${constants.api.site}/original${img?.file_path}`}
+            />
           </SwiperSlide>
         ))}
       </Box>
       <SwiperNavigation
         classBtns={[
-          'swiper-button-prev__moviePage--relatedMovies',
-          'swiper-button-next__moviePage--relatedMovies',
+          'swiper-button-prev__moviePage--backdrops',
+          'swiper-button-next__moviePage--backdrops',
         ]}
-        zIndex={0}
+        top="45%"
       />
       {/*   <Grid container spacing={4}>
         {similarMovies.map((movie) => (
@@ -99,5 +94,4 @@ function RelatedMovies({ similarMovies }) {
     </Box>
   );
 }
-
-export default RelatedMovies;
+export default BackDropsTab;

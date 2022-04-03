@@ -32,18 +32,18 @@ function Companies({ movie }) {
   return (
     <>
       <Divider textAlign="center" sx={{ my: 0 }}>
-        <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
+        <Typography variant="caption" mb={0} fontWeight="400" my={0}>
           Compañias Productoras
         </Typography>
       </Divider>
       <Stack
-        my={5}
+        my={0}
         direction="row"
         spacing={4}
+        minHeight="345px"
         justifyContent="center"
         alignContent="center"
         alignItems="center"
-        bgcolor="gray.dark"
         p={5}
         flexWrap="wrap"
       >
@@ -61,7 +61,7 @@ function ProductionCompany({ company }) {
     <Box
       alt="banner"
       width="100%"
-      maxWidth="10%"
+      maxWidth="15%"
       height="auto"
       component="img"
       src={`${constants.api.site}/original${company?.logo_path}`}

@@ -122,7 +122,7 @@ function OverView({ movie, credits, titles }) {
         </Button>
       </Stack>
       <Typography variant="h6" mb={0} fontWeight="400" mt={5}>
-        Descripción
+        Resumen
       </Typography>
       <Typography variant="body1" fontWeight="300" mb={2} gutterBottom>
         {movie?.overview}
@@ -167,7 +167,7 @@ function OverView({ movie, credits, titles }) {
           color="primary.main"
           ml={1}
         >
-          {credits?.crew?.find((worker) => worker.job === 'Director').name}
+          {credits?.crew?.find((worker) => worker.job === 'Director')?.name}
         </Typography>
       </Typography>
       <Typography variant="body2" mb={0} fontWeight="400" my={1}>

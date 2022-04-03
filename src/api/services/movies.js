@@ -26,6 +26,13 @@ export function getMovie(id) {
 export function getMovieTitles(id) {
   return axios.get(`/movie/${id}/alternative_titles`);
 }
+export function getMovieVideos(id) {
+  return axios.get(`/movie/${id}/videos`, {
+    params: {
+      language: 'en',
+    },
+  });
+}
 export function getMovieKeywords(id) {
   return axios.get(`/movie/${id}/keywords`);
 }
@@ -33,5 +40,9 @@ export function getMovieCredits(id) {
   return axios.get(`/movie/${id}/credits`);
 }
 export function getMovieImages(id) {
-  return axios.get(`/movie/${id}/images`);
+  return axios.get(`/movie/${id}/images`, {
+    params: {
+      language: 'en',
+    },
+  });
 }

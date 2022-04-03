@@ -46,7 +46,7 @@ function Cast({ credits }) {
           Actores Principales
         </Typography>
       </Divider>
-      <Box p={8} bgcolor="gray.dark" pb={4}>
+      <Box p={8} bgcolor="gray.dark" pb={4} borderRadius="5px">
         <Box
           pb={5}
           width="100%"

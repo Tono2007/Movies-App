@@ -41,6 +41,7 @@ import {
   getMovieImages,
   getSimilarMovies,
   getMovieTitles,
+  getMovieVideos,
 } from '../../api/services/movies';
 //compo
 import RelatedMovies from './RelatedMovies';
@@ -86,6 +87,7 @@ function MoviePage() {
   const [imgs, setImgs] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [titles, setTitles] = useState([]);
+  const [videos, seyVideos] = useState([]);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -97,9 +99,13 @@ function MoviePage() {
           getMovieImages(idMovie),
           getMovieTitles(idMovie),
         ]);
+        const responseVideos = await getMovieVideos(idMovie);
         const response = await getSimilarMovies(idMovie);
+        console.log(responseVideos);
         console.log(response);
+
         setSimilarMovies(response.data.results);
+        seyVideos(responseVideos.data.results);
         console.log(responses);
         setMovie(responses[0].data);
         setKeywords(responses[1].data.keywords);
@@ -120,37 +126,7 @@ function MoviePage() {
       <Stack m="auto" px="4%" mb={9}>
         <OverView movie={movie} credits={credits} titles={titles} />
         <Cast credits={credits} />
-        <Multimedia movie={movie} />
-        <Divider textAlign="center" sx={{ my: 5 }}>
-          <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
-            Multimedia
-          </Typography>
-        </Divider>
-        <Divider textAlign="center" sx={{ my: 5 }}>
-          <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
-            Imagenes
-          </Typography>
-        </Divider>
-        <Box p={0} bgcolor="transparent">
-          <Grid container spacing={4}>
-            {imgs?.posters?.map((img, index) => (
-              <Grid item xs={12} sm={6} md={3} lg={2} xl={2} key={index}>
-                <MovieImg img={img} />
-              </Grid>
-            ))}
-            {imgs?.backdrops?.map((img, index) => (
-              <Grid item xs={12} sm={6} md={3} lg={2} xl={2} key={index}>
-                <MovieImg img={img} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <Divider textAlign="center" sx={{ my: 5 }}>
-          <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
-            Videos
-          </Typography>
-        </Divider>
-        <Companies movie={movie} />
+        <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />
         <Collection movie={movie} />
         <RelatedMovies similarMovies={similarMovies} />
