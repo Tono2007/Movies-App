@@ -87,7 +87,7 @@ function MoviePage() {
   const [imgs, setImgs] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [titles, setTitles] = useState([]);
-  const [videos, seyVideos] = useState([]);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -105,7 +105,7 @@ function MoviePage() {
         console.log(response);
 
         setSimilarMovies(response.data.results);
-        seyVideos(responseVideos.data.results);
+        setVideos(responseVideos.data.results);
         console.log(responses);
         setMovie(responses[0].data);
         setKeywords(responses[1].data.keywords);
@@ -122,9 +122,19 @@ function MoviePage() {
 
   return (
     <>
-      <Banner showCover caption="PELICULA" id={idMovie} trailer={videos[0]} />
+      <Banner
+        showCover
+        caption="PELICULA"
+        id={idMovie}
+        trailer={videos.find((video) => video.type === 'Trailer')}
+      />
       <Stack m="auto" px="4%" mb={9}>
-        <OverView movie={movie} credits={credits} titles={titles} />
+        <OverView
+          movie={movie}
+          credits={credits}
+          titles={titles}
+          trailer={videos.find((video) => video.type === 'Trailer')}
+        />
         <Cast credits={credits} />
         <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />

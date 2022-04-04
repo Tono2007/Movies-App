@@ -47,7 +47,7 @@ function Modal(props) {
               fontWeight="300"
             >
               <Logo height="35px" />
-              &nbsp; {title}
+              {title}
               <IconButton
                 aria-label="close"
                 onClick={fnCloseModal}

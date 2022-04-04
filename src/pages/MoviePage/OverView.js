@@ -45,10 +45,23 @@ import {
 //compo
 import RelatedMovies from './RelatedMovies';
 import Cast from './Cast';
+import Modal from '../../components/Modal';
+import ModalVideo from '../../components/ModalVideo';
 
-function OverView({ movie, credits, titles }) {
+function OverView({ movie, credits, titles, trailer }) {
+  const [openVideoModal, setOpenVideoModal] = useState(false);
+
   return (
     <>
+      <Modal
+        openModal={openVideoModal}
+        fnCloseModal={() => setOpenVideoModal(false)}
+        title={trailer?.name ?? 'Sin Trailer'}
+        maxWidth="md"
+        type
+      >
+        <ModalVideo video={trailer} />
+      </Modal>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Chip
           color="primary"
@@ -117,6 +130,7 @@ function OverView({ movie, credits, titles }) {
           variant="contained"
           sx={{ width: '200px', mt: '-18px' }}
           endIcon={<PlayCircleOutlineIcon />}
+          onClick={() => setOpenVideoModal(true)}
         >
           Ver Trailer
         </Button>

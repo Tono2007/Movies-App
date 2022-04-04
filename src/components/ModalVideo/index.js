@@ -17,22 +17,22 @@ function ModalVideo({ video, title }) {
         }}
         id="video"
         title="video"
-        src={`https://www.youtube.com/embed/${video.key}?modestbranding=1&rel=0`}
+        src={`https://www.youtube.com/embed/${video?.key}?modestbranding=1&rel=0`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
       <Stack direction="row" spacing={1} my={0} flexWrap="wrap" ml={1} mb={1}>
-        <Typography variant="caption">{video.name}</Typography>
+        <Typography variant="caption">{video?.name}</Typography>
         {/* {video.official ? 'Oficial' : 'No Oficial'} */}
         <Chip
           variant="filled"
           size="small"
           color="primary"
-          label={video.official ? 'Oficial' : 'No Oficial'}
+          label={video?.official ? 'Oficial' : 'No Oficial'}
         />
-        <Chip variant="outlined" size="small" label={video.type} />
-        <Chip variant="outlined" size="small" label={video.site} />
+        <Chip variant="outlined" size="small" label={video?.type} />
+        <Chip variant="outlined" size="small" label={video?.site} />
       </Stack>
     </>
   );

@@ -49,7 +49,7 @@ function GenreChip({ text }) {
     </Typography>
   );
 }
-function Cover({ id, imgPath }) {
+function Cover({ id, imgPath, video }) {
   const [openVideoModal, setOpenVideoModal] = useState(false);
 
   return (
@@ -62,6 +62,15 @@ function Cover({ id, imgPath }) {
       alignItems="center"
       flexDirection="column"
     >
+      <Modal
+        openModal={openVideoModal}
+        fnCloseModal={() => setOpenVideoModal(false)}
+        title={video?.name ?? 'Sin Trailer'}
+        maxWidth="md"
+        type
+      >
+        <ModalVideo video={video} />
+      </Modal>
       <Box
         border={3}
         borderColor="#eee4"
@@ -82,6 +91,7 @@ function Cover({ id, imgPath }) {
         variant="contained"
         sx={{ width: '200px' /* mt: '-18px'  */, mt: 1 }}
         endIcon={<PlayCircleOutlineIcon />}
+        onClick={() => setOpenVideoModal(true)}
       >
         Ver Trailer
       </Button>
@@ -309,7 +319,7 @@ function Banner(props) {
             </Button>
           )}
         </Stack>
-        {showCover && <Cover imgPath={movie?.poster_path} />}
+        {showCover && <Cover imgPath={movie?.poster_path} video={trailer} />}
       </Box>
     </Box>
   );

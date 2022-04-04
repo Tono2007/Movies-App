@@ -44,7 +44,7 @@ function Companies({ movie }) {
         alignItems="center"
       >
         {movie?.production_companies
-          ?.filter((company) => company.logo_path !== null)
+          // ?.filter((company) => company.logo_path !== null)
           .map((company) => (
             <Grid item xs={12} sm={3} md={3} lg={3} xl={2} key={company.id}>
               <ProductionCompany company={company} key={company.id} />
