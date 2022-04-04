@@ -26,6 +26,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import Footer from '../Footer';
+import Logo from '../Logo';
 
 function NavButton(NavButtonProps) {
   const { path, children, to, addSX, ...rest } = NavButtonProps;
@@ -90,41 +91,7 @@ function navbar() {
             m: 'auto',
           }}
         >
-          <Stack
-            direction="row"
-            alignItems="center"
-            spacing={1}
-            component={NavLink}
-            to="/"
-            sx={{ textDecoration: 'none' }}
-            bgcolor="#fafafa10"
-            p={1}
-            borderRadius="20px"
-          >
-            <Avatar sx={{ bgcolor: 'primary.dark', width: 30, height: 30 }}>
-              <LocalMoviesIcon fontSize="small" />
-            </Avatar>{' '}
-            <Typography
-              color="#fff"
-              fontWeight="400"
-              fontSize="15px"
-              sx={{
-                textShadow: (theme) =>
-                  `1px 1px 0px ${theme.palette.primary.light}`,
-              }}
-            >
-              Movies
-              <Typography
-                component="span"
-                color="#fff"
-                fontWeight="400"
-                fontSize="15px"
-              >
-                APP
-              </Typography>
-            </Typography>
-          </Stack>
-
+          <Logo />
           <Stack direction="row" spacing={2}>
             <NavButton path="/" to="/">
               Inicio
