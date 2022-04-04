@@ -36,39 +36,41 @@ function Companies({ movie }) {
           Compañias Productoras
         </Typography>
       </Divider>
-      <Stack
-        my={0}
-        direction="row"
-        spacing={4}
-        minHeight="345px"
+      <Grid
+        container
+        spacing={1}
         justifyContent="center"
         alignContent="center"
         alignItems="center"
-        p={5}
-        flexWrap="wrap"
       >
         {movie?.production_companies
           ?.filter((company) => company.logo_path !== null)
           .map((company) => (
-            <ProductionCompany company={company} key={company.id} />
+            <Grid item xs={12} sm={3} md={3} lg={3} xl={2} key={company.id}>
+              <ProductionCompany company={company} key={company.id} />
+            </Grid>
           ))}
-      </Stack>
+      </Grid>
     </>
   );
 }
 function ProductionCompany({ company }) {
   return (
-    <Box
-      alt="banner"
-      width="100%"
-      maxWidth="15%"
-      height="auto"
-      component="img"
-      src={`${constants.api.site}/original${company?.logo_path}`}
-      sx={{
-        objectFit: 'cover',
-      }}
-    />
+    <>
+      <Box
+        alt="banner"
+        width="100%"
+        height="auto"
+        component="img"
+        src={`${constants.api.site}/original${company?.logo_path}`}
+        sx={{
+          objectFit: 'cover',
+        }}
+      />
+      <Typography variant="caption" display="block" textAlign="center">
+        {company.name}
+      </Typography>
+    </>
   );
 }
 

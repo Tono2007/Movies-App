@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 //ICONS
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 
-function Logo() {
+function Logo({ ...rest }) {
   return (
     <Stack
       direction="row"
@@ -19,6 +19,7 @@ function Logo() {
       bgcolor="#fafafa10"
       p={1}
       borderRadius="20px"
+      {...rest}
     >
       <Avatar sx={{ bgcolor: 'primary.dark', width: 30, height: 30 }}>
         <LocalMoviesIcon fontSize="small" />

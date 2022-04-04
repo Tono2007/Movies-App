@@ -122,7 +122,7 @@ function MoviePage() {
 
   return (
     <>
-      <Banner showCover caption="PELICULA" id={idMovie} />
+      <Banner showCover caption="PELICULA" id={idMovie} trailer={videos[0]} />
       <Stack m="auto" px="4%" mb={9}>
         <OverView movie={movie} credits={credits} titles={titles} />
         <Cast credits={credits} />

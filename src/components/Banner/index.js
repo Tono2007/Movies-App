@@ -26,6 +26,9 @@ import {
   getMovieKeywords,
   getMovieCredits,
 } from '../../api/services/movies';
+//
+import Modal from '../Modal';
+import ModalVideo from '../ModalVideo';
 
 function GenreChip({ text }) {
   return (
@@ -47,6 +50,8 @@ function GenreChip({ text }) {
   );
 }
 function Cover({ id, imgPath }) {
+  const [openVideoModal, setOpenVideoModal] = useState(false);
+
   return (
     <Box
       width="50%"
@@ -85,7 +90,7 @@ function Cover({ id, imgPath }) {
 }
 function Banner(props) {
   const navigate = useNavigate();
-  const { showCover, caption, movieBtn, id, genres } = props;
+  const { showCover, caption, movieBtn, id, genres, trailer } = props;
   const [movie, setMovie] = useState({});
   const [keywords, setKeywords] = useState([]);
   const [credits, setCredits] = useState([]);

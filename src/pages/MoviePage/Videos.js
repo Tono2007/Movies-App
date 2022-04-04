@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { constants } from '../../utils/constants';
 //
 import Container from '@mui/material/Container';
@@ -17,13 +18,15 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 //
-import MovieCard from '../../components/MovieCard';
+import Modal from '../../components/Modal';
+
 //
 import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Movie, VideoCallTwoTone } from '@mui/icons-material';
+import ModalVideo from '../../components/ModalVideo';
 
 function VideosTab({ videos }) {
   return (
@@ -122,8 +125,19 @@ function ImgCard({ video }) {
   );
 }
 function ImgCard2({ video }) {
+  const [openVideoModal, setOpenVideoModal] = useState(false);
+
   return (
     <>
+      <Modal
+        openModal={openVideoModal}
+        fnCloseModal={() => setOpenVideoModal(false)}
+        title={video.name}
+        maxWidth="md"
+        type
+      >
+        <ModalVideo video={video} />
+      </Modal>
       <Box
         border={1}
         borderColor="#eee2"
@@ -132,6 +146,7 @@ function ImgCard2({ video }) {
         width="100%"
         height="100%"
         textAlign="center"
+        onClick={() => setOpenVideoModal(true)}
         //component="img"
         //https://i.ytimg.com/vi/6Cl8PmVm3YE/hqdefault.jpg
         //src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
@@ -165,6 +180,7 @@ function ImgCard2({ video }) {
         <IconButton
           aria-label="delete"
           size="large"
+          onClick={() => setOpenVideoModal(true)}
           sx={{
             mt: '5%',
             mx: 'auto',
