@@ -19,6 +19,7 @@ import { getAllMovieGenres } from '../../api/services/catalog';
 import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import TvShowsOnAir from './TvShowsOnAir';
 
 function WelcomePage() {
   const [genres, setGenres] = useState([]);
@@ -53,8 +54,8 @@ function WelcomePage() {
           <GenreList />
         </Grid>
       </Grid>
-      <TvShows />
-      <h2>Series:</h2>
+      <TvShowsOnAir />
+      {/* <TvShows /> */}
     </>
   );
 }

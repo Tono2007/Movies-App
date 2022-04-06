@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //mi
 import Box from '@mui/material/Box';
@@ -16,7 +17,6 @@ import Grid from '@mui/material/Grid';
 import MovieIcon from '@mui/icons-material/Movie';
 //
 import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
-import { IndeterminateCheckBoxOutlined } from '@mui/icons-material';
 
 function GenresPage() {
   const [genres, setGenres] = useState([]);
@@ -123,6 +123,8 @@ function GenresPage() {
 }
 
 function GenreCard({ genre, index }) {
+  const navigate = useNavigate();
+
   return (
     <Box
       p={2}
@@ -130,6 +132,12 @@ function GenreCard({ genre, index }) {
       borderColor="transparent"
       bgcolor="gray.dark"
       position="relative"
+      onClick={() =>
+        navigate({
+          pathname: '/movies',
+          search: `?with_genres=${genre.id}`,
+        })
+      }
       sx={{
         transition: '0.3s',
         borderRadius: '6px',

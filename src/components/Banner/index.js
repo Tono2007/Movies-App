@@ -54,7 +54,9 @@ function Cover({ id, imgPath, video }) {
 
   return (
     <Box
-      width="50%"
+      ml="auto"
+      maxWidth="50%"
+      width="auto"
       height="100%"
       p={2}
       display="flex"
@@ -76,14 +78,13 @@ function Cover({ id, imgPath, video }) {
         borderColor="#eee4"
         boxShadow={15}
         alt="banner"
-        width="50%"
+        width="100%"
         height="auto"
         maxHeight="70%"
         component="img"
         src={`${constants.api.site}/original${imgPath}`}
         sx={{
-          filter: 'brightness(0.99)',
-          objectFit: 'cover',
+          objectFit: 'contain',
         }}
       />
       <Button
@@ -163,8 +164,6 @@ function Banner(props) {
       </Box>
       <Box
         position="relative"
-        left="0"
-        top="0"
         width="100%"
         height="105vh"
         display="flex"

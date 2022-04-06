@@ -18,6 +18,9 @@ export function getLatestMovie() {
 export function getSimilarMovies(id) {
   return axios.get(`/movie/${id}/similar`);
 }
+export function getDiscoverMovies(params) {
+  return axios.get(`/discover/movie${params}`);
+}
 //-------------------------
 
 export function getMovie(id) {

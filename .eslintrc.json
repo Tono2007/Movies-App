@@ -17,6 +17,7 @@
     "react/prop-types": 0,
     "no-use-before-define": "warn",
     "react/no-array-index-key": 0,
+    "react/jsx-no-bind": "off",
     /* "no-shadow": "warn",
     "react/destructuring-assignment": "warn",
     "no-param-reassign": "warn",
@@ -24,15 +25,11 @@
     "react/jsx-props-no-spreading": 0,
     "no-console": 0,
     "spaced-comment": 0,
-  
-
     "radix": 0,
-    
     "allowTernary": 0,
     "react/jsx-uses-react": "off",
     "default-param-last": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-no-bind": "off",
     "react/no-unstable-nested-components": "off", */
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": "error"

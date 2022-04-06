@@ -99,16 +99,16 @@ function navbar() {
             <NavButton path="/movies" to="/movies">
               Peliculas
             </NavButton>
-            <NavButton path="/dashboard" to="/dashboard">
+            <NavButton path="/series" to="/series">
               Series
             </NavButton>
-            <NavButton path="/dashboard" to="/dashboard">
+            <NavButton path="/blog" to="/blog">
               Blog
             </NavButton>
             <NavButton path="/genres" to="/genres">
               Generos
             </NavButton>
-            <NavButton path="/dashboard" to="/dashboard">
+            <NavButton path="/cast" to="/cast">
               Actores
             </NavButton>
           </Stack>

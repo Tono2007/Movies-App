@@ -1,4 +1,5 @@
-import React from 'react';
+import { constants } from '../../utils/constants';
+
 import {
   useNavigate,
   Link as RouterLink,
@@ -35,21 +36,42 @@ function Footer() {
         <Logo />
 
         <Stack direction="row" spacing={1}>
-          <IconButton aria-label="network" color="secondary">
-            <FacebookIcon />
-          </IconButton>
-          <IconButton aria-label="network" color="secondary">
-            <GitHubIcon />
-          </IconButton>
-          <IconButton aria-label="network" color="secondary">
-            <TwitterIcon />
-          </IconButton>
-          <IconButton aria-label="network" color="secondary">
-            <GoogleIcon />
-          </IconButton>
-          <IconButton aria-label="network" color="secondary">
-            <FacebookIcon />
-          </IconButton>
+          <Link
+            href={constants.siteData.siteRepo}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <IconButton aria-label="network" color="secondary">
+              <FacebookIcon />
+            </IconButton>
+          </Link>
+          <Link
+            href={constants.siteData.siteRepo}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <IconButton aria-label="network" color="secondary">
+              <TwitterIcon />
+            </IconButton>
+          </Link>
+          <Link
+            href={constants.siteData.siteRepo}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <IconButton aria-label="network" color="secondary">
+              <GoogleIcon />
+            </IconButton>
+          </Link>
+          <Link
+            href={constants.siteData.siteRepo}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <IconButton aria-label="network" color="secondary">
+              <GitHubIcon />
+            </IconButton>
+          </Link>
         </Stack>
       </Stack>
 

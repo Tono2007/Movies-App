@@ -39,6 +39,7 @@ function TopRatedMovies() {
     };
     getMovies();
   }, []);
+
   return (
     <Box m="auto" mx="4%" my={5} position="relative">
       <Stack
@@ -105,7 +106,6 @@ function TopRatedMovies() {
           'swiper-button-prev__welcomePage--RatedMovies',
           'swiper-button-next__welcomePage--RatedMovies',
         ]}
-        zIndex={0}
       />
     </Box>
   );

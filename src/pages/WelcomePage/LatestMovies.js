@@ -59,7 +59,7 @@ function LatestMovies() {
           Ver Mas
         </Button>
       </Stack>
-      <Box position="relative" px={0} mt="5%" height="230px">
+      <Box position="relative" px={0} mt="5%" height="250px">
         {/*  <SwiperNavigation
           classBtns={[
             'swiper-button-prev__welcomePage--latestMovies',
@@ -69,7 +69,7 @@ function LatestMovies() {
         /> */}
         <Box
           mx="auto"
-          pb={12}
+          pb={9}
           width="calc(100% - 0px)"
           height="100%"
           component={Swiper}
@@ -120,10 +120,10 @@ function LatestMovies() {
           />
         </Box>
       </Box>
-      <Box position="relative" px={0} height="230px">
+      <Box position="relative" px={0} height="250px">
         <Box
           mx="auto"
-          pb={12}
+          pb={9}
           height="100%"
           width="calc(100% - 0px)"
           component={Swiper}

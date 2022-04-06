@@ -13,8 +13,13 @@ import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieCard from '../../components/MovieCard';
+//
+import SwiperNavigation from '../../components/SwiperNavigation';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
+// eslint-disable-next-line import/no-unresolved
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-function PopularMovies() {
+function TvShows() {
   return (
     <Box m="auto" mx="4%" my={5}>
       <Stack
@@ -38,7 +43,56 @@ function PopularMovies() {
 
       <Grid container spacing={4} alignItems="center">
         <Grid item xs={12} sm={6} md={4} lg={2} xl={2}>
-          <ShowCard />
+          <Box
+            mx="auto"
+            pr={4}
+            height="auto"
+            maxHeight="500px"
+            width="calc(100% - 0px)"
+            component={Swiper}
+            direction="vertical"
+            grabCursor
+            spaceBetween={10}
+            autoplay={{
+              delay: 8000,
+              disableOnInteraction: false,
+            }}
+            modules={[Pagination]}
+            slidesPerView={5}
+            pagination={{ clickable: true }}
+            sx={{
+              '& span.swiper-pagination-bullet': {
+                bgcolor: 'primary.light',
+              },
+              '& .swiper-pagination': {
+                mb: 0,
+              },
+            }}
+          >
+            {/* {latestMovies.slice(10, 20).map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <MovieCard movie={movie} />
+          </SwiperSlide>
+        ))} */}
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ShowCard />
+            </SwiperSlide>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={10} xl={2}>
           <Banner />
@@ -74,7 +128,7 @@ function ShowCard() {
         borderRadius="3px"
         overflow="hidden"
         position="relative"
-        height="300px"
+        height="100%"
         sx={{
           '&:after': {
             transition: '0.5s',
@@ -249,4 +303,4 @@ function CardContent() {
   );
 }
 
-export default PopularMovies;
+export default TvShows;

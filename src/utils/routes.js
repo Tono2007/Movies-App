@@ -8,6 +8,7 @@ import PageNotFound from '../pages/PageNotFound';
 
 //Pages
 import WelcomePage from '../pages/WelcomePage';
+import WorkInProgress from '../pages/WorkInProgress';
 import ScrollToTop from './helpers/ScrollToTop';
 
 function Router() {
@@ -21,6 +22,8 @@ function Router() {
             <Route path="movies" element={<MoviesPage />} />
             <Route path="movies/:idMovie" element={<MoviePage />} />
             <Route path="genres" element={<GenresPage />} />
+            <Route path="series" element={<WorkInProgress />} />
+            <Route path="cast" element={<WorkInProgress />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="/login" element={<h1>welvcomne</h1>} />

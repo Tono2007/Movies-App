@@ -1,4 +1,6 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
+
 //mi
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,13 +16,86 @@ import Grid from '@mui/material/Grid';
 
 //Icons
 import SearchIcon from '@mui/icons-material/Search';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import TheatersIcon from '@mui/icons-material/Theaters';
 //gh
 import MovieCard from '../../components/MovieCard';
-
 //assets
 import wallpaper from '../../assets/images/wallpaper.jpg';
+//api
+import { getDiscoverMovies } from '../../api/services/movies';
+import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
 
-function peliculas() {
+function MoviesPage() {
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [movies, setMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [pagination, setPagination] = useState({
+    pag: 1,
+    totalPages: 0,
+    totalMovies: 0,
+  });
+
+  useEffect(() => {
+    const getGenres = async () => {
+      try {
+        const response = await getAllMovieGenres();
+        console.log(response);
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getGenres();
+  }, []);
+
+  useEffect(() => {
+    console.log(Object.fromEntries(new URLSearchParams(searchParams)));
+    console.log(new URLSearchParams(searchParams));
+    console.log([...searchParams]);
+
+    console.log('location', location);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const entry of searchParams.entries()) {
+      // eslint-disable-next-line no-console
+      console.log(entry);
+    }
+    const getMovies = async () => {
+      try {
+        const response = await getDiscoverMovies(location?.search);
+        console.log(response);
+        setMovies(response.data.results);
+        setPagination({
+          pag: response.data.page,
+          totalPages: response.data.total_pages,
+          totalMovies: response.data.total_results,
+        });
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    getMovies();
+  }, [location]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const values = Object.fromEntries(data.entries());
+    setSearchParams(values);
+    console.log(data.get('with_text_query'));
+    console.log(values);
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+    //const params = serializeFormQuery(event.target);
+    const params = { sdsd: 'fs' };
+
+    //setSearchParams(params);
+  }
+
   return (
     <Box>
       <Box
@@ -64,13 +139,21 @@ function peliculas() {
         >
           Peliculas
         </Typography>
-        <Stack direction="row" spacing={3} mt={3} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={3}
+          mt={3}
+          alignItems="center"
+          component="form"
+          onSubmit={handleSubmit}
+        >
           <TextField
             fullWidth
             size="small"
             margin="dense"
+            defaultValue={searchParams.get('with_text_query')}
             InputProps={{
-              name: 'jobName',
+              name: 'with_text_query',
               startAdornment: (
                 <InputAdornment position="start">
                   <SvgIcon fontSize="small" color="action">
@@ -83,46 +166,57 @@ function peliculas() {
             variant="outlined"
           />
           <TextField
-            select
-            name="hearAboutUs"
-            /*    value={formValues.hearAboutUs}
-            error={error.error}
-            onChange={handleChange} */
             size="small"
             label="Año"
-            SelectProps={{
-              native: true,
+            variant="outlined"
+            type="number"
+            name="year"
+            max="2099"
+            defaultValue={searchParams.get('year')}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CalendarMonthIcon />
+                </InputAdornment>
+              ),
             }}
-          >
-            <option value=" " disabled>
-              Selecciona una opción
-            </option>
-            <option value=" ">Selecciona una opción</option>{' '}
-            <option value=" ">Selecciona una opción</option>
-          </TextField>
-          <TextField
-            select
-            name="hearAboutUs"
-            /*    value={formValues.hearAboutUs}
+          />
+          {genres.length > 0 && (
+            <TextField
+              select
+              name="with_genres"
+              /*    value={formValues.hearAboutUs}
             error={error.error}
             onChange={handleChange} */
-            size="small"
-            label="Genero"
-            SelectProps={{
-              native: true,
-            }}
-          >
-            <option value=" " disabled>
-              Selecciona una opción
-            </option>
-            <option value=" ">Selecciona una opción</option>{' '}
-            <option value=" ">Selecciona una opción</option>
-          </TextField>
+              size="small"
+              label="Genero"
+              SelectProps={{
+                native: true,
+                defaultValue: searchParams.get('with_genres'),
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <TheatersIcon />
+                  </InputAdornment>
+                ),
+              }}
+            >
+              <option value=" " disabled>
+                Selecciona una opción
+              </option>
+              <option value="">Todos</option>
+              {genres.map((genre) => (
+                <option value={genre.id} key={genre.id}>
+                  {genre.name}
+                </option>
+              ))}
+            </TextField>
+          )}
           <Button
             size="medium"
             variant="contained"
             endIcon={<SearchIcon />}
             sx={{ minWidth: '130px' }}
+            type="submit"
           >
             Buscar
           </Button>
@@ -130,43 +224,48 @@ function peliculas() {
         <Typography variant="suntitle" mb={3} mt={2}>
           Filtros:
           <Stack direction="row" spacing={1}>
-            <Chip label="Sin Filtros" size="small" />
-            <Chip label="nombre" size="small" />
-            <Chip label="Accion" size="small" />
-            <Chip label="2017" size="small" />
+            {[...searchParams].filter((entry) => entry[1] !== '').length ===
+              0 && <Chip label="Sin Filtros" size="small" />}
+            {[...searchParams]
+              .filter((entry) => entry[1] !== '')
+              .map((entry, index) => {
+                const preLabel = {
+                  year: 'Año: ',
+                  with_genres: 'Genero: ',
+                  with_text_query: 'Buscar: ',
+                };
+                let label = `${preLabel[entry[0]]} ${entry[1]}`;
+                if (entry[0] === 'with_genres') {
+                  label = `${preLabel[entry[0]]} ${
+                    genres.find((genre) => genre.id === Number(entry[1]))?.name
+                  }`;
+                }
+
+                return <Chip label={label} size="small" key={index} />;
+              })}
           </Stack>
         </Typography>
         <Typography variant="h6" mb={3} mt={2}>
-          Todas las Peliculas
+          {[...searchParams].filter((entry) => entry[1] !== '').length === 0
+            ? 'Todas las Peliculas'
+            : 'Resultados'}
         </Typography>
         <Divider
           variant="middle"
           sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
         />
         <Grid container spacing={4} my={2}>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <MovieCard />
-          </Grid>
+          {movies.map((movie) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+              <MovieCard movie={movie} />
+            </Grid>
+          ))}
         </Grid>
-        <Stack height="500px"> sdf</Stack>{' '}
+        Estas en la pagina {pagination.pag} de {pagination.totalPages}
+        total serultados {pagination.totalMovies}
       </Stack>
     </Box>
   );
 }
 
-export default peliculas;
+export default MoviesPage;
