@@ -1,26 +1,17 @@
-import { useEffect, useState } from 'react';
-
-//
-import Container from '@mui/material/Container';
+import { useState } from 'react';
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
 //Icons
-import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import GroupIcon from '@mui/icons-material/Group';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import DnsIcon from '@mui/icons-material/Dns';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
+//Components
 import VideosTab from './Videos';
 import PostersTab from './Posters';
 import Companies from './Companies';

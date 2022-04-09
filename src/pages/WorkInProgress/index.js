@@ -1,14 +1,11 @@
-import { useLocation } from 'react-router-dom';
 import { constants } from '../../utils/constants';
 
 //MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 
 //Icons
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import CodeIcon from '@mui/icons-material/Code';
 
 function WorkInProgress() {

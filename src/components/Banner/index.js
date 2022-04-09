@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { constants } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
+
+import { constants } from '../../utils/constants';
 import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
 
 import moment from 'moment';
 import 'moment/locale/es';
-//mi
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
-//icon
+//Icons
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EventIcon from '@mui/icons-material/Event';
@@ -26,7 +27,7 @@ import {
   getMovieKeywords,
   getMovieCredits,
 } from '../../api/services/movies';
-//
+//Components
 import Modal from '../Modal';
 import ModalVideo from '../ModalVideo';
 
@@ -49,7 +50,7 @@ function GenreChip({ text }) {
     </Typography>
   );
 }
-function Cover({ id, imgPath, video }) {
+function Cover({ imgPath, video }) {
   const [openVideoModal, setOpenVideoModal] = useState(false);
 
   return (

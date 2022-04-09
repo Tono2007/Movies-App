@@ -1,17 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 //ICONS
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import SvgIcon from '@mui/material/SvgIcon';
-import Divider from '@mui/material/Divider';
-import InputAdornment from '@mui/material/InputAdornment';
 //ico
 import SearchIcon from '@mui/icons-material/Search';
 

@@ -1,12 +1,9 @@
-//
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+//MUI
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-
 import Chip from '@mui/material/Chip';
 
-function ModalVideo({ video, title }) {
+function ModalVideo({ video }) {
   return (
     <>
       <iframe

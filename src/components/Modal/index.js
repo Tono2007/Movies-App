@@ -7,7 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 //Icons
 import CloseIcon from '@mui/icons-material/Close';
-//
+//Components
 import Logo from '../Logo';
 
 function Modal(props) {

@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, NavLink, useMatch, Outlet } from 'react-router-dom';
-
-import Container from '@mui/material/Container';
+import { useNavigate, NavLink } from 'react-router-dom';
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
-
 //Icons
-import StarIcon from '@mui/icons-material/Star';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import MovieCard from '../../components/MovieCard';
 //API
-import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
+import { getAllMovieGenres } from '../../api/services/catalog';
 
 function ListItem({ genre }) {
   return (

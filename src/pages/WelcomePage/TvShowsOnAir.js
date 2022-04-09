@@ -8,25 +8,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
-
 //Icons
-import StarIcon from '@mui/icons-material/Star';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EventIcon from '@mui/icons-material/Event';
 import GTranslateIcon from '@mui/icons-material/GTranslate';
-import MovieIcon from '@mui/icons-material/Movie';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-//
-import MovieCard from '../../components/MovieCard';
-//
+
+//Swiper
 import SwiperNavigation from '../../components/SwiperNavigation';
-import { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 //api

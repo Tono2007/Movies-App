@@ -1,39 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
-import { constants } from '../../utils/constants';
-
-import moment from 'moment';
-import 'moment/locale/es';
-//
-import Box from '@mui/material/Box';
-import Banner from '../../components/Banner';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
-import Badge from '@mui/material/Badge';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Chip from '@mui/material/Chip';
-import Container from '@mui/material/Container';
+//MUI
 import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-
-//icns
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import MovieIcon from '@mui/icons-material/Movie';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-//
+//API
 import {
   getMovie,
   getMovieKeywords,
@@ -44,42 +13,14 @@ import {
   getMovieVideos,
 } from '../../api/services/movies';
 import { getAllMovieGenres } from '../../api/services/catalog';
-
-//compo
+//Components
+import Banner from '../../components/Banner';
 import RelatedMovies from './RelatedMovies';
 import Cast from './Cast';
 import OverView from './OverView';
-import Companies from './Companies';
 import Keywords from './Keywords';
 import Collection from './Collection';
 import Multimedia from './Multimedia';
-
-function MovieImg({ img }) {
-  return (
-    <div>
-      <Box
-        border={1}
-        borderColor="#eee2"
-        boxShadow={15}
-        alt="banner"
-        width="100%"
-        height="200px"
-        maxHeight="70%"
-        component="img"
-        src={`${constants.api.site}/original${img?.file_path}`}
-        sx={{
-          cursor: 'pointer',
-          filter: 'brightness(0.99)',
-          objectFit: 'cover',
-          '&:hover': {
-            border: 2,
-            borderColor: 'primary.main',
-          },
-        }}
-      />
-    </div>
-  );
-}
 
 function MoviePage() {
   const { idMovie } = useParams();

@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-//mi
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import SvgIcon from '@mui/material/SvgIcon';
-import Divider from '@mui/material/Divider';
-import InputAdornment from '@mui/material/InputAdornment';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
-//
+//Icons
 import MovieIcon from '@mui/icons-material/Movie';
-//
-import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
+//API
+import { getAllMovieGenres } from '../../api/services/catalog';
 
 function GenresPage() {
   const [genres, setGenres] = useState([]);

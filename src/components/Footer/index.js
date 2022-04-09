@@ -1,11 +1,4 @@
 import { constants } from '../../utils/constants';
-
-import {
-  useNavigate,
-  Link as RouterLink,
-  useMatch,
-  Outlet,
-} from 'react-router-dom';
 // MUI Stuff
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -14,14 +7,13 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
-
-//
+//Icons
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from '@mui/icons-material/Google';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-//
+//Components
 import Logo from '../Logo';
 
 function Footer() {

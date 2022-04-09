@@ -2,26 +2,18 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //mui
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
-
-//Icons
-import StarIcon from '@mui/icons-material/Star';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-//com
+//Components
 import MovieCard from '../../components/MovieCard';
-//api
+//API
 import { getRatedMovies } from '../../api/services/movies';
-//
+//Swiper
 import SwiperNavigation from '../../components/SwiperNavigation';
-import { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Navigation, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 

@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { constants } from '../../utils/constants';
-
-//
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-
 //API
-import { getPerson, getPersonImages } from '../../api/services/people';
+import { getPerson } from '../../api/services/people';
 
 function ActorDetail({ id }) {
   const [person, setPerson] = useState([]);

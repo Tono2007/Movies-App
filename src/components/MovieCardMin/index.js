@@ -4,17 +4,11 @@ import { constants } from '../../utils/constants';
 import moment from 'moment';
 import 'moment/locale/es';
 //MUI
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
-
 //Icons
-import StarIcon from '@mui/icons-material/Star';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 function MovieCard({ movie, genres }) {

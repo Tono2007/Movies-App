@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 
-//mi
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import SvgIcon from '@mui/material/SvgIcon';
@@ -20,7 +19,7 @@ import Alert from '@mui/material/Alert';
 import SearchIcon from '@mui/icons-material/Search';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import TheatersIcon from '@mui/icons-material/Theaters';
-//gh
+//Components
 import MovieCard from '../../components/MovieCard';
 //assets
 import wallpaper from '../../assets/images/wallpaper.jpg';

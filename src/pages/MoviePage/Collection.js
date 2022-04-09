@@ -1,30 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
 import { constants } from '../../utils/constants';
-
-import moment from 'moment';
-import 'moment/locale/es';
-//
+//MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
-//
+//Swiper
 import SwiperNavigation from '../../components/SwiperNavigation';
-import { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-//
+//API
 import { getCollection } from '../../api/services/collections';
+//Components
 import MovieCard from '../../components/MovieCardMin';
 
 function Collection({ movie }) {

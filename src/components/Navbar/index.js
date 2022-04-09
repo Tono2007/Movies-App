@@ -1,30 +1,13 @@
 import React from 'react';
-import { useNavigate, NavLink, useMatch, Outlet } from 'react-router-dom';
+import { NavLink, useMatch, Outlet } from 'react-router-dom';
 // MUI Stuff
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
-import Badge from '@mui/material/Badge';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Chip from '@mui/material/Chip';
-import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 //ICONS
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import SearchIcon from '@mui/icons-material/Search';
+
 import Footer from '../Footer';
 import Logo from '../Logo';
 import Search from './Search';

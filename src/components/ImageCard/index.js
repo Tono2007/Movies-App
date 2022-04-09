@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { constants } from '../../utils/constants';
-//
-import Container from '@mui/material/Container';
+import { useState } from 'react';
+//MUI
 import Box from '@mui/material/Box';
-//
+//Components
 import Modal from '../Modal';
 
 function ImageCard({ img }) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, NavLink, useMatch, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // MUI Stuff
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -13,7 +13,7 @@ function Logo({ ...rest }) {
       direction="row"
       alignItems="center"
       spacing={1}
-      component={NavLink}
+      component={Link}
       to="/"
       sx={{ textDecoration: 'none' }}
       bgcolor="#fafafa10"
