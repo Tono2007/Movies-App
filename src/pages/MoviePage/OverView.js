@@ -88,6 +88,14 @@ function OverView({ movie, credits, titles, trailer }) {
 
           <Typography variant="subtitle2" fontSize="90px" fontWeight="300">
             {movie?.vote_average}
+            <Typography
+              fontSize="40px"
+              fontWeight="300"
+              display="inline"
+              component="span"
+            >
+              /10
+            </Typography>
           </Typography>
         </Stack>
       </Stack>

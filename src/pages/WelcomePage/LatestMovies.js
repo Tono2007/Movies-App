@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+//
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -24,6 +26,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { getUpcomingMovies } from '../../api/services/movies';
 
 function LatestMovies() {
+  const navigate = useNavigate();
+
   const [latestMovies, setLatestMovies] = useState([]);
 
   useEffect(() => {
@@ -55,7 +59,16 @@ function LatestMovies() {
             sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
           />
         </Typography>
-        <Button size="medium" variant="contained">
+        <Button
+          size="medium"
+          variant="contained"
+          onClick={() =>
+            navigate({
+              pathname: '/movies',
+              search: `?sort_by=primary_release_date.desc`,
+            })
+          }
+        >
           Ver Mas
         </Button>
       </Stack>

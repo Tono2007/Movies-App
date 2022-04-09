@@ -217,10 +217,18 @@ function Banner(props) {
               />
             )}
             <Typography variant="caption" fontSize="17px" mb={0} mr={1}>
-              {movie?.vote_average}
+              {movie?.vote_average}{' '}
+              <Typography
+                fontSize="10px"
+                fontWeight="300"
+                display="inline"
+                component="span"
+              >
+                /10
+              </Typography>
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              ({movie?.popularity} Votos totales)
+              • ({movie?.popularity} Votos totales)
             </Typography>
           </Stack>
           <Typography

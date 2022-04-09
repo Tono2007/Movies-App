@@ -43,7 +43,7 @@ function ListItem({ genre }) {
         },
       }}
       component={NavLink}
-      to="/"
+      to={`movies/?with_genres=${genre.id}`}
     >
       {genre.name}
     </Link>

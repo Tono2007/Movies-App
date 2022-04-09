@@ -46,7 +46,7 @@ function Modal(props) {
               alignContent="center"
               fontWeight="300"
             >
-              <Logo height="35px" />
+              <Logo height="35px" mr={-10} />
               {title}
               <IconButton
                 aria-label="close"

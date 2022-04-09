@@ -37,6 +37,8 @@ import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Modal from '../../components/Modal';
+import ActorDetail from '../../components/ActorDetail';
 
 function Cast({ credits }) {
   return (
@@ -101,8 +103,19 @@ function Cast({ credits }) {
   );
 }
 function ActressCard({ cast }) {
+  const [openActressModal, setOpenActressModal] = useState(false);
+
   return (
     <div>
+      <Modal
+        openModal={openActressModal}
+        fnCloseModal={() => setOpenActressModal(false)}
+        title={cast?.name}
+        maxWidth="sm"
+        type
+      >
+        <ActorDetail id={cast?.id} />
+      </Modal>
       <Typography
         borderRadius="10px"
         variant="caption"
@@ -114,9 +127,10 @@ function ActressCard({ cast }) {
       </Typography>
       {cast?.profile_path && (
         <Box
+          onClick={() => setOpenActressModal(true)}
           border={3}
           borderColor="#eee4"
-          boxShadow={15}
+          boxShadow={10}
           alt="banner"
           width="100%"
           height="300px"
@@ -124,7 +138,14 @@ function ActressCard({ cast }) {
           component="img"
           src={`${constants.api.site}/original${cast?.profile_path}`}
           sx={{
+            transition: '0.3s',
             objectFit: 'cover',
+            '&:hover': {
+              transform: 'scale(1.01)',
+              cursor: 'pointer',
+              borderColor: 'primary.main',
+              boxShadow: 20,
+            },
           }}
         />
       )}

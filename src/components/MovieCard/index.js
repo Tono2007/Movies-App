@@ -105,7 +105,15 @@ function CardContent({ movie }) {
             />
           )}
           <Typography variant="caption" fontSize="15px" mb={0}>
-            {movie?.vote_average}
+            {movie?.vote_average}{' '}
+            <Typography
+              fontSize="10px"
+              fontWeight="300"
+              display="inline"
+              component="span"
+            >
+              /10
+            </Typography>
           </Typography>
         </div>
         <Typography variant="caption" fontSize="12px" ml={0}>

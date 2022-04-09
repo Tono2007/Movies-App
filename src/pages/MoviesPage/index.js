@@ -13,6 +13,8 @@ import Divider from '@mui/material/Divider';
 import InputAdornment from '@mui/material/InputAdornment';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
+import Pagination from '@mui/material/Pagination';
+import Alert from '@mui/material/Alert';
 
 //Icons
 import SearchIcon from '@mui/icons-material/Search';
@@ -24,7 +26,7 @@ import MovieCard from '../../components/MovieCard';
 import wallpaper from '../../assets/images/wallpaper.jpg';
 //api
 import { getDiscoverMovies } from '../../api/services/movies';
-import { getAllMovieGenres, getAllTvGenres } from '../../api/services/catalog';
+import { getAllMovieGenres } from '../../api/services/catalog';
 
 function MoviesPage() {
   const location = useLocation();
@@ -52,16 +54,15 @@ function MoviesPage() {
   }, []);
 
   useEffect(() => {
-    console.log(Object.fromEntries(new URLSearchParams(searchParams)));
+    /* console.log(Object.fromEntries(new URLSearchParams(searchParams)));
     console.log(new URLSearchParams(searchParams));
     console.log([...searchParams]);
-
     console.log('location', location);
     // eslint-disable-next-line no-restricted-syntax
     for (const entry of searchParams.entries()) {
       // eslint-disable-next-line no-console
       console.log(entry);
-    }
+    } */
     const getMovies = async () => {
       try {
         const response = await getDiscoverMovies(location?.search);
@@ -80,20 +81,17 @@ function MoviesPage() {
     getMovies();
   }, [location]);
 
+  const handlePagination = (event, value) => {
+    setPagination((state) => ({ ...state, pag: value }));
+    const actualPath = Object.fromEntries(new URLSearchParams(searchParams));
+    setSearchParams({ ...actualPath, page: value });
+  };
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const values = Object.fromEntries(data.entries());
-    setSearchParams(values);
-    console.log(data.get('with_text_query'));
-    console.log(values);
-    // The serialize function here would be responsible for
-    // creating an object of { key: value } pairs from the
-    // fields in the form that make up the query.
-    //const params = serializeFormQuery(event.target);
-    const params = { sdsd: 'fs' };
-
-    //setSearchParams(params);
+    setSearchParams({ ...values, page: 1 });
+    //console.log(data.get('with_text_query'));
   }
 
   return (
@@ -233,12 +231,24 @@ function MoviesPage() {
                   year: 'Año: ',
                   with_genres: 'Genero: ',
                   with_text_query: 'Buscar: ',
+                  page: 'Pagina: ',
+                  sort_by: 'Peliculas ',
+                };
+                const sortByLabels = {
+                  'popularity.desc': 'Mas Populares',
+                  'vote_average.desc': 'Mejor Calificadas: ',
+                  'primary_release_date.desc': 'mas recientes',
+                  page: 'Pagina: ',
+                  sort_by: 'Peliculas ',
                 };
                 let label = `${preLabel[entry[0]]} ${entry[1]}`;
                 if (entry[0] === 'with_genres') {
                   label = `${preLabel[entry[0]]} ${
                     genres.find((genre) => genre.id === Number(entry[1]))?.name
                   }`;
+                }
+                if (entry[0] === 'sort_by') {
+                  label = `${preLabel[entry[0]]} ${sortByLabels[entry[1]]}`;
                 }
 
                 return <Chip label={label} size="small" key={index} />;
@@ -254,6 +264,11 @@ function MoviesPage() {
           variant="middle"
           sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
         />
+        <Typography textAlign="right" variant="caption">
+          Pagina {pagination.pag} de{' '}
+          {pagination.totalPages < 500 ? pagination.totalPages : 500} |
+          Peliculas: {pagination.totalMovies}
+        </Typography>
         <Grid container spacing={4} my={2}>
           {movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
@@ -261,8 +276,22 @@ function MoviesPage() {
             </Grid>
           ))}
         </Grid>
-        Estas en la pagina {pagination.pag} de {pagination.totalPages}
-        total serultados {pagination.totalMovies}
+        <Pagination
+          sx={{ m: 'auto', my: 3 }}
+          count={pagination.totalPages < 500 ? pagination.totalPages : 500}
+          page={pagination.page}
+          onChange={handlePagination}
+          size="large"
+          color="primary"
+          showFirstButton
+          showLastButton
+          siblingCount={2}
+          boundaryCount={2}
+        />
+        <Alert severity="info">
+          En orden con la API de TMBD solo se proporcionan con un maximo las
+          primeras 500 paginas.
+        </Alert>
       </Stack>
     </Box>
   );

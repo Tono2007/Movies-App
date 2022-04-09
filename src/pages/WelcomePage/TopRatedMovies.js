@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 //mui
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -24,6 +26,7 @@ import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 function TopRatedMovies() {
+  const navigate = useNavigate();
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
@@ -57,7 +60,16 @@ function TopRatedMovies() {
           />
         </Typography>
 
-        <Button size="medium" variant="contained">
+        <Button
+          size="medium"
+          variant="contained"
+          onClick={() =>
+            navigate({
+              pathname: '/movies',
+              search: `?sort_by=vote_average.desc`,
+            })
+          }
+        >
           Ver todas
         </Button>
       </Stack>
