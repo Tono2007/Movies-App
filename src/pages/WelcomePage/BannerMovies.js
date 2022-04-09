@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 //Components
 import Banner from '../../components/Banner';
+import Loader from '../../components/Loader';
 //API
 import { getPlayingMovies } from '../../api/services/movies';
 // Swiper
@@ -12,22 +13,29 @@ import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 function BannerSection({ genres }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
       try {
+        setIsLoading(true);
         const response = await getPlayingMovies();
         //console.log(response);
         setMovies(response.data.results);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getMovies();
   }, []);
-  return (
+  return isLoading ? (
+    <Loader my="20vh" />
+  ) : (
     <Box
       component={Swiper}
       loop

@@ -10,19 +10,25 @@ import Grid from '@mui/material/Grid';
 import MovieIcon from '@mui/icons-material/Movie';
 //API
 import { getAllMovieGenres } from '../../api/services/catalog';
+//Components
+import Loader from '../../components/Loader';
 
 function GenresPage() {
   const [genres, setGenres] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getGenres = async () => {
       try {
+        setIsLoading(true);
         const response = await getAllMovieGenres();
         console.log(response);
         setGenres(response.data.genres);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getGenres();
@@ -31,7 +37,7 @@ function GenresPage() {
     <>
       <Box
         width="100%"
-        height="20vh"
+        height="30vh"
         position="relative"
         sx={{
           '&:after': {
@@ -70,6 +76,7 @@ function GenresPage() {
         >
           Generos de Peliculas
         </Typography>
+        {isLoading && <Loader />}
         <Grid
           container
           spacing={3}

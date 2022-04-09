@@ -1,90 +1,62 @@
-# Getting Started with Create React App
+# **Movie APP**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto es un sitio web para navegar entre peliculas y ver detalles de cada una.
+Se ocupa la API de TheMovieDataBase [TMDV](https://www.themoviedb.org/) [API](https://developers.themoviedb.org/3/getting-started/introduction)
 
-## Available Scripts
+- Permite ver las peliculas mas populares, mejor calificadas, ultimos estrenos, por genero y peliculas actualmente en emisión.
+- Permite ver detalles de cada pelicula (resumen, trailer, puntuación, duración, imagenes, reparto, videos, peliculas relacionadas...)
+- Permite buscar peliculas por titulo, año y genero.
 
-In the project directory, you can run:
+**_ Algun dia terminare la parte de series. _**
 
-### `npm start`
+## **CAPTURAS**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<div>
+    <img src="src/assets/screenshots.WelcomePage.jpeg" height="600px"/>
+    <img src="src/assets/screenshots.MoviePage.jpeg" height="600px"/>
+</div>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![img](src/assets/screenshots.WelcomePage.jpeg)
+![img](src/assets/screenshots.MoviePage.jpeg)
 
-### `npm test`
+## **DEMO**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Puede ver el demo de este haciendo click [aquí](https://movies-app-tono2007.vercel.app/).
 
-### `npm run build`
+## **TECNOLOGIAS**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para el proyecto utilice las siguientes tecnologias:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ReactJs
+- Material-ui(MUI)
+- Swiper
+- HTML, CSS,JS
+- Vercel
+- TMDB
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **USO**
 
-### `npm run eject`
+Para usar este proyecto:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Clonar repositorio: ` git clone https://github.com/Tono2007/Movies-App.git`
+- Instalar dependencias: `npm install` o` yarn install`
+- Ejecutarlo: `npm start` o ` yarn start`
+- Obtén tu clave de la api TMDB [API](https://developers.themoviedb.org/3/getting-started/introduction)
+- Configura variables de ambiente con tu clave
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Guiate del fichero **.env-example**
+Para uso local crea `.env`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-ramas
-develop -> any pull request of changes this branch
-main -> don´t modify, this is what is running in production
-
-
-Set enviroment variables env.local
-NEXT_PUBLIC_EXTERNAL_SERVER_API_URL=http://api.com
-
-Api reference
-themoviedb api documentation
-
-How to run locally
-$ npm install
-$ npm run dev
-
-
-Set enviroment variables env.local
+```ssh
 REACT_APP_API_KEY_V3 = Key...
 REACT_APP_API_KEY_V4 = Key...
+```
+
+## Ramas
+
+Si este proyecto en algun momento crece.
+
+- dev - > cualquier pull request a esta rama, por ahora no hay revisiones ni convenciones para la estructura, titulo y descripción de los cambios.
+- main -> no modificar, esta se usara como un entorno de producción.

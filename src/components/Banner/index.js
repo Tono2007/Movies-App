@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 //Icons
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
@@ -30,6 +31,7 @@ import {
 //Components
 import Modal from '../Modal';
 import ModalVideo from '../ModalVideo';
+import Loader from '../Loader';
 
 function GenreChip({ text }) {
   return (
@@ -106,12 +108,14 @@ function Banner(props) {
   const [movie, setMovie] = useState({});
   const [keywords, setKeywords] = useState([]);
   const [credits, setCredits] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   //console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
 
   useEffect(() => {
     const getDetails = async () => {
       try {
+        setIsLoading(true);
         const responses = await Promise.all([
           getMovie(id),
           getMovieKeywords(id),
@@ -124,6 +128,8 @@ function Banner(props) {
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getDetails();
@@ -329,6 +335,15 @@ function Banner(props) {
         </Stack>
         {showCover && <Cover imgPath={movie?.poster_path} video={trailer} />}
       </Box>
+      {isLoading && (
+        <Loader
+          sx={{
+            position: 'absolute',
+            top: 'calc(50% - 100px)',
+            left: 'calc(50% - 150px)',
+          }}
+        />
+      )}
     </Box>
   );
 }

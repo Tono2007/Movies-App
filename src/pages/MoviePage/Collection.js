@@ -15,18 +15,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { getCollection } from '../../api/services/collections';
 //Components
 import MovieCard from '../../components/MovieCardMin';
+import Loader from '../../components/Loader';
 
-function Collection({ movie }) {
+function Collection({ movie, genres }) {
   const [collection, setCollection] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const getDetails = async () => {
       try {
+        setIsLoading(true);
+
         const response = await getCollection(movie.belongs_to_collection?.id);
         console.log(response);
         setCollection(response.data);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     movie.belongs_to_collection?.id && getDetails();
@@ -39,6 +46,7 @@ function Collection({ movie }) {
           Saga
         </Typography>
       </Divider>
+      {isLoading && <Loader />}
       <Grid container spacing={6} mb={10} alignItems="center">
         <Grid item xs={6}>
           <Banner movie={movie} />
@@ -109,7 +117,7 @@ function Collection({ movie }) {
       >
         {collection?.parts?.map((movieData) => (
           <SwiperSlide key={movieData.id}>
-            <MovieCard movie={movieData} />
+            <MovieCard movie={movieData} genres={genres} />
           </SwiperSlide>
         ))}
         <SwiperNavigation

@@ -27,7 +27,7 @@ function Account() {
         <PersonOutlineIcon fontSize="medium" sx={{ color: '#fff' }} />
       </Avatar>
       <Stack
-        spacing={1}
+        spacing={2}
         id="DDAccount"
         bgcolor="background.paper"
         boxShadow={4}

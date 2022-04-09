@@ -16,20 +16,25 @@ import SwiperNavigation from '../../components/SwiperNavigation';
 import { Navigation, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Loader from '../../components/Loader';
 
 function PopularMovies({ genres }) {
-  const [popularMovies, setPopularMovies] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
     const getDetails = async () => {
       try {
+        setIsLoading(true);
         const response = await getPopularMovies();
         console.log(response);
         setPopularMovies(response.data.results);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getDetails();
@@ -64,52 +69,58 @@ function PopularMovies({ genres }) {
           Ver todas
         </Button>
       </Stack>
-      <Box
-        mx="auto"
-        pb={5}
-        width="calc(100% - 100px)"
-        height="400px"
-        component={Swiper}
-        grabCursor
-        spaceBetween={30}
-        autoplay={{
-          delay: 8000,
-          disableOnInteraction: false,
-        }}
-        modules={[Navigation, Scrollbar]}
-        scrollbar={{
-          draggable: true,
-          dragSize: 100,
-        }}
-        slidesPerView={4}
-        navigation={{
-          nextEl: '.swiper-button-next__welcomePage--popularMovies',
-          prevEl: '.swiper-button-prev__welcomePage--popularMovies',
-        }}
-        sx={{
-          '& .swiper-scrollbar': {
-            height: '10px',
-            mt: 1,
-            mb: '-0px',
-            bgcolor: (theme) => theme.palette.gray.dark,
-            '& .swiper-scrollbar-drag:hover': {
-              bgcolor: 'primary.dark',
-            },
-          },
-        }}
-      >
-        {popularMovies.map((movie) => (
-          <SwiperSlide key={movie.id}>
-            <MovieCard movie={movie} genres={genres} />
-          </SwiperSlide>
-        ))}
-      </Box>
-      <SwiperNavigation
-        classBtns={[
-          'swiper-button-prev__welcomePage--popularMovies',
-          'swiper-button-next__welcomePage--popularMovies',
-        ]}
-      />
+      {isLoading ? (
+        <Loader my="20vh" />
+      ) : (
+        <>
+          <Box
+            mx="auto"
+            pb={5}
+            width="calc(100% - 100px)"
+            height="400px"
+            component={Swiper}
+            grabCursor
+            spaceBetween={30}
+            autoplay={{
+              delay: 8000,
+              disableOnInteraction: false,
+            }}
+            modules={[Navigation, Scrollbar]}
+            scrollbar={{
+              draggable: true,
+              dragSize: 100,
+            }}
+            slidesPerView={4}
+            navigation={{
+              nextEl: '.swiper-button-next__welcomePage--popularMovies',
+              prevEl: '.swiper-button-prev__welcomePage--popularMovies',
+            }}
+            sx={{
+              '& .swiper-scrollbar': {
+                height: '10px',
+                mt: 1,
+                mb: '-0px',
+                bgcolor: (theme) => theme.palette.gray.dark,
+                '& .swiper-scrollbar-drag:hover': {
+                  bgcolor: 'primary.dark',
+                },
+              },
+            }}
+          >
+            {popularMovies.map((movie) => (
+              <SwiperSlide key={movie.id}>
+                <MovieCard movie={movie} genres={genres} />
+              </SwiperSlide>
+            ))}
+          </Box>
+          <SwiperNavigation
+            classBtns={[
+              'swiper-button-prev__welcomePage--popularMovies',
+              'swiper-button-next__welcomePage--popularMovies',
+            ]}
+          />
+        </>
+      )}
     </Box>
   );
 }

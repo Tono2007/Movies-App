@@ -113,15 +113,6 @@ function CardContent({ movie, genres }) {
               • {genres?.find((genre) => genre.id === genreId)?.name}{' '}
             </Typography>
           ))}
-          <Typography
-            variant="caption"
-            fontWeight="300"
-            mb={0}
-            color="textSecondary"
-          >
-            {' '}
-            Accion Aventura
-          </Typography>
         </Typography>
         {/*  <Typography fontSize="15px" color="textSecondary" fontWeight="300" mb={1}>
         <Typography

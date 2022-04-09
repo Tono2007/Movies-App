@@ -5,27 +5,33 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
+import CircularProgress from '@mui/material/CircularProgress';
 //API
 import { getPerson } from '../../api/services/people';
 
 function ActorDetail({ id }) {
   const [person, setPerson] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getPersonDetails = async () => {
       try {
+        setIsLoading(true);
         const response = await getPerson(id);
         console.log(response);
         setPerson(response.data);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getPersonDetails();
   }, []);
   return (
     <Stack p={2}>
+      {isLoading && <CircularProgress />}
       {person?.profile_path && (
         <Box
           alt="banner"

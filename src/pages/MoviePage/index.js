@@ -21,9 +21,12 @@ import OverView from './OverView';
 import Keywords from './Keywords';
 import Collection from './Collection';
 import Multimedia from './Multimedia';
+import Loader from '../../components/Loader';
 
 function MoviePage() {
   const { idMovie } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [movie, setMovie] = useState({});
   const [keywords, setKeywords] = useState([]);
   const [credits, setCredits] = useState([]);
@@ -36,6 +39,8 @@ function MoviePage() {
   useEffect(() => {
     const getDetails = async () => {
       try {
+        setIsLoading(true);
+
         const responses = await Promise.all([
           getMovie(idMovie),
           getMovieKeywords(idMovie),
@@ -61,12 +66,16 @@ function MoviePage() {
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getDetails();
   }, [idMovie]);
 
-  return (
+  return isLoading ? (
+    <Loader my="20vh" />
+  ) : (
     <>
       <Banner
         showCover
@@ -84,7 +93,7 @@ function MoviePage() {
         <Cast credits={credits} />
         <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />
-        <Collection movie={movie} />
+        <Collection movie={movie} genres={genres} />
         <RelatedMovies similarMovies={similarMovies} genres={genres} />
       </Stack>
     </>

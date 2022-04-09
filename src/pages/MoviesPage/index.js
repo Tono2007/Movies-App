@@ -14,13 +14,14 @@ import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Alert from '@mui/material/Alert';
-
+import CircularProgress from '@mui/material/CircularProgress';
 //Icons
 import SearchIcon from '@mui/icons-material/Search';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import TheatersIcon from '@mui/icons-material/Theaters';
 //Components
 import MovieCard from '../../components/MovieCard';
+import Loader from '../../components/Loader';
 //assets
 import wallpaper from '../../assets/images/wallpaper.jpg';
 //api
@@ -30,10 +31,11 @@ import { getAllMovieGenres } from '../../api/services/catalog';
 function MoviesPage() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [pagination, setPagination] = useState({
-    pag: 1,
+  const [page, setPage] = useState(Number(searchParams.get('page') ?? 1));
+  const [total, setTotal] = useState({
     totalPages: 0,
     totalMovies: 0,
   });
@@ -64,27 +66,32 @@ function MoviesPage() {
     } */
     const getMovies = async () => {
       try {
+        setIsLoading(true);
         const response = await getDiscoverMovies(location?.search);
         console.log(response);
         setMovies(response.data.results);
-        setPagination({
-          pag: response.data.page,
+        setTotal({
+          //page: response.data.page,
           totalPages: response.data.total_pages,
           totalMovies: response.data.total_results,
         });
+        setPage(response.data.page);
       } catch (error) {
         console.log(error);
         console.log(error.response);
+      } finally {
+        setIsLoading(false);
       }
     };
     getMovies();
   }, [location]);
 
   const handlePagination = (event, value) => {
-    setPagination((state) => ({ ...state, pag: value }));
+    setPage(value);
     const actualPath = Object.fromEntries(new URLSearchParams(searchParams));
     setSearchParams({ ...actualPath, page: value });
   };
+
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -211,11 +218,22 @@ function MoviesPage() {
           <Button
             size="medium"
             variant="contained"
-            endIcon={<SearchIcon />}
+            endIcon={
+              !isLoading ? (
+                <SearchIcon />
+              ) : (
+                <CircularProgress
+                  color="secondary"
+                  size={20}
+                  sx={{ my: 'auto' }}
+                />
+              )
+            }
             sx={{ minWidth: '130px' }}
             type="submit"
+            disabled={isLoading}
           >
-            Buscar
+            {!isLoading ? 'Buscar' : 'Buscando'}
           </Button>
         </Stack>
         <Typography variant="suntitle" mb={3} mt={2}>
@@ -243,7 +261,8 @@ function MoviesPage() {
                 let label = `${preLabel[entry[0]]} ${entry[1]}`;
                 if (entry[0] === 'with_genres') {
                   label = `${preLabel[entry[0]]} ${
-                    genres.find((genre) => genre.id === Number(entry[1]))?.name
+                    genres?.find((genre) => genre?.id === Number(entry[1]))
+                      ?.name
                   }`;
                 }
                 if (entry[0] === 'sort_by') {
@@ -263,30 +282,38 @@ function MoviesPage() {
           variant="middle"
           sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
         />
-        <Typography textAlign="right" variant="caption">
-          Pagina {pagination.pag} de{' '}
-          {pagination.totalPages < 500 ? pagination.totalPages : 500} |
-          Peliculas: {pagination.totalMovies}
-        </Typography>
-        <Grid container spacing={4} my={2}>
-          {movies.map((movie) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
-              <MovieCard movie={movie} genres={genres} />
+        {isLoading ? (
+          <Loader mt={2} />
+        ) : (
+          <>
+            <Typography textAlign="right" variant="caption">
+              Pagina {page} de {total.totalPages < 500 ? total.totalPages : 500}{' '}
+              | Peliculas: {total.totalMovies}
+            </Typography>
+            <Grid container spacing={4} my={2}>
+              {movies.map((movie) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+                  <MovieCard movie={movie} genres={genres} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Pagination
-          sx={{ m: 'auto', my: 3 }}
-          count={pagination.totalPages < 500 ? pagination.totalPages : 500}
-          page={pagination.page}
-          onChange={handlePagination}
-          size="large"
-          color="primary"
-          showFirstButton
-          showLastButton
-          siblingCount={2}
-          boundaryCount={2}
-        />
+            <Pagination
+              page={page}
+              sx={{ m: 'auto', my: 3 }}
+              //defaultPage={Number(searchParams.get('page'))}
+              defaultPage={1}
+              count={total.totalPages < 500 ? total.totalPages : 500}
+              onChange={handlePagination}
+              size="large"
+              color="primary"
+              showFirstButton
+              showLastButton
+              siblingCount={2}
+              boundaryCount={2}
+            />
+          </>
+        )}
+
         <Alert severity="info">
           En orden con la API de TMBD solo se proporcionan con un maximo las
           primeras 500 paginas.

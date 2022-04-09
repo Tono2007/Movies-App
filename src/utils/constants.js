@@ -5,15 +5,10 @@ export const constants = {
     linkedin: 'https://www.linkedin.com/in/antonio-ayola/',
     github: 'https://github.com/Tono2007',
     email: 'antonio.ayola.cortes@gmail.com',
-    twitter: 'https://twitter.com/Antonio_Ayola_',
-    number: '+52 7711825937',
-    whatsapp: 'https://wa.me/527711825937',
-    instagram: 'https://www.instagram.com/antonioayola1/',
-    facebook: 'https://www.facebook.com/tono2007/',
   },
   language: 'es_mx',
   siteData: {
-    siteUrl: 'antonioayola.vercel.app/',
+    siteUrl: 'https://movies-app-tono2007.vercel.app/',
     siteRepo: 'https://github.com/Tono2007/Movies-App',
   },
   api: {
