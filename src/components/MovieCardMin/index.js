@@ -17,7 +17,7 @@ import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, genres }) {
   return (
     <Box height="100%">
       <Box
@@ -69,7 +69,7 @@ function MovieCard({ movie }) {
             }}
           />
         </Box>
-        <CardContent movie={movie} />
+        <CardContent movie={movie} genres={genres} />
       </Box>
       <Typography variant="caption" my={0} lineHeight="1px">
         {movie?.title}
@@ -77,7 +77,7 @@ function MovieCard({ movie }) {
     </Box>
   );
 }
-function CardContent({ movie }) {
+function CardContent({ movie, genres }) {
   const navigate = useNavigate();
 
   return (
@@ -107,7 +107,18 @@ function CardContent({ movie }) {
           color="textSecondary"
           flexGrow={1}
         >
-          {moment(movie?.release_date).format('YYYY')} •
+          {moment(movie?.release_date).format('YYYY')} |{'  '}
+          {movie?.genre_ids?.map((genreId, index) => (
+            <Typography
+              key={index}
+              variant="caption"
+              color="textSecondary"
+              fontWeight="300"
+              component="span"
+            >
+              • {genres?.find((genre) => genre.id === genreId)?.name}{' '}
+            </Typography>
+          ))}
           <Typography
             variant="caption"
             fontWeight="300"

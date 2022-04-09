@@ -272,7 +272,7 @@ function MoviesPage() {
         <Grid container spacing={4} my={2}>
           {movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} genres={genres} />
             </Grid>
           ))}
         </Grid>

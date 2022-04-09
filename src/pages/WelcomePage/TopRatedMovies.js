@@ -25,7 +25,7 @@ import { Navigation, Pagination, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-function TopRatedMovies() {
+function TopRatedMovies({ genres }) {
   const navigate = useNavigate();
   const [popularMovies, setPopularMovies] = useState([]);
 
@@ -109,7 +109,7 @@ function TopRatedMovies() {
       >
         {popularMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <MovieCard movie={movie} />
+            <MovieCard movie={movie} genres={genres} />
           </SwiperSlide>
         ))}
       </Box>

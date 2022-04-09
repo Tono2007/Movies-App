@@ -25,7 +25,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 //api
 import { getUpcomingMovies } from '../../api/services/movies';
 
-function LatestMovies() {
+function LatestMovies({ genres }) {
   const navigate = useNavigate();
 
   const [latestMovies, setLatestMovies] = useState([]);
@@ -119,7 +119,7 @@ function LatestMovies() {
         >
           {latestMovies.slice(0, 10).map((movie) => (
             <SwiperSlide key={movie.id}>
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} genres={genres} />
             </SwiperSlide>
           ))}
           <SwiperNavigation
@@ -164,7 +164,7 @@ function LatestMovies() {
         >
           {latestMovies.slice(10, 20).map((movie) => (
             <SwiperSlide key={movie.id}>
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} genres={genres} />
             </SwiperSlide>
           ))}
           <SwiperNavigation

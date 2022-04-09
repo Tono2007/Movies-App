@@ -20,7 +20,7 @@ import { Navigation, Pagination, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-function RelatedMovies({ similarMovies }) {
+function RelatedMovies({ similarMovies, genres }) {
   return (
     <Box my={3} position="relative">
       <Stack
@@ -74,7 +74,7 @@ function RelatedMovies({ similarMovies }) {
       >
         {similarMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <MovieCard movie={movie} />
+            <MovieCard movie={movie} genres={genres} />
           </SwiperSlide>
         ))}
       </Box>

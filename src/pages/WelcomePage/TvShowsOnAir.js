@@ -166,7 +166,7 @@ function TvShowsOnAir() {
                   variant="contained"
                   sx={{ width: '200px' }}
                   endIcon={<PlayCircleOutlineIcon />}
-                  onClick={() => navigate(`/movies/${movie?.id}`)}
+                  onClick={() => navigate(`/series/${movie?.id}`)}
                 >
                   Ver Serie
                 </Button>

@@ -44,11 +44,11 @@ function WelcomePage() {
       {/*       <Banner caption="MoviesAPP" movieBtn movie={movies[1]} genres={genres} />
        */}
       <BannerMovies genres={genres} />
-      <PopularMovies />
-      <TopRatedMovies />
+      <PopularMovies genres={genres} />
+      <TopRatedMovies genres={genres} />
       <Grid container spacing={0} m="auto" px="4%" my={9} alignItems="center">
         <Grid item xs={9}>
-          <LatestMovies />
+          <LatestMovies genres={genres} />
         </Grid>
         <Grid item xs={3}>
           <GenreList />

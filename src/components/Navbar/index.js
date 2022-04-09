@@ -27,6 +27,8 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import Footer from '../Footer';
 import Logo from '../Logo';
+import Search from './Search';
+import Account from './Account';
 
 function NavButton(NavButtonProps) {
   const { path, children, to, addSX, ...rest } = NavButtonProps;
@@ -115,10 +117,8 @@ function navbar() {
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography>Es</Typography>
-            <SearchIcon />
-            <Avatar sx={{ bgcolor: 'primary.main' }}>
-              <PersonOutlineIcon fontSize="medium" sx={{ color: '#fff' }} />
-            </Avatar>
+            <Search />
+            <Account />
           </Stack>
         </Toolbar>
       </AppBar>

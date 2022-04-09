@@ -43,6 +43,8 @@ import {
   getMovieTitles,
   getMovieVideos,
 } from '../../api/services/movies';
+import { getAllMovieGenres } from '../../api/services/catalog';
+
 //compo
 import RelatedMovies from './RelatedMovies';
 import Cast from './Cast';
@@ -88,6 +90,7 @@ function MoviePage() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [titles, setTitles] = useState([]);
   const [videos, setVideos] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -98,6 +101,7 @@ function MoviePage() {
           getMovieCredits(idMovie),
           getMovieImages(idMovie),
           getMovieTitles(idMovie),
+          getAllMovieGenres(),
         ]);
         const responseVideos = await getMovieVideos(idMovie);
         const response = await getSimilarMovies(idMovie);
@@ -112,6 +116,7 @@ function MoviePage() {
         setCredits(responses[2].data);
         setImgs(responses[3].data);
         setTitles(responses[4].data.titles);
+        setGenres(responses[5].data.genres);
       } catch (error) {
         console.log(error);
         console.log(error.response);
@@ -139,7 +144,7 @@ function MoviePage() {
         <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />
         <Collection movie={movie} />
-        <RelatedMovies similarMovies={similarMovies} />
+        <RelatedMovies similarMovies={similarMovies} genres={genres} />
       </Stack>
     </>
   );
