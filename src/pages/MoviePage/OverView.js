@@ -33,13 +33,21 @@ function OverView({ movie, credits, titles, trailer }) {
       >
         <ModalVideo video={trailer} />
       </Modal>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction={{ xs: 'column', md: 'row' }}
+        justifyContent="space-between"
+        alignItems={{ xs: 'flex-start', md: 'center' }}
+      >
         <Chip
           color="primary"
           label={moment(movie?.release_date).format('L')}
           size="medium"
         />
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems={{ xs: 'flex-start', md: 'center' }}
+          spacing={1}
+        >
           <div>
             {movie?.vote_average !== undefined && (
               <Rating
@@ -85,7 +93,7 @@ function OverView({ movie, credits, titles, trailer }) {
           }}
         />
       </Typography>
-      <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
         <AccessTimeIcon color="primary" />
         <Typography variant="subtitle1" mb={0} fontWeight="400" my={0}>
           {convertMinsToHrsMins(movie?.runtime)}{' '}

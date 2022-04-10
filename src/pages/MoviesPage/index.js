@@ -144,8 +144,9 @@ function MoviesPage() {
           Peliculas
         </Typography>
         <Stack
-          direction="row"
+          direction={{ xs: 'column', md: 'row' }}
           spacing={3}
+          //flexWrap="wrap"
           mt={3}
           alignItems="center"
           component="form"
@@ -304,7 +305,7 @@ function MoviesPage() {
               defaultPage={1}
               count={total.totalPages < 500 ? total.totalPages : 500}
               onChange={handlePagination}
-              size="large"
+              size="medium"
               color="primary"
               showFirstButton
               showLastButton

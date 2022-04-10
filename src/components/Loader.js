@@ -8,13 +8,13 @@ import Logo from './Logo';
 function Loader({ addSx, ...rest }) {
   return (
     <Stack
-      mx="auto"
+      mx={{ xs: 1, sm: 'auto' }}
       borderRadius="5px"
       sx={{ ...addSx }}
       {...rest}
       bgcolor="gray.dark"
       p={2}
-      width="370px"
+      width={{ xs: '100%', sm: '370px' }}
     >
       <Stack
         direction="row"

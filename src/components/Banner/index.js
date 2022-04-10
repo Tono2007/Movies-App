@@ -58,6 +58,7 @@ function Cover({ imgPath, video }) {
   return (
     <Box
       ml="auto"
+      mx="auto"
       maxWidth="50%"
       width="auto"
       height="100%"
@@ -136,10 +137,14 @@ function Banner(props) {
   }, [id]);
 
   return (
-    <Box position="relative">
+    <Box
+      position="relative"
+      height={{ sm: '100%', md: '105vh' }}
+      minHeight="80vh"
+    >
       <Box
         width="100%"
-        minHeight="105vh"
+        height="100%"
         position="absolute"
         sx={{
           '&:after': {
@@ -172,16 +177,17 @@ function Banner(props) {
       <Box
         position="relative"
         width="100%"
-        height="105vh"
+        height="100%"
         display="flex"
+        flexWrap="wrap"
         alignItems="center"
-        p="3%"
+        p={{ xs: '3%', md: '3%' }}
       >
         <Stack
-          mt="-1%"
+          mt={{ xs: '10vh', md: -2 }}
           bgcolor="#21212100"
-          p={5}
-          width="50%"
+          p={{ xs: '3%', md: 5 }}
+          width={{ xs: '100%', md: '50%' }}
           direction="column"
           justifyContent="flex-end"
           alignItems="flex-start"
@@ -198,7 +204,8 @@ function Banner(props) {
             {caption}
           </Typography>
           <Typography
-            fontSize="4vw"
+            my={1}
+            fontSize={{ xs: '5vw', sm: '4vw' }}
             fontWeight="800"
             lineHeight="4vw"
             sx={{
@@ -212,7 +219,11 @@ function Banner(props) {
             }
             {movie?.title}
           </Typography>
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            alignItems={{ xs: 'flex-start', sm: 'center' }}
+            spacing={1}
+          >
             {movie?.vote_average !== undefined && (
               <Rating
                 name="size-medium"
@@ -273,7 +284,6 @@ function Banner(props) {
               index !== 0 ? `, ${genrer.name}` : `${genrer.name}`,
             )}
           </Typography>
-
           <Stack
             direction="row"
             flexWrap="wrap"
@@ -325,7 +335,13 @@ function Banner(props) {
             <Button
               size="large"
               variant="contained"
-              sx={{ width: '200px' }}
+              sx={{
+                width: '200px',
+                display: {
+                  xs: 'none',
+                  sm: 'flex',
+                },
+              }}
               endIcon={<PlayCircleOutlineIcon />}
               onClick={() => navigate(`/movies/${movie?.id}`)}
             >
@@ -339,8 +355,8 @@ function Banner(props) {
         <Loader
           sx={{
             position: 'absolute',
-            top: 'calc(50% - 100px)',
-            left: 'calc(50% - 150px)',
+            top: { xs: 'calc(50% - 100px)', sm: 'calc(50% - 100px)' },
+            left: { xs: '0', sm: 'calc(50% - 150px)' },
           }}
         />
       )}

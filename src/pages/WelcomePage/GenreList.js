@@ -61,7 +61,7 @@ function GenreList() {
     getGenres();
   }, []);
   return (
-    <Box p={2} bgcolor="#1E2029" borderRadius="5px" ml={5}>
+    <Box p={2} bgcolor="#1E2029" borderRadius="5px" ml={5} mx={4}>
       <Typography variant="h6" textAlign="center" my={2}>
         Generos de Pelicula
       </Typography>

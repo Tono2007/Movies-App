@@ -23,10 +23,9 @@ function PostersTab({ imgs }) {
         pb={5}
         my={1}
         width="calc(100% - 100px)"
-        height="330px"
+        height={{ xs: '400px', md: '330px', xl: '500px' }}
         component={Swiper}
         grabCursor
-        spaceBetween={30}
         autoplay={{
           delay: 8000,
           disableOnInteraction: false,
@@ -36,7 +35,24 @@ function PostersTab({ imgs }) {
           draggable: true,
           dragSize: 100,
         }}
-        slidesPerView={5}
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+          1600: {
+            slidesPerView: 6,
+            spaceBetween: 40,
+          },
+        }}
         navigation={{
           nextEl: '.swiper-button-next__moviePage--posters',
           prevEl: '.swiper-button-prev__moviePage--posters',

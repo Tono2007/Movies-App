@@ -46,7 +46,11 @@ function Modal(props) {
               alignContent="center"
               fontWeight="300"
             >
-              <Logo height="35px" mr={-10} />
+              <Logo
+                height="35px"
+                mr={-10}
+                display={{ xs: 'none', sm: 'flex' }}
+              />
               {title}
               <IconButton
                 aria-label="close"
@@ -70,7 +74,7 @@ function Modal(props) {
               borderBottom: `2px solid  ${theme.palette.primary.main}`,
             }}
           >
-            <Logo height="35px" />
+            <Logo height="35px" display={{ xs: 'none', sm: 'flex' }} />
             <Typography variant="h6" fontWeight="300">
               {title}
             </Typography>

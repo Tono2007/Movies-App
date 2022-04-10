@@ -47,7 +47,7 @@ function ActorDetail({ id }) {
         />
       )}
       <Typography
-        fontSize="2vw"
+        fontSize={{ xs: '4vw', sm: '2vw' }}
         fontWeight="800"
         lineHeight="2vw"
         my={2}

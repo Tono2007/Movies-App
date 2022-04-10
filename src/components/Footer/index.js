@@ -24,7 +24,12 @@ function Footer() {
       px="5%"
       pt={5}
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap"
+      >
         <Logo />
 
         <Stack direction="row" spacing={1}>
@@ -68,7 +73,7 @@ function Footer() {
       </Stack>
 
       <Grid container spacing={1} m="auto" px="4%" my={1} mb={3}>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Stack spacing={1}>
             <Typography variant="h6" my={1}>
               Mapa del Sitio
@@ -82,7 +87,7 @@ function Footer() {
             <FooterLink text="Blog" />
           </Stack>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Stack spacing={1}>
             <Typography variant="h6" my={1}>
               Terminos de Uso
@@ -92,7 +97,7 @@ function Footer() {
             <FooterLink text="Terminos y Condiciones" />
           </Stack>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Stack spacing={1}>
             <Typography variant="h6" my={1}>
               FAQ
@@ -102,7 +107,7 @@ function Footer() {
             <FooterLink text="Series" />
           </Stack>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Stack spacing={1}>
             <Typography variant="h6" my={1}>
               Privacidad

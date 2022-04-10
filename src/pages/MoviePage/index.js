@@ -83,7 +83,7 @@ function MoviePage() {
         id={idMovie}
         trailer={videos.find((video) => video.type === 'Trailer')}
       />
-      <Stack m="auto" px="4%" mb={9}>
+      <Stack m="auto" px={{ xs: '2%', sm: '4%' }} mb={9}>
         <OverView
           movie={movie}
           credits={credits}

@@ -31,10 +31,9 @@ function VideosTab({ videos }) {
         pb={11}
         my={1}
         width="calc(100% - 100px)"
-        height="330px"
+        height={{ xs: '300px', md: '330px', xl: '350px' }}
         component={Swiper}
         grabCursor
-        spaceBetween={30}
         autoplay={{
           delay: 8000,
           disableOnInteraction: false,
@@ -44,7 +43,20 @@ function VideosTab({ videos }) {
           draggable: true,
           dragSize: 100,
         }}
-        slidesPerView={2}
+        breakpoints={{
+          240: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1300: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
         navigation={{
           nextEl: '.swiper-button-next__moviePage--videos',
           prevEl: '.swiper-button-prev__moviePage--videos',

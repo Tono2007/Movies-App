@@ -37,11 +37,19 @@ function WelcomePage() {
       <BannerMovies genres={genres} />
       <PopularMovies genres={genres} />
       <TopRatedMovies genres={genres} />
-      <Grid container spacing={0} m="auto" px="4%" my={9} alignItems="center">
-        <Grid item xs={9}>
+      <Grid
+        container
+        spacing={0}
+        m="auto"
+        px="4%"
+        my={9}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid item xs={12} lg={9}>
           <LatestMovies genres={genres} />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} lg={3}>
           <GenreList />
         </Grid>
       </Grid>

@@ -72,10 +72,13 @@ function TvShowsOnAir() {
         <>
           <Box
             mx="auto"
-            pr={11}
+            pr={{ xs: 3, md: 6 }}
             height="500px"
             maxHeight="600px"
-            width="calc(100% - 100px)"
+            width={{
+              xs: 'calc(100% - 75px)',
+              sm: 'calc(100% - 100px)',
+            }}
             component={Swiper}
             direction="vertical"
             grabCursor
@@ -102,85 +105,91 @@ function TvShowsOnAir() {
           >
             {playingTvShows.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <Stack
-                  direction="row"
-                  width="100%"
-                  bgcolor="#d3d3d3"
-                  height="100%"
-                  position="relative"
-                >
-                  <Banner movie={movie} />
+                <>
                   <Stack
-                    bgcolor="#0009"
-                    position="absolute"
-                    top="20%"
-                    right="1%"
-                    width="40%"
-                    p={2}
+                    direction="row"
+                    width="100%"
+                    bgcolor="#d3d3d3"
+                    height="90%"
+                    position="relative"
                   >
-                    <Typography
-                      fontSize="3vw"
-                      fontWeight="800"
-                      lineHeight="3vw"
-                      sx={{
-                        textTransform: 'uppercase',
-                        textShadow: (theme) =>
-                          `2px 2px 0px ${theme.palette.primary.light}`,
-                      }}
+                    <Banner movie={movie} />
+                    <Stack
+                      display={{ xs: 'none', md: 'flex' }}
+                      bgcolor="#0009"
+                      position="absolute"
+                      top="20%"
+                      right="1%"
+                      left={{ xs: 0, md: '50%' }}
+                      width={{ xs: '80%', md: '40%' }}
+                      p={2}
                     >
-                      {movie?.name}
-                    </Typography>
-                    <Typography fontSize="15px" fontWeight="300" mb={1}>
-                      {movie?.overview?.substring(0, 200)}...
-                    </Typography>
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      {movie?.vote_average !== undefined && (
-                        <Rating
-                          name="size-medium"
-                          value={movie.vote_average}
-                          precision={0.5}
-                          sx={{ mr: '5px' }}
-                          max={10}
-                          size="small"
-                        />
-                      )}
                       <Typography
-                        variant="caption"
-                        fontSize="17px"
-                        mb={0}
-                        mr={1}
+                        fontSize={{ xs: '5vw', sm: '3vw' }}
+                        fontWeight="800"
+                        lineHeight="3vw"
+                        my={1}
+                        sx={{
+                          textTransform: 'uppercase',
+                          textShadow: (theme) =>
+                            `2px 2px 0px ${theme.palette.primary.light}`,
+                        }}
                       >
-                        {movie?.vote_average}
+                        {movie?.name}
                       </Typography>
+                      <Typography fontSize="15px" fontWeight="300" mb={1}>
+                        {movie?.overview?.substring(0, 200)}...
+                      </Typography>
+                      <Stack direction="row" alignItems="center" spacing={1}>
+                        {movie?.vote_average !== undefined && (
+                          <Rating
+                            name="size-medium"
+                            value={movie.vote_average}
+                            precision={0.5}
+                            sx={{ mr: '5px' }}
+                            max={10}
+                            size="small"
+                          />
+                        )}
+                        <Typography
+                          variant="caption"
+                          fontSize="17px"
+                          mb={0}
+                          mr={1}
+                        >
+                          {movie?.vote_average}
+                        </Typography>
+                      </Stack>
+                      <Typography variant="caption" fontSize="12px" mb={0}>
+                        ({movie?.popularity} Votos totales)
+                      </Typography>
+                      <Typography
+                        fontSize="15px"
+                        fontWeight="300"
+                        mb={0}
+                        color="textSecondary"
+                      >
+                        <EventIcon fontSize="5px" sx={{ mb: '-3px' }} />{' '}
+                        {moment(movie?.first_air_date).format('LL')} •{' '}
+                        <GTranslateIcon
+                          fontSize="5px"
+                          sx={{ mb: '-3px', mr: 0.5 }}
+                        />
+                        {movie?.original_language}
+                      </Typography>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        sx={{ width: '200px' }}
+                        endIcon={<PlayCircleOutlineIcon />}
+                        onClick={() => navigate(`/series/${movie?.id}`)}
+                      >
+                        Ver Serie
+                      </Button>
                     </Stack>
-                    <Typography variant="caption" fontSize="12px" mb={0}>
-                      ({movie?.popularity} Votos totales)
-                    </Typography>
-                    <Typography
-                      fontSize="15px"
-                      fontWeight="300"
-                      mb={0}
-                      color="textSecondary"
-                    >
-                      <EventIcon fontSize="5px" sx={{ mb: '-3px' }} />{' '}
-                      {moment(movie?.first_air_date).format('LL')} •{' '}
-                      <GTranslateIcon
-                        fontSize="5px"
-                        sx={{ mb: '-3px', mr: 0.5 }}
-                      />
-                      {movie?.original_language}
-                    </Typography>
-                    <Button
-                      size="small"
-                      variant="contained"
-                      sx={{ width: '200px' }}
-                      endIcon={<PlayCircleOutlineIcon />}
-                      onClick={() => navigate(`/series/${movie?.id}`)}
-                    >
-                      Ver Serie
-                    </Button>
                   </Stack>
-                </Stack>
+                  <Typography> {movie?.name}</Typography>
+                </>
               </SwiperSlide>
             ))}
           </Box>
@@ -308,6 +317,7 @@ function Cover({ id, imgPath }) {
       left="10%"
       position="absolute"
       width="auto"
+      maxWidth="80%"
       height="80%"
       display="flex"
       justifyContent="center"

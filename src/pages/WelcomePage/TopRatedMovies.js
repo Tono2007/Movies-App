@@ -77,11 +77,14 @@ function TopRatedMovies({ genres }) {
           <Box
             mx="auto"
             pb={5}
-            width="calc(100% - 100px)"
-            height="400px"
+            width={{
+              xs: 'calc(100% - 75px)',
+              sm: 'calc(100% - 100px)',
+              xl: 'calc(100% - 200px)',
+            }}
+            height={{ xs: '500px', md: '550px', lg: '400px' }}
             component={Swiper}
             grabCursor
-            spaceBetween={30}
             autoplay={{
               delay: 8000,
               disableOnInteraction: false,
@@ -91,7 +94,24 @@ function TopRatedMovies({ genres }) {
               draggable: true,
               dragSize: 100,
             }}
-            slidesPerView={4}
+            breakpoints={{
+              600: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+              1600: {
+                slidesPerView: 5,
+                spaceBetween: 40,
+              },
+            }}
             navigation={{
               nextEl: '.swiper-button-next__welcomePage--RatedMovies',
               prevEl: '.swiper-button-prev__welcomePage--RatedMovies',

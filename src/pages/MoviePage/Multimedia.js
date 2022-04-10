@@ -72,9 +72,9 @@ function Multimedia({ imgs, movie, videos }) {
         </Tabs>
       </Stack>
       <Box
-        px={{ xs: '5px', md: '2%' }}
         mt={2}
         bgcolor="gray.dark"
+        px={{ xs: '5px', md: '2%' }}
         p={2}
         borderRadius="5px"
       >

@@ -55,7 +55,7 @@ function BannerSection({ genres }) {
           bgcolor: 'primary.light',
         },
         '& .swiper-pagination': {
-          mb: 9,
+          mb: { xs: 2, sm: 0 },
         },
       }}
     >

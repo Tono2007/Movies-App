@@ -48,10 +48,10 @@ function Collection({ movie, genres }) {
       </Divider>
       {isLoading && <Loader />}
       <Grid container spacing={6} mb={10} alignItems="center">
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Banner movie={movie} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <>
             <Typography variant="caption" fontWeight="300" mb={0}>
               Total: {collection?.parts?.length} partes
@@ -82,16 +82,32 @@ function Collection({ movie, genres }) {
         mx="auto"
         pb={9}
         width="calc(100% - 0px)"
-        height="230px"
+        height={{ xs: '250px', md: '230px', xl: '300px' }}
         component={Swiper}
         grabCursor
-        spaceBetween={30}
         autoplay={{
           delay: 7000,
           disableOnInteraction: false,
         }}
         modules={[Navigation, Pagination]}
-        slidesPerView={3}
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          900: {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+          1600: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        }}
         navigation={{
           nextEl: '.swiper-button-next__moviePage--collectionMovies',
           prevEl: '.swiper-button-prev__moviePage--collectionMovies',

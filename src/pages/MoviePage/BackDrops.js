@@ -23,21 +23,43 @@ function BackDropsTab({ imgs }) {
         mx="auto"
         pb={5}
         my={1}
-        width="calc(100% - 100px)"
-        height="330px"
+        width={{
+          xs: 'calc(100% - 85px)',
+          sm: 'calc(100% - 100px)',
+          xl: 'calc(100% - 200px)',
+        }}
+        height={{ xs: '200px', sm: '330px' }}
         component={Swiper}
         grabCursor
-        spaceBetween={30}
         autoplay={{
           delay: 8000,
           disableOnInteraction: false,
+        }}
+        /* spaceBetween={30}
+        slidesPerView={2} */
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 1,
+            spaceBetween: 40,
+          },
+          900: {
+            slidesPerView: 2,
+            spaceBetween: 50,
+          },
+          1600: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
         }}
         modules={[Navigation, Scrollbar]}
         scrollbar={{
           draggable: true,
           dragSize: 100,
         }}
-        slidesPerView={2}
         navigation={{
           nextEl: '.swiper-button-next__moviePage--backdrops',
           prevEl: '.swiper-button-prev__moviePage--backdrops',

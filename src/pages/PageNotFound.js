@@ -8,13 +8,13 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 function PageNotFound() {
   return (
     <Box
-      mt="4%"
+      mt="10vh"
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         py: '5%',
-        px: '20%',
+        px: { xs: '5%', sm: '20%' },
         color: 'text.secondary',
       }}
     >

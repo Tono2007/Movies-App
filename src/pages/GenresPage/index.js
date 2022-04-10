@@ -67,7 +67,7 @@ function GenresPage() {
       </Box>
       <Stack m="auto" px="4%" my={2}>
         <Typography
-          fontSize="3vw"
+          fontSize={{ xs: '4vw', sm: '3vw' }}
           fontWeight="800"
           sx={{
             textTransform: 'uppercase',
@@ -87,13 +87,13 @@ function GenresPage() {
           columns={10}
         >
           {genres.map((genre, index) => (
-            <Grid item xs={2} key={index}>
+            <Grid item xs={5} md={3} lg={2} key={index}>
               <GenreCard genre={genre} index={index} />
             </Grid>
           ))}
         </Grid>
         <Typography
-          fontSize="3vw"
+          fontSize={{ xs: '4vw', sm: '3vw' }}
           fontWeight="800"
           sx={{
             textTransform: 'uppercase',
@@ -112,7 +112,7 @@ function GenresPage() {
           columns={10}
         >
           {genres.map((genre, index) => (
-            <Grid item xs={2} key={index}>
+            <Grid item xs={5} md={3} lg={2} key={index}>
               <GenreCard genre={genre} index={index} />
             </Grid>
           ))}

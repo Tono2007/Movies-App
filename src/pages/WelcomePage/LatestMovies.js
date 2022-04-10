@@ -88,13 +88,29 @@ function LatestMovies({ genres }) {
               height="100%"
               component={Swiper}
               grabCursor
-              spaceBetween={30}
               autoplay={{
                 delay: 7000,
                 disableOnInteraction: false,
               }}
               modules={[Navigation, Pagination]}
-              slidesPerView={3}
+              breakpoints={{
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                1600: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+              }}
               navigation={{
                 nextEl: '.swiper-button-next__welcomePage--latestMovies',
                 prevEl: '.swiper-button-prev__welcomePage--latestMovies',
@@ -142,13 +158,29 @@ function LatestMovies({ genres }) {
               width="calc(100% - 0px)"
               component={Swiper}
               grabCursor
-              spaceBetween={30}
               autoplay={{
                 delay: 8000,
                 disableOnInteraction: false,
               }}
               modules={[Navigation, Pagination]}
-              slidesPerView={3}
+              breakpoints={{
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                1600: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+              }}
               navigation={{
                 nextEl: '.swiper-button-next__welcomePage--latestMovies2',
                 prevEl: '.swiper-button-prev__welcomePage--latestMovies2',

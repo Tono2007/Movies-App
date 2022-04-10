@@ -12,6 +12,7 @@ function WorkInProgress() {
   return (
     <Box
       p="10%"
+      pt="15vh"
       sx={{
         backgroundColor: ' #e5e5f7',
         opacity: 0.8,
@@ -32,7 +33,7 @@ function WorkInProgress() {
           //px: '20%',
         }}
       >
-        <CodeIcon sx={{ fontSize: 130 }} />
+        <CodeIcon sx={{ fontSize: 110 }} />
         {/*  <Box p={5}>
             <Stack
               direction="column"
@@ -51,10 +52,14 @@ function WorkInProgress() {
               </Typography>
             </Stack>
           </Box> */}
-        <Typography variant="h1" paragraph>
+        <Typography
+          variant="subtitle2"
+          fontSize={{ xs: '50px', sm: '96px' }}
+          lineHeight={{ xs: '50px', sm: '96px' }}
+        >
           Work In Progress
         </Typography>
-        <Typography variant="h3" paragraph textTransform="uppercase">
+        <Typography variant="h4" my={2} textTransform="uppercase">
           coming soon
         </Typography>
         <Typography variant="h6" paragraph align="center" color="textSecondary">

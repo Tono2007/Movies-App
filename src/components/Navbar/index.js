@@ -12,6 +12,7 @@ import Footer from '../Footer';
 import Logo from '../Logo';
 import Search from './Search';
 import Account from './Account';
+import MobileMenu from './MobileMenu';
 
 function NavButton(NavButtonProps) {
   const { path, children, to, addSX, ...rest } = NavButtonProps;
@@ -64,7 +65,7 @@ function navbar() {
             'linear-gradient(90deg, #12141D90 10%, rgba(20,20,20,0.20) 35%)',
           backdropFilter: 'blur(0.625em)',
           boxShadow: '0px 1px 10px 0px rgba(20,20,20,0.8)',
-          px: 3,
+          px: { xs: 0, md: '3%' },
         }}
       >
         <Toolbar
@@ -76,8 +77,20 @@ function navbar() {
             m: 'auto',
           }}
         >
-          <Logo />
           <Stack direction="row" spacing={2}>
+            <MobileMenu />
+            <Logo />
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={2}
+            display={{
+              xs: 'none',
+              sm: 'none',
+              md: 'none',
+              lg: 'flex',
+            }}
+          >
             <NavButton path="/" to="/">
               Inicio
             </NavButton>

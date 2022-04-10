@@ -12,12 +12,14 @@ Se ocupa la API de TheMovieDataBase [TMDV](https://www.themoviedb.org/) [API](ht
 ## **CAPTURAS**
 
 <div>
-    <img src="src/assets/screenshots.WelcomePage.jpeg" height="600px"/>
-    <img src="src/assets/screenshots.MoviePage.jpeg" height="600px"/>
+    <img src="src/assets/screenshots/WelcomePage.jpeg" height="600px"/>
+    <img src="src/assets/screenshots/MoviePage.jpeg" height="600px"/>
+    <img src="src/assets/screenshots/MoviePageResponsive.jpeg" height="600px"/>
+
 </div>
 
-![img](src/assets/screenshots.WelcomePage.jpeg)
-![img](src/assets/screenshots.MoviePage.jpeg)
+![img](src/assets/screenshots/WelcomePage.jpeg)
+![img](src/assets/screenshots/MoviePage.jpeg)
 
 ## **DEMO**
 

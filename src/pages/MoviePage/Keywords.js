@@ -19,7 +19,7 @@ function Keywords({ keywords }) {
         alignContent="center"
         alignItems="center"
         bgcolor="gray.dark"
-        p={3}
+        p={{ xs: 1, md: 3 }}
         flexWrap="wrap"
       >
         {keywords.map((keyword) => (
@@ -39,7 +39,7 @@ function KeywordChip({ text }) {
       lineHeight="13px"
       my={1}
       width="auto"
-      p="3px 16px"
+      p={{ xs: '1px 8px', sm: '3px 16px' }}
       bgcolor="#eee4"
     >
       {text}

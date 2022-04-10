@@ -21,13 +21,12 @@ function Cast({ credits }) {
           Actores Principales
         </Typography>
       </Divider>
-      <Box p={8} bgcolor="gray.dark" pb={4} borderRadius="5px">
+      <Box p="5%" bgcolor="gray.dark" pb={4} borderRadius="5px">
         <Box
           pb={5}
           width="100%"
           component={Swiper}
           grabCursor
-          spaceBetween={30}
           autoplay={{
             delay: 6000,
             disableOnInteraction: false,
@@ -37,7 +36,28 @@ function Cast({ credits }) {
             draggable: true,
             dragSize: 100,
           }}
-          slidesPerView={5}
+          breakpoints={{
+            400: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            900: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+            1200: {
+              slidesPerView: 5,
+              spaceBetween: 40,
+            },
+          }}
           navigation={{
             nextEl: '.swiper-button-next__moviePage--cast',
             prevEl: '.swiper-button-prev__moviePage--cast',
@@ -106,7 +126,7 @@ function ActressCard({ cast }) {
           boxShadow={10}
           alt="banner"
           width="100%"
-          height="300px"
+          height={{ xs: '500px', sm: '300px', xl: '500px' }}
           maxHeight="70%"
           component="img"
           src={`${constants.api.site}/original${cast?.profile_path}`}

@@ -33,11 +33,14 @@ function RelatedMovies({ similarMovies, genres }) {
       <Box
         mx="auto"
         pb={5}
-        width="calc(100% - 100px)"
-        height="400px"
+        width={{
+          xs: 'calc(100% - 85px)',
+          sm: 'calc(100% - 100px)',
+          xl: 'calc(100% - 200px)',
+        }}
+        height={{ xs: '550px', md: '500px', xl: '600px' }}
         component={Swiper}
         grabCursor
-        spaceBetween={30}
         autoplay={{
           delay: 8000,
           disableOnInteraction: false,
@@ -47,7 +50,24 @@ function RelatedMovies({ similarMovies, genres }) {
           draggable: true,
           dragSize: 100,
         }}
-        slidesPerView={4}
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          1600: {
+            slidesPerView: 5,
+            spaceBetween: 40,
+          },
+        }}
         navigation={{
           nextEl: '.swiper-button-next__moviePage--relatedMovies',
           prevEl: '.swiper-button-prev__moviePage--relatedMovies',
