@@ -285,7 +285,7 @@ function Banner({ movie }) {
       boxShadow={20}
       borderColor="primary.dark"
       sx={{
-        background: `url(${constants.api.site}/original${movie?.backdrop_path}) no-repeat`,
+        background: `url(${constants.api.site}/w1280${movie?.backdrop_path}) no-repeat`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         boxShadow: (theme) =>
@@ -305,12 +305,15 @@ function Banner({ movie }) {
             objectFit: 'cover',
           }}
         /> */}
-      <Cover imgPath={`${constants.api.site}/original${movie?.poster_path}`} />
+      <Cover
+        imgPath={`${constants.api.site}/w500${movie?.poster_path}`}
+        alt={`${movie?.name || 'serie'} poster`}
+      />
     </Box>
   );
 }
 
-function Cover({ id, imgPath }) {
+function Cover({ id, imgPath, alt = 'serie poster' }) {
   return (
     <Box
       top="10%"
@@ -325,13 +328,14 @@ function Cover({ id, imgPath }) {
       flexDirection="column"
     >
       <Box
+        loading="lazy"
+        alt={alt}
         border={3}
         borderColor="#eee4"
-        alt="banner"
         width="100%"
         height="100%"
         component="img"
-        src={`${constants.api.site}/original${imgPath}`}
+        src={imgPath}
         sx={{
           objectFit: 'cover',
         }}

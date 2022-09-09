@@ -123,7 +123,6 @@ function navbar() {
         component="main"
         sx={{
           flex: '1 0 auto',
-          pb: 1,
         }}
       >
         <Outlet />

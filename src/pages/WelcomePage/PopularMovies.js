@@ -24,7 +24,7 @@ function PopularMovies({ genres }) {
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
-    const getDetails = async () => {
+    (async () => {
       try {
         setIsLoading(true);
         const response = await getPopularMovies();
@@ -36,8 +36,7 @@ function PopularMovies({ genres }) {
       } finally {
         setIsLoading(false);
       }
-    };
-    getDetails();
+    })();
   }, []);
   return (
     <Box m="auto" mx="4%" my={5} position="relative">
@@ -106,8 +105,12 @@ function PopularMovies({ genres }) {
                 slidesPerView: 4,
                 spaceBetween: 30,
               },
-              1600: {
+              1700: {
                 slidesPerView: 5,
+                spaceBetween: 40,
+              },
+              2000: {
+                slidesPerView: 8,
                 spaceBetween: 40,
               },
             }}

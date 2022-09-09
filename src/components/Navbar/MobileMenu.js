@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 // MUI Stuff
 import AppBar from '@mui/material/AppBar';
@@ -41,9 +41,8 @@ function MenuListItem({ Icon, title, to, path }) {
   /* const match = Boolean(useRouteMatch({ path })); */
   return (
     <MenuItem
-      onClick={() => {
-        to();
-      }}
+      component={RouterLink}
+      to={path}
       /* selected={match} */
     >
       <ListItemIcon>
@@ -54,17 +53,11 @@ function MenuListItem({ Icon, title, to, path }) {
   );
 }
 function RenderMobileMenu() {
-  const navigate = useNavigate();
-
   return (
     <>
-      <MenuItem
-        onClick={() => {
-          navigate('/account/');
-          //handleMobileMenuClose();
-        }}
-      >
+      <MenuItem component={RouterLink} to="/account/">
         <Avatar
+          loading="lazy"
           alt="Perfil"
           src={`https://picsum.photos/200/300?random=${Math.random()}`}
         />
@@ -73,42 +66,12 @@ function RenderMobileMenu() {
         </Typography>
       </MenuItem>
       <Divider />
-      <MenuListItem
-        Icon={DashboardIcon}
-        title="Inicio"
-        path="/"
-        to={() => navigate('/')}
-      />
-      <MenuListItem
-        Icon={GroupIcon}
-        title="Peliculas"
-        path="/movies"
-        to={() => navigate('/movies')}
-      />
-      <MenuListItem
-        Icon={GroupsIcon}
-        title="Series"
-        path="/series"
-        to={() => navigate('/series')}
-      />
-      <MenuListItem
-        Icon={FeedIcon}
-        title="Blog"
-        path="/blog"
-        to={() => navigate('/blog')}
-      />
-      <MenuListItem
-        Icon={MailIcon}
-        title="Generos"
-        path="/genres"
-        to={() => navigate('/genres')}
-      />
-      <MenuListItem
-        Icon={AccountCircleIcon}
-        title="Actores"
-        path="/cast"
-        to={() => navigate('/cast')}
-      />
+      <MenuListItem Icon={DashboardIcon} title="Inicio" path="/" />
+      <MenuListItem Icon={GroupIcon} title="Peliculas" path="/movies" />
+      <MenuListItem Icon={GroupsIcon} title="Series" path="/series" />
+      <MenuListItem Icon={FeedIcon} title="Blog" path="/blog" />
+      <MenuListItem Icon={MailIcon} title="Generos" path="/genres" />
+      <MenuListItem Icon={AccountCircleIcon} title="Actores" path="/cast" />
 
       <Divider />
       <Button
@@ -135,7 +98,6 @@ function RenderMobileMenu() {
   );
 }
 function MobileMenu() {
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   //const [anchorEl, setAnchorEl] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);

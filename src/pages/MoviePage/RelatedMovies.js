@@ -63,8 +63,12 @@ function RelatedMovies({ similarMovies, genres }) {
             slidesPerView: 4,
             spaceBetween: 30,
           },
-          1600: {
+          1700: {
             slidesPerView: 5,
+            spaceBetween: 40,
+          },
+          2000: {
+            slidesPerView: 8,
             spaceBetween: 40,
           },
         }}

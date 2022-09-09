@@ -28,6 +28,7 @@ function WelcomePage() {
     };
     getGenres();
   }, []);
+  if (genres.length === 0) return null;
 
   return (
     <>

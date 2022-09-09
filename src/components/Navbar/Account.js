@@ -61,6 +61,7 @@ function Account() {
       >
         <Stack direction="row" spacing={2} alignItems="center" mb={1}>
           <Avatar
+            loading="lazy"
             alt="User"
             src={`https://picsum.photos/200/300?random=${Math.random()}`}
           />

@@ -18,7 +18,7 @@ function BannerSection({ genres }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const getMovies = async () => {
+    (async () => {
       try {
         setIsLoading(true);
         const response = await getPlayingMovies();
@@ -26,12 +26,11 @@ function BannerSection({ genres }) {
         setMovies(response.data.results);
       } catch (error) {
         console.log(error);
-        console.log(error.response);
+        console.log(error?.response);
       } finally {
         setIsLoading(false);
       }
-    };
-    getMovies();
+    })();
   }, []);
   return isLoading ? (
     <Loader my="20vh" />

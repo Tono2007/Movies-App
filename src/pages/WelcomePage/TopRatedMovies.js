@@ -24,7 +24,7 @@ function TopRatedMovies({ genres }) {
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
-    const getMovies = async () => {
+    (async () => {
       try {
         setIsLoading(true);
         const response = await getRatedMovies();
@@ -36,8 +36,7 @@ function TopRatedMovies({ genres }) {
       } finally {
         setIsLoading(false);
       }
-    };
-    getMovies();
+    })();
   }, []);
 
   return (
@@ -107,8 +106,12 @@ function TopRatedMovies({ genres }) {
                 slidesPerView: 4,
                 spaceBetween: 30,
               },
-              1600: {
+              1700: {
                 slidesPerView: 5,
+                spaceBetween: 40,
+              },
+              2000: {
+                slidesPerView: 8,
                 spaceBetween: 40,
               },
             }}

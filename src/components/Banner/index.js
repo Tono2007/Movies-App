@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { constants } from '../../utils/constants';
@@ -12,8 +12,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-
+import Skeleton from '@mui/material/Skeleton';
 //Icons
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -29,9 +28,9 @@ import {
   getMovieCredits,
 } from '../../api/services/movies';
 //Components
-import Modal from '../Modal';
-import ModalVideo from '../ModalVideo';
 import Loader from '../Loader';
+
+const Cover = lazy(() => import('./Cover'));
 
 function GenreChip({ text }) {
   return (
@@ -52,57 +51,7 @@ function GenreChip({ text }) {
     </Typography>
   );
 }
-function Cover({ imgPath, video }) {
-  const [openVideoModal, setOpenVideoModal] = useState(false);
 
-  return (
-    <Box
-      ml="auto"
-      mx="auto"
-      maxWidth="50%"
-      width="auto"
-      height="100%"
-      p={2}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-    >
-      <Modal
-        openModal={openVideoModal}
-        fnCloseModal={() => setOpenVideoModal(false)}
-        title={video?.name ?? 'Sin Trailer'}
-        maxWidth="md"
-        type
-      >
-        <ModalVideo video={video} />
-      </Modal>
-      <Box
-        border={3}
-        borderColor="#eee4"
-        boxShadow={15}
-        alt="banner"
-        width="100%"
-        height="auto"
-        maxHeight="70%"
-        component="img"
-        src={`${constants.api.site}/original${imgPath}`}
-        sx={{
-          objectFit: 'contain',
-        }}
-      />
-      <Button
-        size="small"
-        variant="contained"
-        sx={{ width: '200px' /* mt: '-18px'  */, mt: 1 }}
-        endIcon={<PlayCircleOutlineIcon />}
-        onClick={() => setOpenVideoModal(true)}
-      >
-        Ver Trailer
-      </Button>
-    </Box>
-  );
-}
 function Banner(props) {
   const navigate = useNavigate();
   const { showCover, caption, movieBtn, id, genres, trailer } = props;
@@ -110,11 +59,10 @@ function Banner(props) {
   const [keywords, setKeywords] = useState([]);
   const [credits, setCredits] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   //console.log(`${constants.api.site}/original${movie?.backdrop_path}`);
 
   useEffect(() => {
-    const getDetails = async () => {
+    (async () => {
       try {
         setIsLoading(true);
         const responses = await Promise.all([
@@ -128,13 +76,21 @@ function Banner(props) {
         setCredits(responses[2].data.cast);
       } catch (error) {
         console.log(error);
-        console.log(error.response);
+        console.log(error?.response);
       } finally {
         setIsLoading(false);
       }
-    };
-    getDetails();
+    })();
   }, [id]);
+  if (isLoading)
+    return (
+      <Skeleton
+        variant="rounded"
+        width="100%"
+        height="100vh"
+        animation="wave"
+      />
+    );
 
   return (
     <Box
@@ -163,10 +119,11 @@ function Banner(props) {
       >
         <Box
           position="absolute"
-          alt="banner"
+          alt={`${movie?.title || 'movie'} banner`}
           width="100%"
           height="100%"
           component="img"
+          loading="lazy"
           src={`${constants.api.site}/original${movie?.backdrop_path}`}
           sx={{
             filter: 'brightness(0.99)',
@@ -235,7 +192,7 @@ function Banner(props) {
               />
             )}
             <Typography variant="caption" fontSize="17px" mb={0} mr={1}>
-              {movie?.vote_average}{' '}
+              {movie?.vote_average}
               <Typography
                 fontSize="10px"
                 fontWeight="300"
@@ -246,7 +203,7 @@ function Banner(props) {
               </Typography>
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              • ({movie?.popularity} Votos totales)
+              {`•  ${movie?.popularity} Votos totales`}
             </Typography>
           </Stack>
           <Typography
@@ -349,17 +306,16 @@ function Banner(props) {
             </Button>
           )}
         </Stack>
-        {showCover && <Cover imgPath={movie?.poster_path} video={trailer} />}
+        {showCover && (
+          <Suspense fallback={<Loader my={20} />}>
+            <Cover
+              alt={`${movie?.title || 'movie'} poster`}
+              imgPath={movie?.poster_path}
+              video={trailer}
+            />
+          </Suspense>
+        )}
       </Box>
-      {isLoading && (
-        <Loader
-          sx={{
-            position: 'absolute',
-            top: { xs: 'calc(50% - 100px)', sm: 'calc(50% - 100px)' },
-            left: { xs: '0', sm: 'calc(50% - 150px)' },
-          }}
-        />
-      )}
     </Box>
   );
 }

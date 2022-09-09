@@ -31,13 +31,16 @@ function Search() {
   }
   return (
     <>
+      <IconButton aria-label="Search Movie" onClick={handleClick}>
+        <SearchIcon fontSize="small" />
+      </IconButton>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'search-input',
         }}
       >
         <Stack
@@ -61,9 +64,6 @@ function Search() {
           </IconButton>
         </Stack>
       </Menu>
-      <IconButton aria-label="Search Movie" onClick={handleClick}>
-        <SearchIcon fontSize="small" />
-      </IconButton>
     </>
   );
 }

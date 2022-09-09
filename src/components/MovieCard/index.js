@@ -49,16 +49,17 @@ function MovieCard({ movie, genres }) {
             height: '100%',
             position: 'absolute',
             boxShadow: (theme) =>
-              `inset 0px 50px 30px -15px ${theme.palette.background.default},inset 0px -30px 10px -15px ${theme.palette.background.default}`,
+              `inset 0px 40px 30px -15px ${theme.palette.background.default},inset 0px -30px 10px -15px ${theme.palette.background.default}`,
           },
         }}
       >
         <Box
-          alt="banner"
+          loading="lazy"
+          alt={`${movie?.title || 'movie'} poster`}
           width="100%"
           height="100%"
           component="img"
-          src={`${constants.api.site}/original${movie?.poster_path}`}
+          src={`${constants.api.site}/w500${movie?.poster_path}`}
           sx={{
             objectFit: 'cover',
           }}
