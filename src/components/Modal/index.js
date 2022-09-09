@@ -30,9 +30,12 @@ function Modal(props) {
         },
       }}
     >
-      <>
+      <Box position="relative">
         {type ? (
           <Box
+            top="0"
+            position="sticky"
+            zIndex="9999"
             p="2px"
             bgcolor="secondary.dark"
             color="white"
@@ -63,6 +66,9 @@ function Modal(props) {
           </Box>
         ) : (
           <Box
+            top="0"
+            zIndex="9999"
+            position="sticky"
             sx={{
               display: 'flex',
               flexDirection: 'row',
@@ -85,7 +91,7 @@ function Modal(props) {
         )}
 
         <Box /*  px="20px" py="10px" */>{children}</Box>
-      </>
+      </Box>
     </Dialog>
   );
 }

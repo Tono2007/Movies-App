@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 //ICONS
 
 import Footer from '../Footer';
@@ -56,7 +57,7 @@ function NavButton(NavButtonProps) {
 
 function navbar() {
   return (
-    <>
+    <Box display="flex" minHeight="100vh" flexDirection="column">
       <AppBar
         position="fixed"
         sx={{
@@ -118,9 +119,17 @@ function navbar() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Outlet />
+      <Box
+        component="main"
+        sx={{
+          flex: '1 0 auto',
+          pb: 1,
+        }}
+      >
+        <Outlet />
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 }
 

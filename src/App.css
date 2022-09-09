@@ -20,6 +20,8 @@ body {
   ::-webkit-scrollbar-thumb {
     background-color: rgb(62, 64, 75);
     border-radius: 8px;
+    border: 3px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
   }
   ::-webkit-scrollbar-thumb:hover {
     background-color: #c62828;

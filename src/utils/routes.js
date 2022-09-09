@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 //Components
 import Navbar from '../components/Navbar';
+
+//Pages
 import GenresPage from '../pages/GenresPage';
+import Login from '../pages/LoginPage';
 import MoviePage from '../pages/MoviePage';
 import MoviesPage from '../pages/MoviesPage';
 import PageNotFound from '../pages/PageNotFound';
-
-//Pages
 import WelcomePage from '../pages/WelcomePage';
 import WorkInProgress from '../pages/WorkInProgress';
 import ScrollToTop from './helpers/ScrollToTop';
@@ -26,8 +27,8 @@ function Router() {
             <Route path="cast" element={<WorkInProgress />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
-          <Route path="/login" element={<h1>welvcomne</h1>} />
-          <Route path="/signup" element={<h1>welvcomne</h1>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Login />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

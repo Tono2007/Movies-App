@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 // MUI Stuff
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -66,10 +67,23 @@ function Account() {
           <Typography> Nombre Usuario</Typography>
         </Stack>
         <Divider />
-        <Button variant="contained" size="small" fullWidth disableElevation>
+        <Button
+          variant="contained"
+          size="small"
+          fullWidth
+          disableElevation
+          component={Link}
+          to="/login"
+        >
           Iniciar Sesión
         </Button>
-        <Button variant="outlined" size="small" fullWidth>
+        <Button
+          variant="outlined"
+          size="small"
+          fullWidth
+          component={Link}
+          to="/login"
+        >
           Registrarse
         </Button>
       </Stack>

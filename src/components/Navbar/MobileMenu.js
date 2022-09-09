@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 // MUI Stuff
 import AppBar from '@mui/material/AppBar';
@@ -116,11 +116,19 @@ function RenderMobileMenu() {
         size="small"
         fullWidth
         disableElevation
+        component={RouterLink}
+        to="/login"
         sx={{ mb: 1 }}
       >
         Iniciar Sesión
       </Button>
-      <Button variant="outlined" size="small" fullWidth>
+      <Button
+        variant="outlined"
+        size="small"
+        fullWidth
+        component={RouterLink}
+        to="/login"
+      >
         Registrarse
       </Button>
     </>
