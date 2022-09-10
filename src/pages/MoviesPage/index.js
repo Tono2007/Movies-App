@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 
 //MUI
@@ -28,6 +28,20 @@ import wallpaper from '../../assets/images/wallpaper.jpg';
 import { getDiscoverMovies } from '../../api/services/movies';
 import { getAllMovieGenres } from '../../api/services/catalog';
 
+const preLabel = {
+  year: 'Año: ',
+  with_genres: 'Genero: ',
+  with_text_query: 'Buscar: ',
+  page: 'Pagina: ',
+  sort_by: 'Peliculas ',
+};
+const sortByLabels = {
+  'popularity.desc': 'Mas Populares',
+  'vote_average.desc': 'Mejor Calificadas: ',
+  'primary_release_date.desc': 'mas recientes',
+  page: 'Pagina: ',
+  sort_by: 'Peliculas ',
+};
 function MoviesPage() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -78,7 +92,7 @@ function MoviesPage() {
         setPage(response.data.page);
       } catch (error) {
         console.log(error);
-        console.log(error.response);
+        console.log(error?.response);
       } finally {
         setIsLoading(false);
       }
@@ -87,18 +101,22 @@ function MoviesPage() {
   }, [location]);
 
   const handlePagination = (event, value) => {
+    console.log('handle pagination');
     setPage(value);
     const actualPath = Object.fromEntries(new URLSearchParams(searchParams));
     setSearchParams({ ...actualPath, page: value });
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const values = Object.fromEntries(data.entries());
-    setSearchParams({ ...values, page: 1 });
-    //console.log(data.get('with_text_query'));
-  }
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const values = Object.fromEntries(data.entries());
+      setSearchParams({ ...values, page: 1 });
+      //console.log(data.get('with_text_query'));
+    },
+    [setSearchParams],
+  );
 
   return (
     <Box>
@@ -245,20 +263,6 @@ function MoviesPage() {
             {[...searchParams]
               .filter((entry) => entry[1] !== '')
               .map((entry, index) => {
-                const preLabel = {
-                  year: 'Año: ',
-                  with_genres: 'Genero: ',
-                  with_text_query: 'Buscar: ',
-                  page: 'Pagina: ',
-                  sort_by: 'Peliculas ',
-                };
-                const sortByLabels = {
-                  'popularity.desc': 'Mas Populares',
-                  'vote_average.desc': 'Mejor Calificadas: ',
-                  'primary_release_date.desc': 'mas recientes',
-                  page: 'Pagina: ',
-                  sort_by: 'Peliculas ',
-                };
                 let label = `${preLabel[entry[0]]} ${entry[1]}`;
                 if (entry[0] === 'with_genres') {
                   label = `${preLabel[entry[0]]} ${

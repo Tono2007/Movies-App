@@ -22,7 +22,7 @@ function ActorDetail({ id }) {
         setPerson(response.data);
       } catch (error) {
         console.log(error);
-        console.log(error.response);
+        console.log(error?.response);
       } finally {
         setIsLoading(false);
       }
@@ -34,12 +34,12 @@ function ActorDetail({ id }) {
       {isLoading && <CircularProgress />}
       {person?.profile_path && (
         <Box
-          alt="banner"
+          alt={`${person?.name || 'profile'} poster`}
           width="100%"
           height="auto"
           maxHeight="300px"
           component="img"
-          src={`${constants.api.site}/original${person?.profile_path}`}
+          src={`${constants.api.site}/h632${person?.profile_path}`}
           sx={{
             transition: '0.3s',
             objectFit: 'contain',

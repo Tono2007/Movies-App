@@ -71,7 +71,8 @@ function PostersTab({ imgs }) {
         {imgs?.posters?.map((img, index) => (
           <SwiperSlide key={index}>
             <ImageCard
-              img={`${constants.api.site}/original${img?.file_path}`}
+              img={`${constants.api.site}/w300${img?.file_path}`}
+              alt="poster"
             />
           </SwiperSlide>
         ))}

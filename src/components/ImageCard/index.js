@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 //Components
 import Modal from '../Modal';
 
-function ImageCard({ img }) {
+function ImageCard({ img, alt }) {
   const [openImageModal, setOpenImageModal] = useState(false);
 
   return (
@@ -18,7 +18,8 @@ function ImageCard({ img }) {
       >
         <Box
           mb={-1}
-          alt="banner"
+          loading="lazy"
+          alt={alt}
           width="100%"
           height="100%"
           component="img"

@@ -202,9 +202,10 @@ function Cover({ id, imgPath }) {
       flexDirection="column"
     >
       <Box
+        loading="lazy"
         border={3}
         borderColor="#eee4"
-        alt="banner"
+        alt="collection poster"
         width="100%"
         height="auto"
         component="img"

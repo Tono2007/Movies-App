@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { convertMinsToHrsMins } from '../../utils/helpers/helpers';
 
 import moment from 'moment';
@@ -17,7 +17,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 //Components
 import Modal from '../../components/Modal';
-import ModalVideo from '../../components/ModalVideo';
+
+const ModalVideo = lazy(() => import('../../components/ModalVideo'));
 
 function OverView({ movie, credits, titles, trailer }) {
   const [openVideoModal, setOpenVideoModal] = useState(false);
@@ -31,7 +32,9 @@ function OverView({ movie, credits, titles, trailer }) {
         maxWidth="md"
         type
       >
-        <ModalVideo video={trailer} />
+        <Suspense fallback={null}>
+          <ModalVideo video={trailer} />
+        </Suspense>
       </Modal>
       <Stack
         direction={{ xs: 'column', md: 'row' }}
@@ -115,6 +118,23 @@ function OverView({ movie, credits, titles, trailer }) {
             Contenido Adulto
           </Typography>
         )}
+        <Typography
+          border={1}
+          p={0.5}
+          px={1}
+          borderColor="secondary.main"
+          variant="caption"
+        >
+          {movie?.original_language}
+        </Typography>
+        <Typography
+          border={1}
+          p={0.5}
+          borderColor="secondary.main"
+          variant="caption"
+        >
+          {movie?.status}
+        </Typography>
         <FavoriteBorderIcon color="primary" />
         <Button
           size="large"

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 //ICONS
 import Stack from '@mui/material/Stack';
@@ -19,16 +19,19 @@ function Search() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const values = Object.fromEntries(data.entries());
-    navigate({
-      pathname: '/movies',
-      search: `?with_text_query=${values?.movie}`,
-    });
-    setAnchorEl(null);
-  }
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const values = Object.fromEntries(data.entries());
+      navigate({
+        pathname: '/movies',
+        search: `?with_text_query=${values?.movie}`,
+      });
+      setAnchorEl(null);
+    },
+    [navigate],
+  );
   return (
     <>
       <IconButton aria-label="Search Movie" onClick={handleClick}>
@@ -68,4 +71,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default memo(Search);

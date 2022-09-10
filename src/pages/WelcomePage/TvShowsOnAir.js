@@ -37,6 +37,11 @@ function TvShowsOnAir() {
         const response = await getPlayingTvShows();
         console.log(response);
         setPlayingTvShows(response.data.results);
+        /*  setTimeout(async () => {
+          const responseTV = await getPlayingTvShows();
+          console.log(responseTV);
+          setPlayingTvShows(responseTV.data.results);
+        }, 2000); */
       } catch (error) {
         console.log(error);
         console.log(error.response);

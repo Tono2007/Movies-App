@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { constants } from '../../utils/constants';
 //MUI
 import Box from '@mui/material/Box';
@@ -11,7 +11,8 @@ import { Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 //Components
 import Modal from '../../components/Modal';
-import ActorDetail from '../../components/ActorDetail';
+
+const ActorDetail = lazy(() => import('../../components/ActorDetail'));
 
 function Cast({ credits }) {
   return (
@@ -107,7 +108,9 @@ function ActressCard({ cast }) {
         maxWidth="sm"
         type
       >
-        <ActorDetail id={cast?.id} />
+        <Suspense fallback={null}>
+          <ActorDetail id={cast?.id} />
+        </Suspense>
       </Modal>
       <Typography
         borderRadius="10px"
@@ -121,15 +124,16 @@ function ActressCard({ cast }) {
       {cast?.profile_path && (
         <Box
           onClick={() => setOpenActressModal(true)}
+          loading="lazy"
           border={3}
           borderColor="#eee4"
           boxShadow={10}
-          alt="banner"
+          alt={`${cast?.name || 'profile'} poster`}
           width="100%"
           height={{ xs: '500px', sm: '300px', xl: '500px' }}
           maxHeight="70%"
           component="img"
-          src={`${constants.api.site}/original${cast?.profile_path}`}
+          src={`${constants.api.site}/h632${cast?.profile_path}`}
           sx={{
             transition: '0.3s',
             objectFit: 'cover',

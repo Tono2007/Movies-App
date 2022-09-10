@@ -40,32 +40,37 @@ function MoviePage() {
     const getDetails = async () => {
       try {
         setIsLoading(true);
+        const responseMovie = await getMovie(idMovie);
+        console.log(responseMovie);
+        setMovie(responseMovie.data);
 
         const responses = await Promise.all([
-          getMovie(idMovie),
           getMovieKeywords(idMovie),
           getMovieCredits(idMovie),
           getMovieImages(idMovie),
           getMovieTitles(idMovie),
           getAllMovieGenres(),
         ]);
-        const responseVideos = await getMovieVideos(idMovie);
-        const response = await getSimilarMovies(idMovie);
-        console.log(responseVideos);
-        console.log(response);
-
-        setSimilarMovies(response.data.results);
-        setVideos(responseVideos.data.results);
         console.log(responses);
-        setMovie(responses[0].data);
-        setKeywords(responses[1].data.keywords);
-        setCredits(responses[2].data);
-        setImgs(responses[3].data);
-        setTitles(responses[4].data.titles);
-        setGenres(responses[5].data.genres);
+        setKeywords(responses[0].data.keywords);
+        setCredits(responses[1].data);
+        setImgs(responses[2].data);
+        setTitles(responses[3].data.titles);
+        setGenres(responses[4].data.genres);
+
+        setTimeout(async () => {
+          const responseVideos = await getMovieVideos(idMovie);
+          // eslint-disable-next-line no-console
+          console.log(responseVideos);
+          setVideos(responseVideos.data.results);
+          const response = await getSimilarMovies(idMovie);
+          // eslint-disable-next-line no-console
+          console.log(response);
+          setSimilarMovies(response.data.results);
+        }, 2000);
       } catch (error) {
         console.log(error);
-        console.log(error.response);
+        console.log(error?.response);
       } finally {
         setIsLoading(false);
       }

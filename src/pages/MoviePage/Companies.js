@@ -35,11 +35,12 @@ function ProductionCompany({ company }) {
   return (
     <>
       <Box
-        alt="banner"
+        loading="lazy"
+        alt={`${company?.name || 'company'} logo`}
         width="100%"
         height="auto"
         component="img"
-        src={`${constants.api.site}/original${company?.logo_path}`}
+        src={`${constants.api.site}/w300${company?.logo_path}`}
         sx={{
           objectFit: 'cover',
         }}

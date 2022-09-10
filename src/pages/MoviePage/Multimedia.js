@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 //MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,11 +11,12 @@ import GroupIcon from '@mui/icons-material/Group';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import DnsIcon from '@mui/icons-material/Dns';
 import PersonIcon from '@mui/icons-material/Person';
+import Loader from '../../components/Loader';
 //Components
-import VideosTab from './Videos';
-import PostersTab from './Posters';
-import Companies from './Companies';
-import BackDropsTab from './BackDrops';
+const VideosTab = lazy(() => import('./Videos'));
+const PostersTab = lazy(() => import('./Posters'));
+const Companies = lazy(() => import('./Companies'));
+const BackDropsTab = lazy(() => import('./BackDrops'));
 
 function Multimedia({ imgs, movie, videos }) {
   const [value, setValue] = useState(0);
@@ -78,12 +79,12 @@ function Multimedia({ imgs, movie, videos }) {
         p={2}
         borderRadius="5px"
       >
-        {value === 0 && <VideosTab imgs={imgs} videos={videos} />}
-        {value === 1 && <PostersTab imgs={imgs} />}
-        {value === 2 && <BackDropsTab imgs={imgs} />}
-        {value === 3 && <Companies movie={movie} />}
-        {value === 4 && 'Search />'}
-        {value === 5 && <Companies movie={movie} />}
+        <Suspense fallback={<Loader />}>
+          {value === 0 && <VideosTab imgs={imgs} videos={videos} />}
+          {value === 1 && <PostersTab imgs={imgs} />}
+          {value === 2 && <BackDropsTab imgs={imgs} />}
+          {value === 3 && <Companies movie={movie} />}
+        </Suspense>
       </Box>
     </Stack>
   );

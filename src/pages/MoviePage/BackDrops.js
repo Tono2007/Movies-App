@@ -79,6 +79,7 @@ function BackDropsTab({ imgs }) {
           <SwiperSlide key={index}>
             <ImageCard
               img={`${constants.api.site}/original${img?.file_path}`}
+              alt="movie poster"
             />
           </SwiperSlide>
         ))}

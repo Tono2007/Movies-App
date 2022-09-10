@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 //MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,7 +16,7 @@ import { Navigation, Scrollbar } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 //Components
-import ModalVideo from '../../components/ModalVideo';
+const ModalVideo = lazy(() => import('../../components/ModalVideo'));
 
 function VideosTab({ videos }) {
   return (
@@ -103,29 +103,7 @@ function VideosTab({ videos }) {
     </Box>
   );
 }
-function ImgCard({ video }) {
-  return (
-    <Box
-      border={1}
-      borderColor="#eee2"
-      boxShadow={15}
-      alt="banner"
-      width="100%"
-      height="100%"
-      component="img"
-      //https://i.ytimg.com/vi/6Cl8PmVm3YE/hqdefault.jpg
-      src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
-      sx={{
-        cursor: 'pointer',
-        objectFit: 'cover',
-        '&:hover': {
-          border: 2,
-          borderColor: 'primary.main',
-        },
-      }}
-    />
-  );
-}
+
 function ImgCard2({ video }) {
   const [openVideoModal, setOpenVideoModal] = useState(false);
 
@@ -138,7 +116,9 @@ function ImgCard2({ video }) {
         maxWidth="md"
         type
       >
-        <ModalVideo video={video} />
+        <Suspense fallback={null}>
+          <ModalVideo video={video} />
+        </Suspense>
       </Modal>
       <Box
         border={1}
