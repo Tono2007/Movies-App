@@ -90,6 +90,11 @@ function MoviesPage() {
           totalMovies: response.data.total_results,
         });
         setPage(response.data.page);
+        window.scrollTo({
+          top: 350,
+          left: 0,
+          behavior: 'smooth',
+        });
       } catch (error) {
         console.log(error);
         console.log(error?.response);
