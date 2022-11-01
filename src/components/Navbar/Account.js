@@ -69,6 +69,7 @@ function Account() {
         </Stack>
         <Divider />
         <Button
+          title="Iniciar Sesión"
           variant="contained"
           size="small"
           fullWidth
@@ -79,6 +80,7 @@ function Account() {
           Iniciar Sesión
         </Button>
         <Button
+          title="Registrarse"
           variant="outlined"
           size="small"
           fullWidth

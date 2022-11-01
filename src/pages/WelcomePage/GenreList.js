@@ -15,6 +15,7 @@ import { getAllMovieGenres } from '../../api/services/catalog';
 function ListItem({ genre }) {
   return (
     <Link
+      title={`Ver peliculas de ${genre}`}
       underline="hover"
       height="100%"
       fontSize="15px"

@@ -41,6 +41,7 @@ function MenuListItem({ Icon, title, to, path }) {
   /* const match = Boolean(useRouteMatch({ path })); */
   return (
     <MenuItem
+      title={title}
       component={RouterLink}
       to={path}
       /* selected={match} */
@@ -55,7 +56,7 @@ function MenuListItem({ Icon, title, to, path }) {
 function RenderMobileMenu() {
   return (
     <>
-      <MenuItem component={RouterLink} to="/account/">
+      <MenuItem>
         <Avatar
           loading="lazy"
           alt="Perfil"
