@@ -10,6 +10,7 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 function Logo({ ...rest }) {
   return (
     <Stack
+      title="Inicio"
       direction="row"
       alignItems="center"
       spacing={1}

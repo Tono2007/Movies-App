@@ -196,6 +196,7 @@ function Login() {
             />
           ) : (
             <Button
+              title="Iniciar sesión"
               type="submit"
               variant="contained"
               endIcon={<LoginIcon />}
@@ -208,6 +209,7 @@ function Login() {
         </form>
 
         <Button
+          title="Registrarse"
           sx={{ mt: 2 }}
           variant="outlined"
           fullWidth
@@ -219,6 +221,7 @@ function Login() {
           Registrarse
         </Button>
         <Link
+          title="Recuperar Contraseña"
           to="/login"
           variant="body2"
           component={RouterLink}

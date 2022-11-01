@@ -66,6 +66,7 @@ function WorkInProgress() {
           If you want to check in the development process, you are welcome to
           take a peek on{' '}
           <Link
+            title="Repo Github"
             underline="hover"
             color="primary.light"
             sx={{ cursor: 'pointer' }}

@@ -20,6 +20,7 @@ function NavButton(NavButtonProps) {
   const match = useMatch({ path });
   return (
     <Link
+      title={path}
       underline="none"
       height="100%"
       fontSize="17px"
