@@ -55,7 +55,7 @@ function Cast({ credits }) {
               spaceBetween: 40,
             },
             1200: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 40,
             },
           }}

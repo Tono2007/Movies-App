@@ -60,6 +60,7 @@ function OverView({ movie, credits, titles, trailer }) {
                 sx={{ mr: '5px' }}
                 max={10}
                 size="large"
+                readOnly
               />
             )}
 
@@ -73,7 +74,7 @@ function OverView({ movie, credits, titles, trailer }) {
             fontSize={{ xs: '40px', md: '90px' }}
             fontWeight="300"
           >
-            {movie?.vote_average}
+            {movie?.vote_average && Math.round(movie.vote_average * 100) / 100}
             <Typography
               fontSize={{ xs: '20px', md: '40px' }}
               fontWeight="300"

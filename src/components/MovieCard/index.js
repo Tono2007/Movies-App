@@ -97,6 +97,7 @@ function CardContent({ movie, genres }) {
               sx={{ mr: '1px' }}
               max={10}
               size="small"
+              readOnly
             />
           )}
           <Typography variant="caption" fontSize="15px" mb={0}>

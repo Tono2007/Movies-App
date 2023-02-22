@@ -300,9 +300,9 @@ function MoviesPage() {
               Pagina {page} de {total.totalPages < 500 ? total.totalPages : 500}{' '}
               | Peliculas: {total.totalMovies}
             </Typography>
-            <Grid container spacing={4} my={2}>
+            <Grid container spacing={0} my={2}>
               {movies.map((movie) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.id}>
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={movie.id}>
                   <MovieCard movie={movie} genres={genres} />
                 </Grid>
               ))}
