@@ -189,6 +189,7 @@ function Banner(props) {
                 sx={{ mr: '5px' }}
                 max={10}
                 size="medium"
+                readOnly
               />
             )}
             <Typography variant="caption" fontSize="17px" mb={0} mr={1}>
@@ -203,7 +204,7 @@ function Banner(props) {
               </Typography>
             </Typography>
             <Typography variant="caption" fontSize="12px" mb={0}>
-              {`•  ${movie?.popularity} Votos totales`}
+              {`•  ${movie?.vote_count} Votos totales`}
             </Typography>
           </Stack>
           <Typography

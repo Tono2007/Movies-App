@@ -15,13 +15,15 @@ import {
 import { getAllMovieGenres } from '../../api/services/catalog';
 //Components
 import Banner from '../../components/Banner';
+import Loader from '../../components/Loader';
+
 import RelatedMovies from './RelatedMovies';
 import Cast from './Cast';
 import OverView from './OverView';
 import Keywords from './Keywords';
 import Collection from './Collection';
 import Multimedia from './Multimedia';
-import Loader from '../../components/Loader';
+import Ratings from './Ratings';
 
 function MoviePage() {
   const { idMovie } = useParams();
@@ -95,10 +97,12 @@ function MoviePage() {
           titles={titles}
           trailer={videos.find((video) => video.type === 'Trailer')}
         />
+
         <Cast credits={credits} />
         <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />
         <Collection movie={movie} genres={genres} />
+        <Ratings idMovie={idMovie} movie={movie} />
         <RelatedMovies similarMovies={similarMovies} genres={genres} />
       </Stack>
     </>

@@ -49,3 +49,11 @@ export function getMovieImages(id) {
     },
   });
 }
+export function getMovieReviews(id) {
+  return axios.get(`/movie/${id}/reviews`, {
+    params: {
+      language: 'es',
+      page: 1,
+    },
+  });
+}

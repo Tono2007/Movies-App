@@ -65,7 +65,7 @@ function OverView({ movie, credits, titles, trailer }) {
             )}
 
             <Typography variant="subtitle1">
-              Votos totales: ({movie?.popularity})
+              Votos totales: ({movie?.vote_count})
             </Typography>
           </div>
 
@@ -165,6 +165,31 @@ function OverView({ movie, credits, titles, trailer }) {
           {movie?.production_countries?.[0]?.name}
         </Typography>
       </Typography>
+
+      <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+        Director:
+        <Typography
+          component="span"
+          variant="body2"
+          fontWeight="400"
+          color="primary.main"
+          ml={1}
+        >
+          {credits?.crew?.find((worker) => worker.job === 'Director')?.name}
+        </Typography>
+      </Typography>
+      <Typography variant="body2" mb={0} fontWeight="400" my={1}>
+        Estreno:
+        <Typography
+          component="span"
+          variant="body2"
+          fontWeight="400"
+          color="primary.light"
+          ml={1}
+        >
+          {moment(movie?.release_date).format('L')}
+        </Typography>
+      </Typography>
       <Typography variant="body2" mb={0} fontWeight="400" my={1}>
         Actores:
         <Typography
@@ -182,18 +207,6 @@ function OverView({ movie, credits, titles, trailer }) {
           {new Intl.ListFormat('es').format(
             credits?.cast?.slice(0, 10).map((title) => title.name),
           )}
-        </Typography>
-      </Typography>
-      <Typography variant="body2" mb={0} fontWeight="400" my={1}>
-        Director:
-        <Typography
-          component="span"
-          variant="body2"
-          fontWeight="400"
-          color="primary.main"
-          ml={1}
-        >
-          {credits?.crew?.find((worker) => worker.job === 'Director')?.name}
         </Typography>
       </Typography>
       <Typography variant="body2" mb={0} fontWeight="400" my={1}>
