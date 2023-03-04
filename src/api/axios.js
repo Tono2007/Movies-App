@@ -24,6 +24,13 @@ instance.interceptors.request.use(
   },
   (error) => {
     console.log('Interceptor de peticion Axios error', error);
+    if (error && error.response.status === 401) {
+      console.log('Error 401 falta autenticación');
+      alert('Error 401 falta autenticación, Inicia Sesión');
+
+      window.location.replace('/login');
+      return Promise.reject(error);
+    }
     return Promise.reject(error);
   },
 );

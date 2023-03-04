@@ -84,8 +84,9 @@ function Account() {
           variant="outlined"
           size="small"
           fullWidth
-          component={Link}
-          to="/login"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://www.themoviedb.org/signup"
         >
           Registrarse
         </Button>

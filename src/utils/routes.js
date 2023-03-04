@@ -18,24 +18,92 @@ function Router() {
   return (
     <BrowserRouter>
       <ScrollToTop>
-        <Suspense fallback={<Loader my={20} />}>
-          <Routes>
-            <Route exact path="/" element={<Navbar />}>
-              <Route index element={<WelcomePage />} />
-              <Route path="welcome" element={<WelcomePage />} />
-              <Route path="movies" element={<MoviesPage />} />
-              <Route path="movies/:idMovie" element={<MoviePage />} />
-              <Route path="genres" element={<GenresPage />} />
-              <Route path="series" element={<WorkInProgress />} />
-              <Route path="cast" element={<WorkInProgress />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Login />} />
+        <Routes>
+          <Route exact path="/" element={<Navbar />}>
+            <Route
+              index
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <WelcomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="welcome"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <WelcomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="movies"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <MoviesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="movies/:idMovie"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <MoviePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="genres"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <GenresPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="series"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <WorkInProgress />
+                </Suspense>
+              }
+            />
+            <Route
+              path="cast"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <WorkInProgress />
+                </Suspense>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<Loader my={20} />}>
+                  <PageNotFound />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<Loader my={20} />}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense fallback={<Loader my={20} />}>
+                <Login />
+              </Suspense>
+            }
+          />
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Suspense>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </ScrollToTop>
     </BrowserRouter>
   );
