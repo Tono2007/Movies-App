@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { setSessionId } from '../../utils/helpers/helpers';
+import {
+  setUserData,
+  deleteUserData,
+  setSessionId,
+} from '../../utils/helpers/helpers';
+
 //MUI
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -24,6 +29,7 @@ import {
   authByLogin,
   createSession,
 } from '../../api/services/authentication';
+import { getAccountDetails } from '../../api/services/account';
 
 function Login() {
   const navigate = useNavigate();
@@ -68,6 +74,9 @@ function Login() {
         authorizeResponse?.data?.request_token,
       );
       setSessionId(sessionResponse?.data?.session_id);
+      /* const responseUserData = await getAccountDetails();
+      console.log(responseUserData);
+      setUserData(responseUserData.data); */
       navigate('/');
     } catch (submitError) {
       console.log(submitError);

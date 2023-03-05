@@ -16,7 +16,7 @@ export function createSession(requestToken) {
   });
 }
 export function deleteSession(sessionId) {
-  return axios.post(`/authentication/session/new`, {
-    session_id: sessionId,
+  return axios.delete(`/authentication/session`, {
+    data: { session_id: sessionId },
   });
 }

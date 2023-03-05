@@ -1,5 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import './App.css';
+import { GlobalProvider } from './context/GlobalContext';
 //MUI
 import CssBaseline from '@mui/material/CssBaseline';
 import {
@@ -22,10 +23,12 @@ SwiperCore.use([Autoplay]);
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router />
-    </MuiThemeProvider>
+    <GlobalProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router />
+      </MuiThemeProvider>
+    </GlobalProvider>
   );
 }
 

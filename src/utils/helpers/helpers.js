@@ -26,18 +26,6 @@ export function deleteSessionId() {
   localStorage.removeItem(SESSION_KEY);
 }
 
-const USER_DATA = 'USER-DATA';
-
-export function setUserData(token) {
-  localStorage.setItem(USER_DATA, token);
-}
-export function getUserData() {
-  return localStorage.getItem(USER_DATA) || '';
-}
-export function deleteUserData() {
-  localStorage.removeItem(USER_DATA);
-}
-
 const authVerify = async () => {
   const sessionId = getSessionId();
 };

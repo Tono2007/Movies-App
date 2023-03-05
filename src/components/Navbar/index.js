@@ -1,5 +1,8 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useMatch, Outlet } from 'react-router-dom';
+
+import { useGlobalContext } from '../../context/GlobalContext';
+
 // MUI Stuff
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,8 +10,8 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-//ICONS
-
+//components
+import Loader from '../Loader';
 import Footer from '../Footer';
 import Logo from '../Logo';
 import Search from './Search';
@@ -56,8 +59,16 @@ function NavButton(NavButtonProps) {
   );
 }
 
-function navbar() {
-  return (
+function Navbar() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { fetchUserData } = useGlobalContext();
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  return isLoading ? (
+    <Loader addSx={{ mt: 13 }} />
+  ) : (
     <Box display="flex" minHeight="100vh" flexDirection="column">
       <AppBar
         position="fixed"
@@ -114,7 +125,9 @@ function navbar() {
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Typography>Es</Typography>
+            <Typography sx={{ display: { xs: 'none', sm: 'inline' } }}>
+              Es
+            </Typography>
             <Search />
             <Account />
           </Stack>
@@ -133,4 +146,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;

@@ -36,6 +36,10 @@ import GroupIcon from '@mui/icons-material/Group';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import MovieFilterIcon from '@mui/icons-material/MovieFilter';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 
 function MenuListItem({ Icon, title, to, path }) {
   /* const match = Boolean(useRouteMatch({ path })); */
@@ -56,7 +60,7 @@ function MenuListItem({ Icon, title, to, path }) {
 function RenderMobileMenu() {
   return (
     <>
-      <MenuItem>
+      {/* <MenuItem>
         <Avatar
           loading="lazy"
           alt="Perfil"
@@ -65,17 +69,17 @@ function RenderMobileMenu() {
         <Typography sx={{ marginLeft: '10px' }} variant="subtitle1">
           Nombre Usuario
         </Typography>
-      </MenuItem>
+      </MenuItem> */}
       <Divider />
       <MenuListItem Icon={DashboardIcon} title="Inicio" path="/" />
-      <MenuListItem Icon={GroupIcon} title="Peliculas" path="/movies" />
-      <MenuListItem Icon={GroupsIcon} title="Series" path="/series" />
+      <MenuListItem Icon={LocalMoviesIcon} title="Peliculas" path="/movies" />
+      <MenuListItem Icon={SlideshowIcon} title="Series" path="/series" />
       <MenuListItem Icon={FeedIcon} title="Blog" path="/blog" />
-      <MenuListItem Icon={MailIcon} title="Generos" path="/genres" />
-      <MenuListItem Icon={AccountCircleIcon} title="Actores" path="/cast" />
+      <MenuListItem Icon={MovieFilterIcon} title="Generos" path="/genres" />
+      <MenuListItem Icon={TheaterComedyIcon} title="Actores" path="/cast" />
 
       <Divider />
-      <Button
+      {/*  <Button
         variant="contained"
         size="small"
         fullWidth
@@ -94,7 +98,7 @@ function RenderMobileMenu() {
         to="/login"
       >
         Registrarse
-      </Button>
+      </Button> */}
     </>
   );
 }
