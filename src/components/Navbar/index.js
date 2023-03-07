@@ -61,8 +61,9 @@ function NavButton(NavButtonProps) {
 
 function Navbar() {
   const [isLoading, setIsLoading] = useState(false);
-  const { fetchUserData } = useGlobalContext();
+  const { fetchUserData, fetchGenres } = useGlobalContext();
   useEffect(() => {
+    fetchGenres();
     fetchUserData();
   }, []);
 

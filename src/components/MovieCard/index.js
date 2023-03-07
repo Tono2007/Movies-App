@@ -1,5 +1,7 @@
 import { constants } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../../context/GlobalContext';
+
 import moment from 'moment';
 import 'moment/locale/es';
 //MUI
@@ -11,7 +13,10 @@ import Rating from '@mui/material/Rating';
 //Icons
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
-function MovieCard({ movie, genres }) {
+function MovieCard({ movie }) {
+  const { genres } = useGlobalContext();
+  console.log(genres);
+
   return (
     <Box
       position="relative"

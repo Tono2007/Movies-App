@@ -1,16 +1,18 @@
 import axios from '../axios';
 import { getSessionId } from '../../utils/helpers/helpers';
 
-export function getAccountDetails() {
-  const sessionId = getSessionId();
+export function getAccountDetails(sessionId) {
+  if (!sessionId) {
+    return {};
+  }
 
   const config = {
-    header: {
+    params: {
       session_id: sessionId,
     },
   };
   return axios.get(`/account`, config);
 }
-export function getCollectionImages(id) {
-  return axios.get(`/collection/${id}/images`);
+export function getMyFavoriteMovies(accountId) {
+  return axios.get(`/account/${accountId}/favorite/movies`);
 }

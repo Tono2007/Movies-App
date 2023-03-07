@@ -26,6 +26,8 @@ export function deleteSessionId() {
   localStorage.removeItem(SESSION_KEY);
 }
 
-const authVerify = async () => {
+export const authVerify = () => {
   const sessionId = getSessionId();
+  console.log('authVerify', sessionId !== '');
+  return sessionId !== '';
 };

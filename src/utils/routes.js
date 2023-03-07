@@ -1,18 +1,22 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { authVerify } from './helpers/helpers';
 //Components
 import Loader from '../components/Loader';
 import Navbar from '../components/Navbar';
 import ScrollToTop from './helpers/ScrollToTop';
 
 //Pages
+import PageNotFound from '../pages/PageNotFound';
+//import FavoritesMoviesPage from '../pages/FavoritesMoviesPage';
+
 const GenresPage = lazy(() => import('../pages/GenresPage'));
 const Login = lazy(() => import('../pages/LoginPage'));
 const MoviePage = lazy(() => import('../pages/MoviePage'));
 const MoviesPage = lazy(() => import('../pages/MoviesPage'));
-const PageNotFound = lazy(() => import('../pages/PageNotFound'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage'));
 const WorkInProgress = lazy(() => import('../pages/WorkInProgress'));
+const FavoritesMoviesPage = lazy(() => import('../pages/FavoritesMoviesPage'));
 
 function Router() {
   return (
@@ -77,6 +81,37 @@ function Router() {
               }
             />
             <Route
+              path="favorites"
+              element={
+                <AuthRoute>
+                  <Suspense fallback={<Loader my={20} />}>
+                    <FavoritesMoviesPage />
+                  </Suspense>
+                </AuthRoute>
+              }
+            />
+
+            <Route
+              path="rates"
+              element={
+                <AuthRoute>
+                  <Suspense fallback={<Loader my={20} />}>
+                    <FavoritesMoviesPage />
+                  </Suspense>
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="watchlist"
+              element={
+                <AuthRoute>
+                  <Suspense fallback={<Loader my={20} />}>
+                    <FavoritesMoviesPage />
+                  </Suspense>
+                </AuthRoute>
+              }
+            />
+            <Route
               path="*"
               element={
                 <Suspense fallback={<Loader my={20} />}>
@@ -106,6 +141,18 @@ function Router() {
         </Routes>
       </ScrollToTop>
     </BrowserRouter>
+  );
+}
+
+function AuthRoute({ children }) {
+  if (authVerify() === true) {
+    return children;
+  }
+  return (
+    <>
+      <PageNotFound />
+      Iniciar Sesión
+    </>
   );
 }
 

@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  setUserData,
-  deleteUserData,
-  setSessionId,
-} from '../../utils/helpers/helpers';
+import { setSessionId } from '../../utils/helpers/helpers';
 
 //MUI
 import Typography from '@mui/material/Typography';
