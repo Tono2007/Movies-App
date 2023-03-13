@@ -10,6 +10,7 @@ export const constants = {
   siteData: {
     siteUrl: 'https://movies-app-tono2007.vercel.app/',
     siteRepo: 'https://github.com/Tono2007/Movies-App',
+    deployUrl: 'https://movies-app-tono2007.vercel.app',
   },
   api: {
     apiUrl: 'https://api.themoviedb.org/3',

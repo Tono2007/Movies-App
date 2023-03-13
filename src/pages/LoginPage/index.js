@@ -26,6 +26,7 @@ import {
   createSession,
 } from '../../api/services/authentication';
 import { getAccountDetails } from '../../api/services/account';
+import { constants } from '../../utils/constants';
 
 function Login() {
   const navigate = useNavigate();
@@ -74,6 +75,51 @@ function Login() {
       console.log(responseUserData);
       setUserData(responseUserData.data); */
       navigate('/');
+    } catch (submitError) {
+      console.log(submitError);
+      console.log(submitError.response);
+      setError({ error: true, message: 'Error al iniciar sesión' });
+      setHandleSnackbar({
+        open: true,
+        text:
+          submitError?.response?.data?.status_message ??
+          'Error al iniciar sesión',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const tmdbLoginHandler = async () => {
+    try {
+      setIsLoading(true); /*
+      /*  const popup = window.open(
+        'https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}',
+        'popup',
+        'popup=true',
+      );
+      const checkPopup = setInterval(() => {
+        if (
+          popup.window.location.href.includes('http://localhost:3000/login')
+        ) {
+          popup.close();
+        }
+        if (!popup || !popup.closed) return;
+        clearInterval(checkPopup);
+      }, 1000); 
+       */
+
+      const tokenResponse = await getRequestToken();
+      const requestToken = tokenResponse.data.request_token;
+
+      console.log(tokenResponse);
+      const redirectURL = constants.siteData.deployUrl;
+      /* navigate(
+        `https://www.themoviedb.org/authenticate/tokenResponse?redirect_to=${redirectURL}/approved`,
+      ); */
+
+      window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
     } catch (submitError) {
       console.log(submitError);
       console.log(submitError.response);
@@ -141,16 +187,23 @@ function Login() {
           title="Iniciar sesión"
           type="submit"
           variant="outlined"
+          disabled={isLoading}
           endIcon={
-            <img
-              width="110px"
-              height="auto"
-              alt="tmdblogo"
-              src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
-            />
+            <>
+              <img
+                width="110px"
+                height="auto"
+                alt="tmdblogo"
+                src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
+              />
+              {isLoading && (
+                <CircularProgress color="secondary" size={20} sx={{ ml: 1 }} />
+              )}
+            </>
           }
           fullWidth
           color="primary"
+          onClick={tmdbLoginHandler}
         >
           Ingresar por
         </Button>
