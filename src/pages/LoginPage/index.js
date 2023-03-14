@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setSessionId } from '../../utils/helpers/helpers';
 
@@ -28,6 +28,36 @@ import {
 import { getAccountDetails } from '../../api/services/account';
 import { constants } from '../../utils/constants';
 
+/* const features = {
+  popup: 'yes',
+  width: 600,
+  height: 700,
+  top: 'auto',
+  left: 'auto',
+  toolbar: 'no',
+  menubar: 'no',
+};
+const strWindowsFeatures = Object.entries(features)
+  .reduce((str, [key, value]) => {
+    // eslint-disable-next-line eqeqeq
+    if (value == 'auto') {
+      if (key === 'top') {
+        const v = Math.round(window.innerHeight / 2 - features.height / 2);
+        // eslint-disable-next-line no-param-reassign
+        str += `top=${v},`;
+      } else if (key === 'left') {
+        const v = Math.round(window.innerWidth / 2 - features.width / 2);
+        // eslint-disable-next-line no-param-reassign
+        str += `left=${v},`;
+      }
+      return str;
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    str += `${key}=${value},`;
+    return str;
+  }, '')
+  .slice(0, -1); */
 function Login() {
   const navigate = useNavigate();
 
@@ -38,6 +68,40 @@ function Login() {
     open: false,
     text: '',
   });
+
+  const [externalPopup, setExternalPopup] = useState(null);
+
+  useEffect(() => {
+    if (!externalPopup) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      console.log('interval');
+      if (!externalPopup) {
+        timer && clearInterval(timer);
+        return;
+      }
+      const currentUrl = externalPopup.location.href;
+      if (!currentUrl) {
+        return;
+      }
+      const { searchParams } = new URL(currentUrl);
+      const approved = searchParams.get('approved');
+      const reqToken = searchParams.get('request_token');
+      console.log('cambio popup');
+      if (approved && reqToken) {
+        externalPopup.close();
+        console.log(
+          `The popup URL has URL code param = ${reqToken} status is ${approved}`,
+        );
+
+        handleSession(reqToken);
+        timer && clearInterval(timer);
+      }
+    }, 500);
+  }, [externalPopup]);
+
   const handleChange = (e) => {
     setFormValues({
       ...formValues,
@@ -70,11 +134,7 @@ function Login() {
       const sessionResponse = await createSession(
         authorizeResponse?.data?.request_token,
       );
-      setSessionId(sessionResponse?.data?.session_id);
-      /* const responseUserData = await getAccountDetails();
-      console.log(responseUserData);
-      setUserData(responseUserData.data); */
-      navigate('/');
+      handleSession(sessionResponse?.data?.session_id);
     } catch (submitError) {
       console.log(submitError);
       console.log(submitError.response);
@@ -93,33 +153,59 @@ function Login() {
 
   const tmdbLoginHandler = async () => {
     try {
-      setIsLoading(true); /*
+      setIsLoading(true);
+      const tokenResponse = await getRequestToken();
+      const requestToken = tokenResponse.data.request_token;
+      console.log(tokenResponse);
+
       /*  const popup = window.open(
         'https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}',
         'popup',
         'popup=true',
-      );
-      const checkPopup = setInterval(() => {
-        if (
-          popup.window.location.href.includes('http://localhost:3000/login')
-        ) {
-          popup.close();
-        }
-        if (!popup || !popup.closed) return;
-        clearInterval(checkPopup);
-      }, 1000); 
+      ); 
        */
-
-      const tokenResponse = await getRequestToken();
-      const requestToken = tokenResponse.data.request_token;
-
-      console.log(tokenResponse);
+      // window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
       const redirectURL = constants.siteData.deployUrl;
-      /* navigate(
-        `https://www.themoviedb.org/authenticate/tokenResponse?redirect_to=${redirectURL}/approved`,
-      ); */
 
-      window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
+      const url = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
+      // window.open(url, '_blank', strWindowsFeatures);
+
+      const popupWidth = 600;
+      const popupHeight = 700;
+      const left = window.screenX + (window.outerWidth - popupWidth) / 2;
+      const top = window.screenY + (window.outerHeight - popupHeight) / 2.5;
+      const title = `TMDB Auth`;
+      const popup = window.open(
+        url,
+        title,
+        `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`,
+      );
+      setExternalPopup(popup);
+    } catch (submitError) {
+      console.log(submitError);
+      console.log(submitError.response);
+      setError({ error: true, message: 'Error al iniciar sesión' });
+      setHandleSnackbar({
+        open: true,
+        text:
+          submitError?.response?.data?.status_message ??
+          'Error al iniciar sesión',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSession = async (reqToken) => {
+    try {
+      setIsLoading(true);
+      const sessionResponse = await createSession(reqToken);
+      setSessionId(sessionResponse?.data?.session_id);
+      /* const responseUserData = await getAccountDetails();
+      console.log(responseUserData);
+      setUserData(responseUserData.data); */
+      navigate('/');
     } catch (submitError) {
       console.log(submitError);
       console.log(submitError.response);

@@ -120,6 +120,7 @@ function Router() {
               }
             />
           </Route>
+          <Route path="approved" element={<Loader my={25} />} />
           <Route
             path="/login"
             element={
