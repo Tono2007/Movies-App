@@ -77,7 +77,6 @@ function Login() {
     }
 
     const timer = setInterval(() => {
-      console.log('interval');
       if (!externalPopup) {
         timer && clearInterval(timer);
         return;
@@ -89,7 +88,6 @@ function Login() {
       const { searchParams } = new URL(currentUrl);
       const approved = searchParams.get('approved');
       const reqToken = searchParams.get('request_token');
-      console.log('cambio popup');
       if (approved && reqToken) {
         externalPopup.close();
         console.log(
@@ -131,10 +129,7 @@ function Login() {
       };
       const authorizeResponse = await authByLogin(payload);
       console.log(authorizeResponse);
-      const sessionResponse = await createSession(
-        authorizeResponse?.data?.request_token,
-      );
-      handleSession(sessionResponse?.data?.session_id);
+      handleSession(authorizeResponse?.data?.request_token);
     } catch (submitError) {
       console.log(submitError);
       console.log(submitError.response);

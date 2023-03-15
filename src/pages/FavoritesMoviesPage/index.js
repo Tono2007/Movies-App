@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { getSessionId } from '../../utils/helpers/helpers';
 import { useGlobalContext } from '../../context/GlobalContext';
 
 //MUI
@@ -27,11 +27,11 @@ function Favorites() {
   useEffect(() => {
     (async () => {
       try {
-        setIsLoading(true);
-        const response = await getMyFavoriteMovies(userData?.id);
-        console.log(response);
-        setMovies(response.data.results);
-        setTotalMovies(response.data.total_results);
+        if (getSessionId() !== '') {
+          const response = await getMyFavoriteMovies(getSessionId());
+          setMovies(response.data.results);
+          setTotalMovies(response.data.total_results);
+        }
       } catch (error) {
         console.log(error);
         console.log(error.response);
@@ -39,7 +39,7 @@ function Favorites() {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [userData]);
 
   return (
     <>

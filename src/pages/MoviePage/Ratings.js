@@ -98,6 +98,7 @@ function Ratings({ idMovie, movie }) {
         </Stack>
         <div>
           <Button
+            fullWidth
             size="large"
             variant="contained"
             onClick={() => setIsOpenReviewsModal(true)}

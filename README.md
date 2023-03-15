@@ -7,6 +7,8 @@ Se ocupa la API de TheMovieDataBase [TMDV](https://www.themoviedb.org/) [API](ht
 - Permite ver detalles de cada pelicula (resumen, trailer, puntuación, duración, imagenes, reparto, videos, peliculas relacionadas...)
 - Permite buscar peliculas por titulo, año y genero.
 
+Oauth con tu cuenta de TMDB, permite agregar o eliminar peliculas de tus favoritos y calificar peliculas ademas de crear una lista de las peliculas ya vistas.
+
 **_ Algun dia terminare la parte de series. _**
 
 ## **CAPTURAS**

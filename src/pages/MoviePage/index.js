@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getSessionId } from '../../utils/helpers/helpers';
 //MUI
 import Stack from '@mui/material/Stack';
 //API
@@ -13,6 +14,8 @@ import {
   getMovieVideos,
 } from '../../api/services/movies';
 import { getAllMovieGenres } from '../../api/services/catalog';
+import { getAccountStates } from '../../api/services/account';
+
 //Components
 import Banner from '../../components/Banner';
 import Loader from '../../components/Loader';
@@ -37,6 +40,7 @@ function MoviePage() {
   const [titles, setTitles] = useState([]);
   const [videos, setVideos] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [accountStates, setAccountStates] = useState(null);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -45,7 +49,14 @@ function MoviePage() {
         const responseMovie = await getMovie(idMovie);
         console.log(responseMovie);
         setMovie(responseMovie.data);
-
+        if (getSessionId() !== '') {
+          const responseAccount = await getAccountStates({
+            movieId: idMovie,
+            sessionId: getSessionId(),
+          });
+          console.log('//////////////////////', responseAccount);
+          setAccountStates(responseAccount.data);
+        }
         const responses = await Promise.all([
           getMovieKeywords(idMovie),
           getMovieCredits(idMovie),
@@ -96,6 +107,7 @@ function MoviePage() {
           credits={credits}
           titles={titles}
           trailer={videos.find((video) => video.type === 'Trailer')}
+          accountStates={accountStates}
         />
 
         <Cast credits={credits} />

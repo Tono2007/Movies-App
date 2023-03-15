@@ -15,7 +15,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 function MovieCard({ movie }) {
   const { genres } = useGlobalContext();
-  console.log(genres);
+  // console.log(genres);
 
   return (
     <Box

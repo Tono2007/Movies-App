@@ -10,21 +10,75 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 //Icons
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 //Components
 import Modal from '../../components/Modal';
+import Loader from '../../components/Loader';
+import SnackBar from '../../components/SnackBar';
+
+import { markMovieFavorite } from '../../api/services/account';
 
 const ModalVideo = lazy(() => import('../../components/ModalVideo'));
 
-function OverView({ movie, credits, titles, trailer }) {
+function OverView({ movie, credits, titles, trailer, accountStates }) {
   const [openVideoModal, setOpenVideoModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [handleSnackbar, setHandleSnackbar] = useState({
+    open: false,
+    text: '',
+  });
+  const [isFavorite, setIsFavorite] = useState(accountStates?.favorite);
+
+  const addToFavoritesHandler = async () => {
+    console.log(movie, accountStates);
+    if (accountStates === null) {
+      setHandleSnackbar({
+        open: true,
+        text: 'Iniciar Sesión para realizar esta acción',
+        type: 'warning',
+      });
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const response = await markMovieFavorite({
+        movieId: movie.id,
+        favorite: !isFavorite,
+      });
+      console.log(response);
+      setIsFavorite((prev) => !prev);
+      setHandleSnackbar({
+        open: true,
+        text: 'Accion realizada correctamente',
+      });
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      setHandleSnackbar({
+        open: true,
+        text: error?.response?.data?.status_message ?? 'Error en acción',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
+      <SnackBar
+        openSnackbar={handleSnackbar.open}
+        fnCloseSnackbar={() => setHandleSnackbar(false)}
+        data={{ text: handleSnackbar.text }}
+        type={handleSnackbar?.type}
+      />
       <Modal
         openModal={openVideoModal}
         fnCloseModal={() => setOpenVideoModal(false)}
@@ -36,6 +90,11 @@ function OverView({ movie, credits, titles, trailer }) {
           <ModalVideo video={trailer} />
         </Suspense>
       </Modal>
+      {isLoading && (
+        <Loader
+          addSx={{ position: 'fixed', top: '40%', left: '40%', zIndex: 99999 }}
+        />
+      )}
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
@@ -136,7 +195,18 @@ function OverView({ movie, credits, titles, trailer }) {
         >
           {movie?.status}
         </Typography>
-        <FavoriteBorderIcon color="primary" />
+        <Tooltip
+          title={isFavorite ? 'Eliminar de favoritos' : 'Agregar a favoritos'}
+        >
+          <IconButton aria-label="add favorite" onClick={addToFavoritesHandler}>
+            {isFavorite ? (
+              <FavoriteIcon color="primary" fontSize="large" />
+            ) : (
+              <FavoriteBorderIcon color="primary" fontSize="large" />
+            )}
+          </IconButton>
+        </Tooltip>
+
         <Button
           size="large"
           variant="contained"
