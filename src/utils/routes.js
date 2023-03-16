@@ -8,6 +8,7 @@ import ScrollToTop from './helpers/ScrollToTop';
 
 //Pages
 import PageNotFound from '../pages/PageNotFound';
+import Page401 from '../pages/Page401';
 //import FavoritesMoviesPage from '../pages/FavoritesMoviesPage';
 
 const GenresPage = lazy(() => import('../pages/GenresPage'));
@@ -17,6 +18,7 @@ const MoviesPage = lazy(() => import('../pages/MoviesPage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage'));
 const WorkInProgress = lazy(() => import('../pages/WorkInProgress'));
 const FavoritesMoviesPage = lazy(() => import('../pages/FavoritesMoviesPage'));
+const WatchlistPage = lazy(() => import('../pages/WatchlistMoviesPage'));
 
 function Router() {
   return (
@@ -106,19 +108,12 @@ function Router() {
               element={
                 <AuthRoute>
                   <Suspense fallback={<Loader my={20} />}>
-                    <FavoritesMoviesPage />
+                    <WatchlistPage />
                   </Suspense>
                 </AuthRoute>
               }
             />
-            <Route
-              path="*"
-              element={
-                <Suspense fallback={<Loader my={20} />}>
-                  <PageNotFound />
-                </Suspense>
-              }
-            />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="approved" element={<Loader my={25} />} />
           <Route
@@ -149,12 +144,7 @@ function AuthRoute({ children }) {
   if (authVerify() === true) {
     return children;
   }
-  return (
-    <>
-      <PageNotFound />
-      Iniciar Sesión
-    </>
-  );
+  return <Page401 />;
 }
 
 export default Router;

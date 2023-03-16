@@ -24,8 +24,8 @@ function Ratings({ idMovie, movie, accountStates }) {
   const [isWatchlist, setWatchlist] = useState(accountStates?.watchlist);
   const [isLoading, setIsLoading] = useState(false);
   const [handleSnackbar, setHandleSnackbar] = useState({
-    open: true,
-    text: 'sdfsdfdsf',
+    open: false,
+    text: '',
   });
 
   const addToWatchlistHandler = async () => {
