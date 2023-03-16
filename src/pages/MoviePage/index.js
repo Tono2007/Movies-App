@@ -114,7 +114,11 @@ function MoviePage() {
         <Multimedia movie={movie} imgs={imgs} videos={videos} />
         <Keywords keywords={keywords} />
         <Collection movie={movie} genres={genres} />
-        <Ratings idMovie={idMovie} movie={movie} />
+        <Ratings
+          idMovie={idMovie}
+          movie={movie}
+          accountStates={accountStates}
+        />
         <RelatedMovies similarMovies={similarMovies} genres={genres} />
       </Stack>
     </>

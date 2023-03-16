@@ -37,3 +37,15 @@ export function markMovieFavorite({ movieId, favorite }) {
     getSessionParamConfig(),
   );
 }
+export function addMovieToWatchlist({ movieId, watchlist }) {
+  const payload = {
+    media_type: 'movie',
+    media_id: movieId,
+    watchlist,
+  };
+  return axios.post(
+    `/account/null/watchlist`,
+    payload,
+    getSessionParamConfig(),
+  );
+}

@@ -25,7 +25,8 @@ function SnackBar(props) {
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
       <Box
-        p={1}
+        px={3}
+        py={2}
         display="flex"
         flexDirection="row"
         textAlign="center"
@@ -39,16 +40,16 @@ function SnackBar(props) {
         borderColor={`${type}.main`}
       >
         {type === 'success' && (
-          <CheckCircleOutlineRoundedIcon fontSize="medium" color="success" />
+          <CheckCircleOutlineRoundedIcon fontSize="large" color="success" />
         )}
         {type === 'error' && (
-          <ErrorOutlineIcon fontSize="medium" color="error" />
+          <ErrorOutlineIcon fontSize="large" color="error" />
         )}
         {type === 'warning' && (
-          <PriorityHighIcon fontSize="medium" color="warning" />
+          <PriorityHighIcon fontSize="large" color="warning" />
         )}
 
-        <Typography mx={1} fontSize="0.9rem" fontWeight="bold">
+        <Typography mx={1} fontSize="1rem" fontWeight="500">
           {data.text}
         </Typography>
         <IconButton

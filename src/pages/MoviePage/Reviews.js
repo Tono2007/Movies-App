@@ -56,7 +56,7 @@ function Reviews({ idMovie }) {
       </Stack>
       <Stack direction="column" gap={5} my={5}>
         {reviews.map((review) => (
-          <ReviewCard review={review} />
+          <ReviewCard review={review} key={review.id} />
         ))}
       </Stack>
       <Button variant="outlined">Mostrar mas Reseñas</Button>

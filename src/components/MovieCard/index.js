@@ -59,7 +59,7 @@ function MovieCard({ movie }) {
         }}
       >
         <Box
-          loading="lazy"
+          /*  loading="lazy" */
           alt={`${movie?.title || 'movie'} poster`}
           width="100%"
           height="100%"

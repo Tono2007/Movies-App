@@ -2,34 +2,80 @@ import { useEffect, useState, lazy, Suspense } from 'react';
 //Icons
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import StarRateIcon from '@mui/icons-material/StarRate';
+import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import PlaylistRemoveIcon from '@mui/icons-material/PlaylistRemove';
 //Components
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+
 import Modal from '../../components/Modal';
+import Loader from '../../components/Loader';
+import SnackBar from '../../components/SnackBar';
 //API
-import { getMovieReviews } from '../../api/services/movies';
+import { addMovieToWatchlist } from '../../api/services/account';
 
 const Reviews = lazy(() => import('./Reviews'));
 
-function Ratings({ idMovie, movie }) {
+function Ratings({ idMovie, movie, accountStates }) {
   const [isOpenReviewsModal, setIsOpenReviewsModal] = useState(false);
+  const [isWatchlist, setWatchlist] = useState(accountStates?.watchlist);
+  const [isLoading, setIsLoading] = useState(false);
+  const [handleSnackbar, setHandleSnackbar] = useState({
+    open: true,
+    text: 'sdfsdfdsf',
+  });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await getMovieReviews(idMovie);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const addToWatchlistHandler = async () => {
+    console.log(movie, accountStates);
+    if (accountStates === null) {
+      setHandleSnackbar({
+        open: true,
+        text: 'Iniciar Sesión para realizar esta acción',
+        type: 'warning',
+      });
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const response = await addMovieToWatchlist({
+        movieId: movie.id,
+        watchlist: !isWatchlist,
+      });
+      console.log(response);
+      setWatchlist((prev) => !prev);
+      setHandleSnackbar({
+        open: true,
+        text: 'Accion realizada correctamente',
+      });
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      setHandleSnackbar({
+        open: true,
+        text: error?.response?.data?.status_message ?? 'Error en acción',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section>
+      <SnackBar
+        openSnackbar={handleSnackbar.open}
+        fnCloseSnackbar={() => setHandleSnackbar(false)}
+        data={{ text: handleSnackbar.text }}
+        type={handleSnackbar?.type}
+      />
+      {isLoading && (
+        <Loader
+          addSx={{ position: 'fixed', top: '40%', left: '40%', zIndex: 99999 }}
+        />
+      )}
       <Modal
         openModal={isOpenReviewsModal}
         fnCloseModal={() => setIsOpenReviewsModal(false)}
@@ -96,7 +142,7 @@ function Ratings({ idMovie, movie }) {
             Calificar
           </Button>
         </Stack>
-        <div>
+        <Stack spacing={2}>
           <Button
             fullWidth
             size="large"
@@ -106,7 +152,24 @@ function Ratings({ idMovie, movie }) {
           >
             Ver todas las reseñas
           </Button>
-        </div>
+          <Button
+            fullWidth
+            size="large"
+            variant="outlined"
+            endIcon={
+              isWatchlist ? (
+                <PlaylistRemoveIcon color="primary" fontSize="large" />
+              ) : (
+                <PlaylistAddCheckCircleIcon color="primary" fontSize="large" />
+              )
+            }
+            onClick={addToWatchlistHandler}
+          >
+            {isWatchlist
+              ? 'Eliminar de peliculas vistas'
+              : 'Marcar pelicula como vista'}
+          </Button>
+        </Stack>
       </Stack>
     </section>
   );
