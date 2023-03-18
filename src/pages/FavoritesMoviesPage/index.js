@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getSessionId } from '../../utils/helpers/helpers';
 import { useGlobalContext } from '../../context/GlobalContext';
-
+import favBanner from '../../assets/images/favorites-banner.jpg';
 //MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -45,7 +45,7 @@ function Favorites() {
     <>
       <Box
         width="100%"
-        height="30vh"
+        height="40vh"
         position="relative"
         sx={{
           '&:after': {
@@ -66,7 +66,7 @@ function Favorites() {
           width="100%"
           height="100%"
           component="img"
-          src="https://cdn.pixabay.com/photo/2017/11/24/10/43/ticket-2974645_960_720.jpg"
+          src={favBanner}
           sx={{
             filter: 'brightness(0.9)',
             objectFit: 'cover',

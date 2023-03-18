@@ -17,13 +17,12 @@ export async function getAccountDetails() {
   const config = getSessionParamConfig();
   return axios.get(`/account`, config);
 }
+export function getAccountStates({ movieId }) {
+  return axios.get(`/movie/${movieId}/account_states`, getSessionParamConfig());
+}
 
 export function getMyFavoriteMovies() {
   return axios.get(`/account/1/favorite/movies`, getSessionParamConfig());
-}
-
-export function getAccountStates({ movieId }) {
-  return axios.get(`/movie/${movieId}/account_states`, getSessionParamConfig());
 }
 
 export function markMovieFavorite({ movieId, favorite }) {
@@ -36,6 +35,10 @@ export function markMovieFavorite({ movieId, favorite }) {
     },
     getSessionParamConfig(),
   );
+}
+
+export function getMyMoviesWatchlist() {
+  return axios.get(`/account/null/watchlist/movies`, getSessionParamConfig());
 }
 export function addMovieToWatchlist({ movieId, watchlist }) {
   const payload = {

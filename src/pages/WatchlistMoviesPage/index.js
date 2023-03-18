@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getSessionId } from '../../utils/helpers/helpers';
 import { useGlobalContext } from '../../context/GlobalContext';
+import watchlistBanner from '../../assets/images/watchlist-banner.webp';
 
 //MUI
 import Box from '@mui/material/Box';
@@ -11,8 +12,7 @@ import Link from '@mui/material/Link';
 //Icons
 import MovieIcon from '@mui/icons-material/Movie';
 //API
-import { getAllMovieGenres } from '../../api/services/catalog';
-import { getMyFavoriteMovies } from '../../api/services/account';
+import { getMyMoviesWatchlist } from '../../api/services/account';
 
 //Components
 import Loader from '../../components/Loader';
@@ -28,7 +28,7 @@ function WatchlistPage() {
     (async () => {
       try {
         if (getSessionId() !== '') {
-          const response = await getMyFavoriteMovies(getSessionId());
+          const response = await getMyMoviesWatchlist(getSessionId());
           setMovies(response.data.results);
           setTotalMovies(response.data.total_results);
         }
@@ -45,7 +45,7 @@ function WatchlistPage() {
     <>
       <Box
         width="100%"
-        height="30vh"
+        height="40vh"
         position="relative"
         sx={{
           '&:after': {
@@ -66,7 +66,7 @@ function WatchlistPage() {
           width="100%"
           height="100%"
           component="img"
-          src="https://cdn.pixabay.com/photo/2017/11/24/10/43/ticket-2974645_960_720.jpg"
+          src={watchlistBanner}
           sx={{
             filter: 'brightness(0.9)',
             objectFit: 'cover',
@@ -95,7 +95,7 @@ function WatchlistPage() {
             Ver en TMDB
           </Link>
         </Stack>
-        <Typography>Total: {totalMovies}</Typography>
+        <Typography>Mi Lista de Seguimiento - Total: {totalMovies}</Typography>
         {isLoading && <Loader />}
         <Grid container spacing={0} my={2}>
           {movies.map((movie) => (
