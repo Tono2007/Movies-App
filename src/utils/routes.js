@@ -19,6 +19,7 @@ const WelcomePage = lazy(() => import('../pages/WelcomePage'));
 const WorkInProgress = lazy(() => import('../pages/WorkInProgress'));
 const FavoritesMoviesPage = lazy(() => import('../pages/FavoritesMoviesPage'));
 const WatchlistPage = lazy(() => import('../pages/WatchlistMoviesPage'));
+const MyRatedMoviesPage = lazy(() => import('../pages/MyRatedMoviesPage'));
 
 function Router() {
   return (
@@ -98,7 +99,7 @@ function Router() {
               element={
                 <AuthRoute>
                   <Suspense fallback={<Loader my={20} />}>
-                    <FavoritesMoviesPage />
+                    <MyRatedMoviesPage />
                   </Suspense>
                 </AuthRoute>
               }

@@ -52,3 +52,7 @@ export function addMovieToWatchlist({ movieId, watchlist }) {
     getSessionParamConfig(),
   );
 }
+
+export function getMyRatedMovies() {
+  return axios.get(`/account/null/rated/movies`, getSessionParamConfig());
+}

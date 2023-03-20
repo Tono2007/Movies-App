@@ -118,6 +118,7 @@ function Login() {
       return;
     }
     console.log(formValues);
+
     try {
       setIsLoading(true);
       const tokenResponse = await getRequestToken();
@@ -160,7 +161,9 @@ function Login() {
       ); 
        */
       // window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
-      const redirectURL = constants.siteData.deployUrl;
+      // const redirectURL = constants.siteData.deployUrl;
+
+      const redirectURL = window.location.origin;
 
       const url = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectURL}/approved`;
       // window.open(url, '_blank', strWindowsFeatures);
