@@ -2,6 +2,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 //MUI
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
@@ -65,28 +66,31 @@ function Modal(props) {
             </Box>
           </Box>
         ) : (
-          <Box
-            top="0"
-            zIndex="9999"
-            position="sticky"
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              alignContent: 'center',
-              margin: '5px 20px',
-              pb: '4px',
-              borderBottom: `2px solid  ${theme.palette.primary.main}`,
-            }}
-          >
-            <Logo height="35px" display={{ xs: 'none', sm: 'flex' }} />
-            <Typography variant="h6" fontWeight="300">
-              {title}
-            </Typography>
-            <IconButton aria-label="close" onClick={fnCloseModal} size="small">
-              <CloseIcon />
-            </IconButton>
+          <Box top="0" zIndex="9999" position="sticky" width="100%">
+            <Stack
+              direction="row"
+              m="5px 20px"
+              pb="4px"
+              alignItems="center"
+              justifyContent="space-between"
+              alignContent="center"
+              fontWeight="300"
+              sx={{
+                borderBottom: `2px solid  ${theme.palette.primary.main}`,
+              }}
+            >
+              <Logo height="35px" display={{ xs: 'none', sm: 'flex' }} />
+              <Typography variant="h6" fontWeight="300">
+                {title}
+              </Typography>
+              <IconButton
+                aria-label="close"
+                onClick={fnCloseModal}
+                size="small"
+              >
+                <CloseIcon />
+              </IconButton>
+            </Stack>
           </Box>
         )}
 

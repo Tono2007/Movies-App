@@ -56,3 +56,18 @@ export function addMovieToWatchlist({ movieId, watchlist }) {
 export function getMyRatedMovies() {
   return axios.get(`/account/null/rated/movies`, getSessionParamConfig());
 }
+
+export function addMovieRate({ movieId, rate }) {
+  const payload = {
+    value: rate,
+  };
+  return axios.post(
+    `/movie/${movieId}/rating`,
+    payload,
+    getSessionParamConfig(),
+  );
+}
+
+export function deleteMovieRate(movieId) {
+  return axios.delete(`/movie/${movieId}/rating`, getSessionParamConfig());
+}

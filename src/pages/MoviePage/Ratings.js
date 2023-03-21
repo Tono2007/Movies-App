@@ -10,18 +10,26 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Modal from '../../components/Modal';
 import Loader from '../../components/Loader';
 import SnackBar from '../../components/SnackBar';
 //API
-import { addMovieToWatchlist } from '../../api/services/account';
+import {
+  addMovieToWatchlist,
+  addMovieRate,
+  deleteMovieRate,
+} from '../../api/services/account';
 
 const Reviews = lazy(() => import('./Reviews'));
 
 function Ratings({ idMovie, movie, accountStates }) {
   const [isOpenReviewsModal, setIsOpenReviewsModal] = useState(false);
+  const [isOpenRateModal, setIsOpenRateModal] = useState(false);
   const [isWatchlist, setWatchlist] = useState(accountStates?.watchlist);
+  const [isRated, setIsRated] = useState(accountStates?.rated);
   const [isLoading, setIsLoading] = useState(false);
   const [handleSnackbar, setHandleSnackbar] = useState({
     open: false,
@@ -63,6 +71,37 @@ function Ratings({ idMovie, movie, accountStates }) {
     }
   };
 
+  const deleteRateHandler = async () => {
+    if (accountStates === null) {
+      setHandleSnackbar({
+        open: true,
+        text: 'Iniciar Sesión para realizar esta acción',
+        type: 'warning',
+      });
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const response = await deleteMovieRate(movie.id);
+      console.log(response);
+      setIsRated(false);
+      setHandleSnackbar({
+        open: true,
+        text: 'Accion realizada correctamente',
+      });
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      setHandleSnackbar({
+        open: true,
+        text: error?.response?.data?.status_message ?? 'Error en acción',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section>
       <SnackBar
@@ -76,6 +115,28 @@ function Ratings({ idMovie, movie, accountStates }) {
           addSx={{ position: 'fixed', top: '40%', left: '40%', zIndex: 99999 }}
         />
       )}
+      <Modal
+        openModal={isOpenRateModal}
+        fnCloseModal={() => setIsOpenRateModal(false)}
+        title="Calificar Pelicula"
+        maxWidth="xs"
+        type
+      >
+        <RateMovie
+          movieId={idMovie}
+          movie={movie?.title || ''}
+          callbackOnSubmit={() => {
+            console.log('callback');
+            setIsOpenRateModal(false);
+            setHandleSnackbar({
+              open: true,
+              text: 'Calificación enviada',
+            });
+            setIsRated(true);
+          }}
+          accountStates={accountStates}
+        />
+      </Modal>
       <Modal
         openModal={isOpenReviewsModal}
         fnCloseModal={() => setIsOpenReviewsModal(false)}
@@ -138,9 +199,33 @@ function Ratings({ idMovie, movie, accountStates }) {
               readOnly
             />
           )}
-          <Button size="large" variant="contained" endIcon={<StarRateIcon />}>
-            Calificar
-          </Button>
+          {isRated ? (
+            <>
+              {isRated?.value && (
+                <Typography variant="body2">
+                  Valoraste esta película con una calificación de:{' '}
+                  {isRated?.value}
+                </Typography>
+              )}
+              <Button
+                size="large"
+                variant="contained"
+                endIcon={<StarRateIcon />}
+                onClick={deleteRateHandler}
+              >
+                Eliminar mi Calificación
+              </Button>
+            </>
+          ) : (
+            <Button
+              size="large"
+              variant="contained"
+              endIcon={<StarRateIcon />}
+              onClick={() => setIsOpenRateModal(true)}
+            >
+              Calificar Pelicula
+            </Button>
+          )}
         </Stack>
         <Stack spacing={2}>
           <Button
@@ -172,6 +257,102 @@ function Ratings({ idMovie, movie, accountStates }) {
         </Stack>
       </Stack>
     </section>
+  );
+}
+
+function RateMovie({ movieId, movie, callbackOnSubmit, accountStates }) {
+  const [rate, setRate] = useState('0.5');
+  const [handleSnackbar, setHandleSnackbar] = useState({
+    open: false,
+    text: '',
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendRateHandler = async () => {
+    if (accountStates === null) {
+      setHandleSnackbar({
+        open: true,
+        text: 'Iniciar Sesión para realizar esta acción',
+        type: 'warning',
+      });
+      return;
+    }
+    if (+rate <= 0) {
+      setHandleSnackbar({
+        open: true,
+        text: 'La calificación minima es 0.5',
+        type: 'error',
+      });
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const response = await addMovieRate({ movieId, rate });
+      console.log(response);
+      callbackOnSubmit();
+    } catch (error) {
+      console.log(error?.response);
+      setHandleSnackbar({
+        open: true,
+        text: error?.response?.data?.status_message ?? 'Error en acción',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return (
+    <Stack p={4} bgcolor="background.default" spacing={3} direction="column">
+      <SnackBar
+        openSnackbar={handleSnackbar.open}
+        fnCloseSnackbar={() => setHandleSnackbar(false)}
+        data={{ text: handleSnackbar.text }}
+        type={handleSnackbar?.type}
+      />
+      {movie}
+      <br />
+      Agrega una calificacion entre 0.5 y 10
+      <Rating
+        name="size-medium"
+        value={rate}
+        precision={0.5}
+        sx={{ mr: '5px' }}
+        max={10}
+        size="medium"
+        onChange={(event, newValue) => {
+          setRate(newValue);
+        }}
+      />
+      <TextField
+        type="number"
+        id="outlined-basic"
+        label="Calificación"
+        variant="outlined"
+        value={rate}
+        onChange={(event) => {
+          if (event.target.value.toString() <= 10) {
+            setRate(event.target.value);
+          }
+        }}
+        inputProps={{ max: 10, min: 0.5, step: 0.5 }}
+      />
+      <Button
+        size="large"
+        variant="contained"
+        onClick={sendRateHandler}
+        disabled={isLoading}
+        endIcon={
+          <>
+            <StarRateIcon />
+            {isLoading && (
+              <CircularProgress color="secondary" size={20} sx={{ ml: 1 }} />
+            )}
+          </>
+        }
+      >
+        Enviar calificación de {rate}
+      </Button>
+    </Stack>
   );
 }
 
