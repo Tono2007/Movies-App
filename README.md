@@ -15,7 +15,7 @@ Oauth con tu cuenta de TMDB, permite agregar o eliminar peliculas de tus favorit
 
 <div>
     <img src="src/assets/screenshots/WelcomePage.jpeg" height="900px"/>
-    <img src="src/assets/screenshots/MoviePage.jpeg" height="900px"/>
+    <img src="src/assets/screenshots/MoviePage.png" height="900px"/>
     <img src="src/assets/screenshots/MoviePageResponsive.jpeg" height="900px"/>
 
 </div>
@@ -66,3 +66,12 @@ Si este proyecto en algun momento crece.
 
 - dev - > cualquier pull request a esta rama, por ahora no hay revisiones ni convenciones para la estructura, titulo y descripción de los cambios.
 - main -> no modificar, esta se usara como un entorno de producción.
+
+## Páginas
+
+| <img src="src/assets/screenshots/LoginPage.jpeg" height="auto"/> | <img src="src/assets/screenshots/WIPPAGE.png" height="auto"/> |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| <img src="src/assets/screenshots/404Page.png" />                 | <img src="src/assets/screenshots/401Page.png" />              |
+| <img src="src/assets/screenshots/MoviesPage.png" />              | <img src="src/assets/screenshots/GenresPage.png" />           |
+| <img src="src/assets/screenshots/WatchlistPage.png" />           | <img src="src/assets/screenshots/ReviewsSection.png" />       |
+| <img src="src/assets/screenshots/FavoritesPage.png" />           | <img src="src/assets/screenshots/MyRatingsPage.png" />       |

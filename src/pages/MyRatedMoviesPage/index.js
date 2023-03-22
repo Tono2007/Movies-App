@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getSessionId } from '../../utils/helpers/helpers';
 import { useGlobalContext } from '../../context/GlobalContext';
-import favBanner from '../../assets/images/favorites-banner.jpg';
+import favBanner from '../../assets/images/genres-banner.jpg';
 //MUI
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
